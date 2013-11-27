@@ -16,7 +16,7 @@ input[type="text"]:hover, input[type="password"]:hover {background-color:#ffffff
 .error {font-weight:bold; font-style:italic; font-size: 9px; color:#ffffff; background-color:#FF0000; padding:3px 0px;}
 /* end Dojo Specific overrides */
 #wrapper{padding:0px;}
-#header{border-bottom:1px solid #999;margin-bottom:10px;height:46px;width:100%;min-width:960px;
+#header{margin-bottom:10px;height:46px;width:100%;min-width:960px;
 	background: transparent url('../images/logo.png') right top no-repeat;}
 #header h1{padding-top:20px;*padding-top:10px;}
 #login{float:right;*margin-bottom:-26px;}
