@@ -7,10 +7,14 @@
 <div id="login"><jsp:include page="/WEB-INF/sitemesh-common/login.jsp" /></div>
 <div class="headerMenu">
 <ul>
-<li><a href="">Menu1</a></li>
-<li><a href="">Menu1</a></li>
-<li><a href="">Menu1</a></li>
-<li><a href="">Menu1</a></li>
+<li><a href="indexRoom">Rooms</a></li>
+<li><a href="indexRoomtype">Room Types</a></li>
+<li><a href="indexGuest">Guests</a></li>
+<li><a href="indexReservation">Reservation</a></li>
+<li><a href="indexMembers">Members</a></li>
+<li><a href="indexTransactions">Transactions</a></li>
+<li><a href="indexRoomview">Room Views</a></li>
+<li><a href="indexBed">Beds</a></li>
 
 </ul>
 </div>
