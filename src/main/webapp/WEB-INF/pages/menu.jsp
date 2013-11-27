@@ -5,9 +5,9 @@
 	<div id="lb"><div id="rb"><div id="bb"><div id="blc">
 	<div id="brc"><div id="tb"><div id="tlc"><div id="trc">
 		<div id="content">
-			<h1>Spring MVC</h1>
+			<h1>Stub PMS</h1>
 			<p class="line">&nbsp;</p>
-			<jsp:include page="/WEB-INF/pages/roomtype/menu.jsp" />
+<jsp:include page="/WEB-INF/pages/roomtype/menu.jsp" />
 <jsp:include page="/WEB-INF/pages/room/menu.jsp" />
 <jsp:include page="/WEB-INF/pages/guest/menu.jsp" />
 <jsp:include page="/WEB-INF/pages/reservation/menu.jsp" />

@@ -5,3 +5,12 @@
 <h1><fmt:message key="application.title"/></h1>
 </div>
 <div id="login"><jsp:include page="/WEB-INF/sitemesh-common/login.jsp" /></div>
+<div class="headerMenu">
+<ul>
+<li><a href="">Menu1</a></li>
+<li><a href="">Menu1</a></li>
+<li><a href="">Menu1</a></li>
+<li><a href="">Menu1</a></li>
+
+</ul>
+</div>

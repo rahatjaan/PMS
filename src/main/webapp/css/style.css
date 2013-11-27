@@ -1,7 +1,7 @@
 /* Simple reset to help with crossbrowser issues */
 *{margin:0;padding:0;}
 /* end reset */
-body{font:12px Arial, Helvetica, sans-serif;}
+body{background-color:#00577F; font:12px Arial, Helvetica, sans-serif;}
 h1{font-size:16px;font-weight:bold;}
 h2{font-size:14px;font-weight:bold;}
 h3{font-size:12px;font-weight:bold;}
@@ -15,9 +15,9 @@ input[type="checkbox"]:hover,input[type="radio"]:hover{border:none; background-c
 input[type="text"]:hover, input[type="password"]:hover {background-color:#ffffff; border:1px solid #d6e6f6; color:#000000;}
 .error {font-weight:bold; font-style:italic; font-size: 9px; color:#ffffff; background-color:#FF0000; padding:3px 0px;}
 /* end Dojo Specific overrides */
-#wrapper{padding:10px;}
+#wrapper{padding:0px;}
 #header{border-bottom:1px solid #999;margin-bottom:10px;height:46px;width:100%;min-width:960px;
-	background: transparent url('../images/me4s_logo.jpg') right top no-repeat;}
+	background: transparent url('../images/logo.png') right top no-repeat;}
 #header h1{padding-top:20px;*padding-top:10px;}
 #login{float:right;*margin-bottom:-26px;}
 #login a.button{margin-right:0;*margin-right:10px;}
@@ -100,3 +100,28 @@ a.button span:hover{background: transparent url('../images/button_span_hover.gif
 	border-right:1px solid #828282;border-bottom:1px solid #828282;height:19px;}
 .welcome{float:right;margin:4px 10px 0 0;}
 .right{float:right;}
+
+.headerMenu{
+	background:url(../images/thbg.gif) repeat-x rgb(223,222,222);
+	
+	width:100%;
+}
+
+.headerMenu ul{
+	list-style: none;
+	display: flex;
+	
+}
+
+.headerMenu ul li a{
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.headerMenu ul li a:hover{
+	display: block;
+	padding: 10px;
+	font-weight: bold;
+	background: #828282;
+}
