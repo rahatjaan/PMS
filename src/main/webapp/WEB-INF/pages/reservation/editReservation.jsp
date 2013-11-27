@@ -35,6 +35,18 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
+							<fmt:message key="room.title"/>:
+						</td>
+						<td>
+							<select name='room'>
+							    <c:forEach items="rooms" var="room">
+							            <option value='${room}'>${room}</option>
+							    </c:forEach>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
 							<fmt:message key="reservation.arrivaldate.title"/>:
 						</td>
 						<td>

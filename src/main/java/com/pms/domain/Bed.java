@@ -40,7 +40,7 @@ public class Bed implements Serializable {
 	/**
 	 */
 
-	@Column(name = "bed_id", length = 10, nullable = false)
+	@Column(name = "bed_id", length = 10)
 	@Basic(fetch = FetchType.EAGER)
 	@Id
 	@XmlElement

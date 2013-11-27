@@ -1,32 +1,29 @@
 package com.pms.web;
 
-import com.pms.dao.GuestDAO;
-import com.pms.dao.ReservationDAO;
-import com.pms.dao.RoomDAO;
-import com.pms.dao.TransactionsDAO;
-
-import com.pms.domain.Guest;
-import com.pms.domain.Reservation;
-import com.pms.domain.Room;
-import com.pms.domain.Transactions;
-
-import com.pms.service.ReservationService;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pms.dao.GuestDAO;
+import com.pms.dao.ReservationDAO;
+import com.pms.dao.RoomDAO;
+import com.pms.dao.TransactionsDAO;
+import com.pms.domain.Guest;
+import com.pms.domain.Reservation;
+import com.pms.domain.Room;
+import com.pms.domain.Transactions;
+import com.pms.service.ReservationService;
 
 /**
  * Spring MVC controller that handles CRUD requests for Reservation entities
@@ -277,8 +274,9 @@ public class ReservationController {
 	@RequestMapping("/newReservation")
 	public ModelAndView newReservation() {
 		ModelAndView mav = new ModelAndView();
-
+		List<Room> listRoom = new ArrayList<Room>(roomDAO.findAllRooms());
 		mav.addObject("reservation", new Reservation());
+		mav.addObject("rooms",listRoom);
 		mav.addObject("newFlag", true);
 		mav.setViewName("reservation/editReservation.jsp");
 

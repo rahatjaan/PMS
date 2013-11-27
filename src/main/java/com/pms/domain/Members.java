@@ -38,7 +38,7 @@ public class Members implements Serializable {
 	/**
 	 */
 
-	@Column(name = "member_id", length = 50, nullable = false)
+	@Column(name = "member_id", length = 50)
 	@Basic(fetch = FetchType.EAGER)
 	@Id
 	@XmlElement

@@ -1,30 +1,24 @@
 package com.pms.web;
 
-import com.pms.dao.GuestDAO;
-import com.pms.dao.MembersDAO;
-import com.pms.dao.ReservationDAO;
-
-import com.pms.domain.Guest;
-import com.pms.domain.Members;
-import com.pms.domain.Reservation;
-
-import com.pms.service.GuestService;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pms.dao.GuestDAO;
+import com.pms.dao.MembersDAO;
+import com.pms.dao.ReservationDAO;
+import com.pms.domain.Guest;
+import com.pms.domain.Members;
+import com.pms.domain.Reservation;
+import com.pms.service.GuestService;
 
 /**
  * Spring MVC controller that handles CRUD requests for Guest entities
@@ -339,6 +333,18 @@ public class GuestController {
 	 */
 	@RequestMapping("/saveGuest")
 	public String saveGuest(@ModelAttribute Guest guest) {
+		/*Members member = guest.getMembers();
+		Guest g1 = new Guest();
+		g1.setGuestId(guest.getGuestId());
+		g1.setNamePrefix(guest.getNamePrefix());
+		g1.setFirstName(guest.getFirstName());
+		g1.setLastName(guest.getLastName());
+		g1.setAddress1(guest.getAddress1());
+		g1.setAddress2(guest.getAddress2());
+		g1.setEmail(guest.getEmail());
+		g1.setCountry(guest.getCountry());
+		g1.setMobileNumber(guest.getMobileNumber());
+		g1.setMembers(member);*/
 		guestService.saveGuest(guest);
 		return "forward:/indexGuest";
 	}

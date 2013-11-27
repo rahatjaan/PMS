@@ -48,7 +48,7 @@ public class Roomtype implements Serializable {
 	/**
 	 */
 
-	@Column(name = "room_type_id", length = 10, nullable = false)
+	@Column(name = "room_type_id", length = 10)
 	@Basic(fetch = FetchType.EAGER)
 	@Id
 	@XmlElement

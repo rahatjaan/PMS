@@ -22,6 +22,7 @@
 						<td>
 							<c:choose>
 								<c:when test='${newFlag}' >
+								
 							<form:input id="guest_guestId" path="guestId" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "guest_guestId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="guest.guestid.help"/>", required : true}})); </script>
 								</c:when>
@@ -105,8 +106,18 @@
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "guest_mobileNumber",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="guest.mobilenumber.help"/>"}})); </script>
 						</td>
 					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="guest.mobilenumber.title"/>:
+						</td>
+						<td>
+							<form:input id="members_memberId" path="members.memberId" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "members_memberId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="members.memberid.help"/>"}})); </script>
+						</td>
+					</tr>
 				</tbody>
 			</table>
+			
 			<span class="inputbutton"><input class="savebutton" id="save" type="submit" value="<fmt:message key="navigation.save"/>"/></span>
 			<script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'save', event:'onclick'}));</script>
 		</form:form>
