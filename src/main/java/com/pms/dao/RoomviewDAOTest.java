@@ -34,10 +34,10 @@ import org.springframework.transaction.annotation.Transactional;
 		TransactionalTestExecutionListener.class })
 @Transactional
 @ContextConfiguration(locations = {
-		"file:./src/main/resources/PMS-security-context.xml",
-		"file:./src/main/resources/PMS-service-context.xml",
-		"file:./src/main/resources/PMS-dao-context.xml",
-		"file:./src/main/resources/PMS-web-context.xml" })
+		"file:./src/main/resources/PMSSTUB-security-context.xml",
+		"file:./src/main/resources/PMSSTUB-service-context.xml",
+		"file:./src/main/resources/PMSSTUB-dao-context.xml",
+		"file:./src/main/resources/PMSSTUB-web-context.xml" })
 public class RoomviewDAOTest {
 	/**
 	 * The DAO being tested, injected by Spring

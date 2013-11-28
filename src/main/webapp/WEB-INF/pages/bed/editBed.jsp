@@ -17,24 +17,6 @@
 				<tbody>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="bed.bedid.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="bed_bedId" path="bedId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "bed_bedId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="bed.bedid.help"/>", required : true}})); </script>
-								</c:when>
-								<c:otherwise>
-							${bed.bedId}
-						&nbsp;
-									<form:hidden id="bed_bedId" path="bedId"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td class="label" valign="top">
 							<fmt:message key="bed.bedtypecode.title"/>:
 						</td>
 						<td>

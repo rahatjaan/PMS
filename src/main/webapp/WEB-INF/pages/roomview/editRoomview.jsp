@@ -17,24 +17,6 @@
 				<tbody>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="roomview.roomviewid.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="roomview_roomViewId" path="roomViewId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "roomview_roomViewId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="roomview.roomviewid.help"/>", required : true}})); </script>
-								</c:when>
-								<c:otherwise>
-							${roomview.roomViewId}
-						&nbsp;
-									<form:hidden id="roomview_roomViewId" path="roomViewId"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td class="label" valign="top">
 							<fmt:message key="roomview.roomviewcode.title"/>:
 						</td>
 						<td>

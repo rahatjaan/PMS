@@ -70,6 +70,24 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
+							<fmt:message key="roomview.roomviewid.title"/>:
+						</td>
+						<td>
+							${roomtype.roomview.roomViewId}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="bed.bedid.title"/>:
+						</td>
+						<td>
+							${roomtype.bed.bedId}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
 							<fmt:message key="roomtype.isreserved.title"/>:
 						</td>
 						<td>

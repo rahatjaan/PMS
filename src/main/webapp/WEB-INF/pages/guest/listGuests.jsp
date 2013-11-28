@@ -26,6 +26,7 @@
 					<th class="thead"><fmt:message key="guest.email.title"/></th>
 					<th class="thead"><fmt:message key="guest.country.title"/></th>
 					<th class="thead"><fmt:message key="guest.mobilenumber.title"/></th>
+					<th class="thead"><fmt:message key="members.memberid.title"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -87,6 +88,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.mobileNumber}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.members.memberId}
 						&nbsp;
 					</td>
 				</tr>

@@ -30,15 +30,15 @@ import javax.persistence.*;
 		@NamedQuery(name = "findMembersByPrimaryKey", query = "select myMembers from Members myMembers where myMembers.memberId = ?1") })
 @Table(catalog = "stubpms", name = "members")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMS/com/pms/domain", name = "Members")
-@XmlRootElement(namespace = "PMS/com/pms/domain")
+@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Members")
+@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
 public class Members implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 */
 
-	@Column(name = "member_id", length = 50)
+	@Column(name = "member_id", length = 50, nullable = false)
 	@Basic(fetch = FetchType.EAGER)
 	@Id
 	@XmlElement

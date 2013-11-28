@@ -64,24 +64,25 @@ public class GuestRestController {
 	private GuestService guestService;
 
 	/**
-	 * Delete an existing Members entity
+	 * Create a new Members entity
 	 * 
 	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/members/{members_memberId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/Guest/{guest_guestId}/members", method = RequestMethod.POST)
 	@ResponseBody
-	public void deleteGuestMembers(@PathVariable String guest_guestId, @PathVariable String related_members_memberId) {
-		guestService.deleteGuestMembers(guest_guestId, related_members_memberId);
+	public Members newGuestMembers(@PathVariable Integer guest_guestId, @RequestBody Members members) {
+		guestService.saveGuestMembers(guest_guestId, members);
+		return membersDAO.findMembersByPrimaryKey(members.getMemberId());
 	}
 
 	/**
-	 * Save an existing Reservation entity
+	 * Save an existing Members entity
 	 * 
 	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/reservations", method = RequestMethod.PUT)
+	@RequestMapping(value = "/Guest/{guest_guestId}/members", method = RequestMethod.PUT)
 	@ResponseBody
-	public Reservation saveGuestReservations(@PathVariable String guest_guestId, @RequestBody Reservation reservations) {
-		guestService.saveGuestReservations(guest_guestId, reservations);
-		return reservationDAO.findReservationByPrimaryKey(reservations.getReservationId());
+	public Members saveGuestMembers(@PathVariable Integer guest_guestId, @RequestBody Members members) {
+		guestService.saveGuestMembers(guest_guestId, members);
+		return membersDAO.findMembersByPrimaryKey(members.getMemberId());
 	}
 
 	/**
@@ -90,31 +91,62 @@ public class GuestRestController {
 	 */
 	@RequestMapping(value = "/Guest/{guest_guestId}/members", method = RequestMethod.GET)
 	@ResponseBody
-	public Members getGuestMembers(@PathVariable String guest_guestId) {
+	public Members getGuestMembers(@PathVariable Integer guest_guestId) {
 		return guestDAO.findGuestByPrimaryKey(guest_guestId).getMembers();
 	}
 
 	/**
-	 * View an existing Reservation entity
+	 * Select an existing Guest entity
 	 * 
 	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/reservations/{reservation_reservationId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/Guest/{guest_guestId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Reservation loadGuestReservations(@PathVariable String guest_guestId, @PathVariable String related_reservations_reservationId) {
-		Reservation reservation = reservationDAO.findReservationByPrimaryKey(related_reservations_reservationId, -1, -1);
-
-		return reservation;
+	public Guest loadGuest(@PathVariable Integer guest_guestId) {
+		return guestDAO.findGuestByPrimaryKey(guest_guestId);
 	}
 
 	/**
-	 * Save an existing Guest entity
+	 * Delete an existing Guest entity
 	 * 
 	 */
-	@RequestMapping(value = "/Guest", method = RequestMethod.PUT)
+	@RequestMapping(value = "/Guest/{guest_guestId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Guest saveGuest(@RequestBody Guest guest) {
-		guestService.saveGuest(guest);
-		return guestDAO.findGuestByPrimaryKey(guest.getGuestId());
+	public void deleteGuest(@PathVariable Integer guest_guestId) {
+		Guest guest = guestDAO.findGuestByPrimaryKey(guest_guestId);
+		guestService.deleteGuest(guest);
+	}
+
+	/**
+	 * Show all Reservation entities by Guest
+	 * 
+	 */
+	@RequestMapping(value = "/Guest/{guest_guestId}/reservations", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Reservation> getGuestReservations(@PathVariable Integer guest_guestId) {
+		return new java.util.ArrayList<Reservation>(guestDAO.findGuestByPrimaryKey(guest_guestId).getReservations());
+	}
+
+	/**
+	 * View an existing Members entity
+	 * 
+	 */
+	@RequestMapping(value = "/Guest/{guest_guestId}/members/{members_memberId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Members loadGuestMembers(@PathVariable Integer guest_guestId, @PathVariable String related_members_memberId) {
+		Members members = membersDAO.findMembersByPrimaryKey(related_members_memberId, -1, -1);
+
+		return members;
+	}
+
+	/**
+	 * Save an existing Reservation entity
+	 * 
+	 */
+	@RequestMapping(value = "/Guest/{guest_guestId}/reservations", method = RequestMethod.PUT)
+	@ResponseBody
+	public Reservation saveGuestReservations(@PathVariable Integer guest_guestId, @RequestBody Reservation reservations) {
+		guestService.saveGuestReservations(guest_guestId, reservations);
+		return reservationDAO.findReservationByPrimaryKey(reservations.getReservationId());
 	}
 
 	/**
@@ -125,16 +157,6 @@ public class GuestRestController {
 	@ResponseBody
 	public List<Guest> listGuests() {
 		return new java.util.ArrayList<Guest>(guestService.loadGuests());
-	}
-
-	/**
-	 * Delete an existing Reservation entity
-	 * 
-	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/reservations/{reservation_reservationId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteGuestReservations(@PathVariable String guest_guestId, @PathVariable String related_reservations_reservationId) {
-		guestService.deleteGuestReservations(guest_guestId, related_reservations_reservationId);
 	}
 
 	/**
@@ -156,35 +178,46 @@ public class GuestRestController {
 	}
 
 	/**
-	 * Save an existing Members entity
+	 * View an existing Reservation entity
 	 * 
 	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/members", method = RequestMethod.PUT)
+	@RequestMapping(value = "/Guest/{guest_guestId}/reservations/{reservation_reservationId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Members saveGuestMembers(@PathVariable String guest_guestId, @RequestBody Members members) {
-		guestService.saveGuestMembers(guest_guestId, members);
-		return membersDAO.findMembersByPrimaryKey(members.getMemberId());
+	public Reservation loadGuestReservations(@PathVariable Integer guest_guestId, @PathVariable Integer related_reservations_reservationId) {
+		Reservation reservation = reservationDAO.findReservationByPrimaryKey(related_reservations_reservationId, -1, -1);
+
+		return reservation;
 	}
 
 	/**
-	 * Delete an existing Guest entity
+	 * Save an existing Guest entity
 	 * 
 	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/Guest", method = RequestMethod.PUT)
 	@ResponseBody
-	public void deleteGuest(@PathVariable String guest_guestId) {
-		Guest guest = guestDAO.findGuestByPrimaryKey(guest_guestId);
-		guestService.deleteGuest(guest);
+	public Guest saveGuest(@RequestBody Guest guest) {
+		guestService.saveGuest(guest);
+		return guestDAO.findGuestByPrimaryKey(guest.getGuestId());
 	}
 
 	/**
-	 * Select an existing Guest entity
+	 * Delete an existing Reservation entity
 	 * 
 	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/Guest/{guest_guestId}/reservations/{reservation_reservationId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Guest loadGuest(@PathVariable String guest_guestId) {
-		return guestDAO.findGuestByPrimaryKey(guest_guestId);
+	public void deleteGuestReservations(@PathVariable Integer guest_guestId, @PathVariable Integer related_reservations_reservationId) {
+		guestService.deleteGuestReservations(guest_guestId, related_reservations_reservationId);
+	}
+
+	/**
+	 * Delete an existing Members entity
+	 * 
+	 */
+	@RequestMapping(value = "/Guest/{guest_guestId}/members/{members_memberId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteGuestMembers(@PathVariable Integer guest_guestId, @PathVariable String related_members_memberId) {
+		guestService.deleteGuestMembers(guest_guestId, related_members_memberId);
 	}
 
 	/**
@@ -204,41 +237,8 @@ public class GuestRestController {
 	 */
 	@RequestMapping(value = "/Guest/{guest_guestId}/reservations", method = RequestMethod.POST)
 	@ResponseBody
-	public Reservation newGuestReservations(@PathVariable String guest_guestId, @RequestBody Reservation reservation) {
+	public Reservation newGuestReservations(@PathVariable Integer guest_guestId, @RequestBody Reservation reservation) {
 		guestService.saveGuestReservations(guest_guestId, reservation);
 		return reservationDAO.findReservationByPrimaryKey(reservation.getReservationId());
-	}
-
-	/**
-	 * Create a new Members entity
-	 * 
-	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/members", method = RequestMethod.POST)
-	@ResponseBody
-	public Members newGuestMembers(@PathVariable String guest_guestId, @RequestBody Members members) {
-		guestService.saveGuestMembers(guest_guestId, members);
-		return membersDAO.findMembersByPrimaryKey(members.getMemberId());
-	}
-
-	/**
-	 * View an existing Members entity
-	 * 
-	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/members/{members_memberId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Members loadGuestMembers(@PathVariable String guest_guestId, @PathVariable String related_members_memberId) {
-		Members members = membersDAO.findMembersByPrimaryKey(related_members_memberId, -1, -1);
-
-		return members;
-	}
-
-	/**
-	 * Show all Reservation entities by Guest
-	 * 
-	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/reservations", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Reservation> getGuestReservations(@PathVariable String guest_guestId) {
-		return new java.util.ArrayList<Reservation>(guestDAO.findGuestByPrimaryKey(guest_guestId).getReservations());
 	}
 }

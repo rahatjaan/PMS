@@ -15,28 +15,16 @@ import org.springframework.dao.DataAccessException;
 public interface RoomtypeDAO extends JpaDao<Roomtype> {
 
 	/**
-	 * JPQL Query - findRoomtypeByPrimaryKey
+	 * JPQL Query - findRoomtypeByRoomTypeId
 	 *
 	 */
-	public Roomtype findRoomtypeByPrimaryKey(String roomTypeId) throws DataAccessException;
+	public Roomtype findRoomtypeByRoomTypeId(Integer roomTypeId) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByPrimaryKey
+	 * JPQL Query - findRoomtypeByRoomTypeId
 	 *
 	 */
-	public Roomtype findRoomtypeByPrimaryKey(String roomTypeId, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findAllRoomtypes
-	 *
-	 */
-	public Set<Roomtype> findAllRoomtypes() throws DataAccessException;
-
-	/**
-	 * JPQL Query - findAllRoomtypes
-	 *
-	 */
-	public Set<Roomtype> findAllRoomtypes(int startResult, int maxRows) throws DataAccessException;
+	public Roomtype findRoomtypeByRoomTypeId(Integer roomTypeId, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomtypeByRoomDescription
@@ -51,16 +39,28 @@ public interface RoomtypeDAO extends JpaDao<Roomtype> {
 	public Set<Roomtype> findRoomtypeByRoomDescription(String roomDescription, int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeId
+	 * JPQL Query - findRoomtypeByRoomTypeFieldContaining
 	 *
 	 */
-	public Roomtype findRoomtypeByRoomTypeId(String roomTypeId_1) throws DataAccessException;
+	public Set<Roomtype> findRoomtypeByRoomTypeFieldContaining(String roomTypeField) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeId
+	 * JPQL Query - findRoomtypeByRoomTypeFieldContaining
 	 *
 	 */
-	public Roomtype findRoomtypeByRoomTypeId(String roomTypeId_1, int startResult, int maxRows) throws DataAccessException;
+	public Set<Roomtype> findRoomtypeByRoomTypeFieldContaining(String roomTypeField, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeCode
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomTypeCode(String roomTypeCode) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeCode
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomTypeCode(String roomTypeCode, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomtypeByIsReserved
@@ -75,112 +75,40 @@ public interface RoomtypeDAO extends JpaDao<Roomtype> {
 	public Set<Roomtype> findRoomtypeByIsReserved(String isReserved, int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeDescriptionContaining
+	 * JPQL Query - findRoomtypeByRoomLocationContaining
 	 *
 	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeDescriptionContaining(String roomTypeDescription) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeDescriptionContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeDescriptionContaining(String roomTypeDescription, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomDescriptionContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomDescriptionContaining(String roomDescription_1) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomDescriptionContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomDescriptionContaining(String roomDescription_1, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeField
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeField(String roomTypeField) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeField
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeField(String roomTypeField, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeIdContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeIdContaining(String roomTypeId_2) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeIdContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeIdContaining(String roomTypeId_2, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeFieldContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeFieldContaining(String roomTypeField_1) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeFieldContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeFieldContaining(String roomTypeField_1, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomLocation
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomLocation(String roomLocation) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomLocation
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomLocation(String roomLocation, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeCodeContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeCodeContaining(String roomTypeCode) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeCodeContaining
-	 *
-	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeCodeContaining(String roomTypeCode, int startResult, int maxRows) throws DataAccessException;
+	public Set<Roomtype> findRoomtypeByRoomLocationContaining(String roomLocation) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomtypeByRoomLocationContaining
 	 *
 	 */
-	public Set<Roomtype> findRoomtypeByRoomLocationContaining(String roomLocation_1) throws DataAccessException;
+	public Set<Roomtype> findRoomtypeByRoomLocationContaining(String roomLocation, int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomLocationContaining
+	 * JPQL Query - findRoomtypeByRoomTypeCodeContaining
 	 *
 	 */
-	public Set<Roomtype> findRoomtypeByRoomLocationContaining(String roomLocation_1, int startResult, int maxRows) throws DataAccessException;
+	public Set<Roomtype> findRoomtypeByRoomTypeCodeContaining(String roomTypeCode_1) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeDescription
+	 * JPQL Query - findRoomtypeByRoomTypeCodeContaining
 	 *
 	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeDescription(String roomTypeDescription_1) throws DataAccessException;
+	public Set<Roomtype> findRoomtypeByRoomTypeCodeContaining(String roomTypeCode_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeDescription
+	 * JPQL Query - findRoomtypeByPrimaryKey
 	 *
 	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeDescription(String roomTypeDescription_1, int startResult, int maxRows) throws DataAccessException;
+	public Roomtype findRoomtypeByPrimaryKey(Integer roomTypeId_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByPrimaryKey
+	 *
+	 */
+	public Roomtype findRoomtypeByPrimaryKey(Integer roomTypeId_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomtypeByIsReservedContaining
@@ -195,15 +123,75 @@ public interface RoomtypeDAO extends JpaDao<Roomtype> {
 	public Set<Roomtype> findRoomtypeByIsReservedContaining(String isReserved_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeCode
+	 * JPQL Query - findRoomtypeByRoomLocation
 	 *
 	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeCode(String roomTypeCode_1) throws DataAccessException;
+	public Set<Roomtype> findRoomtypeByRoomLocation(String roomLocation_1) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeCode
+	 * JPQL Query - findRoomtypeByRoomLocation
 	 *
 	 */
-	public Set<Roomtype> findRoomtypeByRoomTypeCode(String roomTypeCode_1, int startResult, int maxRows) throws DataAccessException;
+	public Set<Roomtype> findRoomtypeByRoomLocation(String roomLocation_1, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeDescription
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomTypeDescription(String roomTypeDescription) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeDescription
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomTypeDescription(String roomTypeDescription, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeField
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomTypeField(String roomTypeField_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeField
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomTypeField(String roomTypeField_1, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findAllRoomtypes
+	 *
+	 */
+	public Set<Roomtype> findAllRoomtypes() throws DataAccessException;
+
+	/**
+	 * JPQL Query - findAllRoomtypes
+	 *
+	 */
+	public Set<Roomtype> findAllRoomtypes(int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomDescriptionContaining
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomDescriptionContaining(String roomDescription_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomDescriptionContaining
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomDescriptionContaining(String roomDescription_1, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeDescriptionContaining
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomTypeDescriptionContaining(String roomTypeDescription_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeDescriptionContaining
+	 *
+	 */
+	public Set<Roomtype> findRoomtypeByRoomTypeDescriptionContaining(String roomTypeDescription_1, int startResult, int maxRows) throws DataAccessException;
 
 }

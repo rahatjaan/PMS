@@ -68,83 +68,6 @@ public class MembersController {
 	}
 
 	/**
-	 * Select an existing Members entity
-	 * 
-	 */
-	@RequestMapping("/selectMembers")
-	public ModelAndView selectMembers(@RequestParam String memberIdKey) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("members", membersDAO.findMembersByPrimaryKey(memberIdKey));
-		mav.setViewName("members/viewMembers.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Entry point to show all Members entities
-	 * 
-	 */
-	public String indexMembers() {
-		return "redirect:/indexMembers";
-	}
-
-	/**
-	 * Show all Guest entities by Members
-	 * 
-	 */
-	@RequestMapping("/listMembersGuests")
-	public ModelAndView listMembersGuests(@RequestParam String memberIdKey) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("members", membersDAO.findMembersByPrimaryKey(memberIdKey));
-		mav.setViewName("members/guests/listGuests.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Select the Members entity for display allowing the user to confirm that they would like to delete the entity
-	 * 
-	 */
-	@RequestMapping("/confirmDeleteMembers")
-	public ModelAndView confirmDeleteMembers(@RequestParam String memberIdKey) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("members", membersDAO.findMembersByPrimaryKey(memberIdKey));
-		mav.setViewName("members/deleteMembers.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	@RequestMapping("/deleteMembersGuests")
-	public ModelAndView deleteMembersGuests(@RequestParam String members_memberId, @RequestParam String related_guests_guestId) {
-		ModelAndView mav = new ModelAndView();
-
-		Members members = membersService.deleteMembersGuests(members_memberId, related_guests_guestId);
-
-		mav.addObject("members_memberId", members_memberId);
-		mav.addObject("members", members);
-		mav.setViewName("members/viewMembers.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Save an existing Members entity
-	 * 
-	 */
-	@RequestMapping("/saveMembers")
-	public String saveMembers(@ModelAttribute Members members) {
-		membersService.saveMembers(members);
-		return "forward:/indexMembers";
-	}
-
-	/**
 	 * Register custom, context-specific property editors
 	 * 
 	 */
@@ -163,24 +86,35 @@ public class MembersController {
 	}
 
 	/**
-	 * Delete an existing Members entity
+	 * Delete an existing Guest entity
 	 * 
 	 */
-	@RequestMapping("/deleteMembers")
-	public String deleteMembers(@RequestParam String memberIdKey) {
-		Members members = membersDAO.findMembersByPrimaryKey(memberIdKey);
-		membersService.deleteMembers(members);
-		return "forward:/indexMembers";
+	@RequestMapping("/deleteMembersGuests")
+	public ModelAndView deleteMembersGuests(@RequestParam String members_memberId, @RequestParam Integer related_guests_guestId) {
+		ModelAndView mav = new ModelAndView();
+
+		Members members = membersService.deleteMembersGuests(members_memberId, related_guests_guestId);
+
+		mav.addObject("members_memberId", members_memberId);
+		mav.addObject("members", members);
+		mav.setViewName("members/viewMembers.jsp");
+
+		return mav;
 	}
 
 	/**
+	 * Create a new Members entity
+	 * 
 	 */
-	@RequestMapping("/membersController/binary.action")
-	public ModelAndView streamBinary(@ModelAttribute HttpServletRequest request, @ModelAttribute HttpServletResponse response) {
+	@RequestMapping("/newMembers")
+	public ModelAndView newMembers() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("streamedBinaryContentView");
-		return mav;
 
+		mav.addObject("members", new Members());
+		mav.addObject("newFlag", true);
+		mav.setViewName("members/editMembers.jsp");
+
+		return mav;
 	}
 
 	/**
@@ -196,6 +130,17 @@ public class MembersController {
 		mav.setViewName("members/guests/editGuests.jsp");
 
 		return mav;
+	}
+
+	/**
+	 * Delete an existing Members entity
+	 * 
+	 */
+	@RequestMapping("/deleteMembers")
+	public String deleteMembers(@RequestParam String memberIdKey) {
+		Members members = membersDAO.findMembersByPrimaryKey(memberIdKey);
+		membersService.deleteMembers(members);
+		return "forward:/indexMembers";
 	}
 
 	/**
@@ -219,7 +164,7 @@ public class MembersController {
 	 * 
 	 */
 	@RequestMapping("/editMembersGuests")
-	public ModelAndView editMembersGuests(@RequestParam String members_memberId, @RequestParam String guests_guestId) {
+	public ModelAndView editMembersGuests(@RequestParam String members_memberId, @RequestParam Integer guests_guestId) {
 		Guest guest = guestDAO.findGuestByPrimaryKey(guests_guestId, -1, -1);
 
 		ModelAndView mav = new ModelAndView();
@@ -231,16 +176,35 @@ public class MembersController {
 	}
 
 	/**
-	 * Create a new Members entity
+	 * Save an existing Members entity
 	 * 
 	 */
-	@RequestMapping("/newMembers")
-	public ModelAndView newMembers() {
+	@RequestMapping("/saveMembers")
+	public String saveMembers(@ModelAttribute Members members) {
+		membersService.saveMembers(members);
+		return "forward:/indexMembers";
+	}
+
+	/**
+	 */
+	@RequestMapping("/membersController/binary.action")
+	public ModelAndView streamBinary(@ModelAttribute HttpServletRequest request, @ModelAttribute HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("streamedBinaryContentView");
+		return mav;
+
+	}
+
+	/**
+	 * Select an existing Members entity
+	 * 
+	 */
+	@RequestMapping("/selectMembers")
+	public ModelAndView selectMembers(@RequestParam String memberIdKey) {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("members", new Members());
-		mav.addObject("newFlag", true);
-		mav.setViewName("members/editMembers.jsp");
+		mav.addObject("members", membersDAO.findMembersByPrimaryKey(memberIdKey));
+		mav.setViewName("members/viewMembers.jsp");
 
 		return mav;
 	}
@@ -250,13 +214,50 @@ public class MembersController {
 	 * 
 	 */
 	@RequestMapping("/selectMembersGuests")
-	public ModelAndView selectMembersGuests(@RequestParam String members_memberId, @RequestParam String guests_guestId) {
+	public ModelAndView selectMembersGuests(@RequestParam String members_memberId, @RequestParam Integer guests_guestId) {
 		Guest guest = guestDAO.findGuestByPrimaryKey(guests_guestId, -1, -1);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("members_memberId", members_memberId);
 		mav.addObject("guest", guest);
 		mav.setViewName("members/guests/viewGuests.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Entry point to show all Members entities
+	 * 
+	 */
+	public String indexMembers() {
+		return "redirect:/indexMembers";
+	}
+
+	/**
+	 * Select the child Guest entity for display allowing the user to confirm that they would like to delete the entity
+	 * 
+	 */
+	@RequestMapping("/confirmDeleteMembersGuests")
+	public ModelAndView confirmDeleteMembersGuests(@RequestParam String members_memberId, @RequestParam Integer related_guests_guestId) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("guest", guestDAO.findGuestByPrimaryKey(related_guests_guestId));
+		mav.addObject("members_memberId", members_memberId);
+		mav.setViewName("members/guests/deleteGuests.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Show all Guest entities by Members
+	 * 
+	 */
+	@RequestMapping("/listMembersGuests")
+	public ModelAndView listMembersGuests(@RequestParam String memberIdKey) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("members", membersDAO.findMembersByPrimaryKey(memberIdKey));
+		mav.setViewName("members/guests/listGuests.jsp");
 
 		return mav;
 	}
@@ -277,16 +278,15 @@ public class MembersController {
 	}
 
 	/**
-	 * Select the child Guest entity for display allowing the user to confirm that they would like to delete the entity
+	 * Select the Members entity for display allowing the user to confirm that they would like to delete the entity
 	 * 
 	 */
-	@RequestMapping("/confirmDeleteMembersGuests")
-	public ModelAndView confirmDeleteMembersGuests(@RequestParam String members_memberId, @RequestParam String related_guests_guestId) {
+	@RequestMapping("/confirmDeleteMembers")
+	public ModelAndView confirmDeleteMembers(@RequestParam String memberIdKey) {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("guest", guestDAO.findGuestByPrimaryKey(related_guests_guestId));
-		mav.addObject("members_memberId", members_memberId);
-		mav.setViewName("members/guests/deleteGuests.jsp");
+		mav.addObject("members", membersDAO.findMembersByPrimaryKey(memberIdKey));
+		mav.setViewName("members/deleteMembers.jsp");
 
 		return mav;
 	}

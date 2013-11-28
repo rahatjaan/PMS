@@ -18,6 +18,7 @@
 				<tr>
 					<th class="thead">&nbsp;</th>
 					<th class="thead"><fmt:message key="reservation.reservationid.title"/></th>
+					<th class="thead"><fmt:message key="room.roomid.title"/></th>
 					<th class="thead"><fmt:message key="reservation.arrivaldate.title"/></th>
 					<th class="thead"><fmt:message key="reservation.numberofdays.title"/></th>
 					<th class="thead"><fmt:message key="reservation.departuredate.title"/></th>
@@ -29,6 +30,7 @@
 					<th class="thead"><fmt:message key="reservation.cardexpirydate.title"/></th>
 					<th class="thead"><fmt:message key="reservation.numberofchildren.title"/></th>
 					<th class="thead"><fmt:message key="reservation.numberofadults.title"/></th>
+					<th class="thead"><fmt:message key="guest.guestid.title"/></th>
 					<th class="thead"><fmt:message key="reservation.ischeckedout.title"/></th>
 				</tr>
 			</thead>
@@ -51,6 +53,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.reservationId}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.room.roomId}
 						&nbsp;
 					</td>
 					<td nowrap="nowrap" class="tabletd">
@@ -106,6 +113,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.numberOfAdults}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.guest.guestId}
 						&nbsp;
 					</td>
 					<td nowrap="nowrap" class="tabletd">

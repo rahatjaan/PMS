@@ -24,6 +24,24 @@
 						</td>
 					</tr>
 					<tr>
+						<td  class="label">
+							<fmt:message key="room.roomid.title"/>:
+						</td>
+						<td>
+							${reservation.room.roomId}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td  class="label">
+							<fmt:message key="guest.guestid.title"/>:
+						</td>
+						<td>
+							${reservation.guest.guestId}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
 						<td class="label" valign="top">
 							<fmt:message key="reservation.arrivaldate.title"/>:
 						</td>

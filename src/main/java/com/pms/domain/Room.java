@@ -7,6 +7,8 @@ import java.lang.StringBuilder;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,23 +34,22 @@ import javax.persistence.*;
 		@NamedQuery(name = "findRoomByPrimaryKey", query = "select myRoom from Room myRoom where myRoom.roomId = ?1"),
 		@NamedQuery(name = "findRoomByRoomCategory", query = "select myRoom from Room myRoom where myRoom.roomCategory = ?1"),
 		@NamedQuery(name = "findRoomByRoomCategoryContaining", query = "select myRoom from Room myRoom where myRoom.roomCategory like ?1"),
-		@NamedQuery(name = "findRoomByRoomId", query = "select myRoom from Room myRoom where myRoom.roomId = ?1"),
-		@NamedQuery(name = "findRoomByRoomIdContaining", query = "select myRoom from Room myRoom where myRoom.roomId like ?1") })
+		@NamedQuery(name = "findRoomByRoomId", query = "select myRoom from Room myRoom where myRoom.roomId = ?1") })
 @Table(catalog = "stubpms", name = "room")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMS/com/pms/domain", name = "Room")
-@XmlRootElement(namespace = "PMS/com/pms/domain")
+@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Room")
+@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
 public class Room implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 */
 
-	@Column(name = "room_id", length = 10)
+	@Column(name = "room_id", nullable = false)
 	@Basic(fetch = FetchType.EAGER)
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@XmlElement
-	String roomId;
+	Integer roomId;
 	/**
 	 */
 
@@ -92,13 +93,13 @@ public class Room implements Serializable {
 
 	/**
 	 */
-	public void setRoomId(String roomId) {
+	public void setRoomId(Integer roomId) {
 		this.roomId = roomId;
 	}
 
 	/**
 	 */
-	public String getRoomId() {
+	public Integer getRoomId() {
 		return this.roomId;
 	}
 

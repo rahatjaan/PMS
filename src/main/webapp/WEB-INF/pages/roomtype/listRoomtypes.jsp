@@ -23,7 +23,10 @@
 					<th class="thead"><fmt:message key="roomtype.roomtypedescription.title"/></th>
 					<th class="thead"><fmt:message key="roomtype.roomlocation.title"/></th>
 					<th class="thead"><fmt:message key="roomtype.roomdescription.title"/></th>
+					<th class="thead"><fmt:message key="roomview.roomviewid.title"/></th>:
+					<th class="thead"><fmt:message key="bed.bedid.title"/></th>
 					<th class="thead"><fmt:message key="roomtype.isreserved.title"/></th>
+					
 				</tr>
 			</thead>
 			<tbody>
@@ -70,6 +73,16 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.roomDescription}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.roomview.roomViewId}
+						&nbsp;
+					</td>					
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.bed.bedId}
 						&nbsp;
 					</td>
 					<td nowrap="nowrap" class="tabletd">

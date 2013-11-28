@@ -18,31 +18,7 @@ public interface ReservationService {
 	 * Delete an existing Transactions entity
 	 * 
 	 */
-	public Reservation deleteReservationTransactionses(String reservation_reservationId, String related_transactionses_transactionId);
-
-	/**
-	 * Save an existing Transactions entity
-	 * 
-	 */
-	public Reservation saveReservationTransactionses(String reservationId, Transactions related_transactionses);
-
-	/**
-	 * Return a count of all Reservation entity
-	 * 
-	 */
-	public Integer countReservations();
-
-	/**
-	 * Delete an existing Room entity
-	 * 
-	 */
-	public Reservation deleteReservationRoom(String reservation_reservationId_1, String related_room_roomId);
-
-	/**
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	public Reservation deleteReservationGuest(String reservation_reservationId_2, String related_guest_guestId);
+	public Reservation deleteReservationTransactionses(Integer reservation_reservationId, Integer related_transactionses_transactionId);
 
 	/**
 	 * Load an existing Reservation entity
@@ -57,8 +33,16 @@ public interface ReservationService {
 	public List<Reservation> findAllReservations(Integer startResult, Integer maxRows);
 
 	/**
+	 * Delete an existing Guest entity
+	 * 
 	 */
-	public Reservation findReservationByPrimaryKey(String reservationId_1);
+	public Reservation deleteReservationGuest(Integer reservation_reservationId_1, Integer related_guest_guestId);
+
+	/**
+	 * Save an existing Guest entity
+	 * 
+	 */
+	public Reservation saveReservationGuest(Integer reservationId, Guest related_guest);
 
 	/**
 	 * Delete an existing Reservation entity
@@ -67,20 +51,36 @@ public interface ReservationService {
 	public void deleteReservation(Reservation reservation);
 
 	/**
+	 * Delete an existing Room entity
+	 * 
+	 */
+	public Reservation deleteReservationRoom(Integer reservation_reservationId_2, Integer related_room_roomId);
+
+	/**
+	 */
+	public Reservation findReservationByPrimaryKey(Integer reservationId_1);
+
+	/**
+	 * Return a count of all Reservation entity
+	 * 
+	 */
+	public Integer countReservations();
+
+	/**
 	 * Save an existing Room entity
 	 * 
 	 */
-	public Reservation saveReservationRoom(String reservationId_2, Room related_room);
+	public Reservation saveReservationRoom(Integer reservationId_2, Room related_room);
+
+	/**
+	 * Save an existing Transactions entity
+	 * 
+	 */
+	public Reservation saveReservationTransactionses(Integer reservationId_3, Transactions related_transactionses);
 
 	/**
 	 * Save an existing Reservation entity
 	 * 
 	 */
 	public void saveReservation(Reservation reservation_1);
-
-	/**
-	 * Save an existing Guest entity
-	 * 
-	 */
-	public Reservation saveReservationGuest(String reservationId_3, Guest related_guest);
 }

@@ -59,6 +59,15 @@
 						&nbsp;
 						</td>
 					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="roomtype.roomtypeid.title"/>:
+						</td>
+						<td>
+							${room.roomtype.roomTypeId}
+						&nbsp;
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<div class="clear">&nbsp;</div>

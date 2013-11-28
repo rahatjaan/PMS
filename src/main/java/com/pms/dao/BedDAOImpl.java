@@ -66,47 +66,50 @@ public class BedDAOImpl extends AbstractJpaDao<Bed> implements BedDAO {
 	}
 
 	/**
-	 * JPQL Query - findBedByBedTypeDescriptionContaining
+	 * JPQL Query - findBedByBedTypeCodeContaining
 	 *
 	 */
 	@Transactional
-	public Set<Bed> findBedByBedTypeDescriptionContaining(String bedTypeDescription) throws DataAccessException {
+	public Set<Bed> findBedByBedTypeCodeContaining(String bedTypeCode) throws DataAccessException {
 
-		return findBedByBedTypeDescriptionContaining(bedTypeDescription, -1, -1);
+		return findBedByBedTypeCodeContaining(bedTypeCode, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findBedByBedTypeDescriptionContaining
+	 * JPQL Query - findBedByBedTypeCodeContaining
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Bed> findBedByBedTypeDescriptionContaining(String bedTypeDescription, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findBedByBedTypeDescriptionContaining", startResult, maxRows, bedTypeDescription);
+	public Set<Bed> findBedByBedTypeCodeContaining(String bedTypeCode, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findBedByBedTypeCodeContaining", startResult, maxRows, bedTypeCode);
 		return new LinkedHashSet<Bed>(query.getResultList());
 	}
 
 	/**
-	 * JPQL Query - findAllBeds
+	 * JPQL Query - findBedByPrimaryKey
 	 *
 	 */
 	@Transactional
-	public Set<Bed> findAllBeds() throws DataAccessException {
+	public Bed findBedByPrimaryKey(Integer bedId) throws DataAccessException {
 
-		return findAllBeds(-1, -1);
+		return findBedByPrimaryKey(bedId, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findAllBeds
+	 * JPQL Query - findBedByPrimaryKey
 	 *
 	 */
 
-	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Bed> findAllBeds(int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findAllBeds", startResult, maxRows);
-		return new LinkedHashSet<Bed>(query.getResultList());
+	public Bed findBedByPrimaryKey(Integer bedId, int startResult, int maxRows) throws DataAccessException {
+		try {
+			Query query = createNamedQuery("findBedByPrimaryKey", startResult, maxRows, bedId);
+			return (com.pms.domain.Bed) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
 	}
 
 	/**
@@ -132,28 +135,25 @@ public class BedDAOImpl extends AbstractJpaDao<Bed> implements BedDAO {
 	}
 
 	/**
-	 * JPQL Query - findBedByPrimaryKey
+	 * JPQL Query - findBedByBedTypeDescriptionContaining
 	 *
 	 */
 	@Transactional
-	public Bed findBedByPrimaryKey(String bedId) throws DataAccessException {
+	public Set<Bed> findBedByBedTypeDescriptionContaining(String bedTypeDescription) throws DataAccessException {
 
-		return findBedByPrimaryKey(bedId, -1, -1);
+		return findBedByBedTypeDescriptionContaining(bedTypeDescription, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findBedByPrimaryKey
+	 * JPQL Query - findBedByBedTypeDescriptionContaining
 	 *
 	 */
 
+	@SuppressWarnings("unchecked")
 	@Transactional
-	public Bed findBedByPrimaryKey(String bedId, int startResult, int maxRows) throws DataAccessException {
-		try {
-			Query query = createNamedQuery("findBedByPrimaryKey", startResult, maxRows, bedId);
-			return (com.pms.domain.Bed) query.getSingleResult();
-		} catch (NoResultException nre) {
-			return null;
-		}
+	public Set<Bed> findBedByBedTypeDescriptionContaining(String bedTypeDescription, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findBedByBedTypeDescriptionContaining", startResult, maxRows, bedTypeDescription);
+		return new LinkedHashSet<Bed>(query.getResultList());
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class BedDAOImpl extends AbstractJpaDao<Bed> implements BedDAO {
 	 *
 	 */
 	@Transactional
-	public Bed findBedByBedId(String bedId) throws DataAccessException {
+	public Bed findBedByBedId(Integer bedId) throws DataAccessException {
 
 		return findBedByBedId(bedId, -1, -1);
 	}
@@ -172,13 +172,35 @@ public class BedDAOImpl extends AbstractJpaDao<Bed> implements BedDAO {
 	 */
 
 	@Transactional
-	public Bed findBedByBedId(String bedId, int startResult, int maxRows) throws DataAccessException {
+	public Bed findBedByBedId(Integer bedId, int startResult, int maxRows) throws DataAccessException {
 		try {
 			Query query = createNamedQuery("findBedByBedId", startResult, maxRows, bedId);
 			return (com.pms.domain.Bed) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
 		}
+	}
+
+	/**
+	 * JPQL Query - findAllBeds
+	 *
+	 */
+	@Transactional
+	public Set<Bed> findAllBeds() throws DataAccessException {
+
+		return findAllBeds(-1, -1);
+	}
+
+	/**
+	 * JPQL Query - findAllBeds
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Bed> findAllBeds(int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findAllBeds", startResult, maxRows);
+		return new LinkedHashSet<Bed>(query.getResultList());
 	}
 
 	/**
@@ -200,50 +222,6 @@ public class BedDAOImpl extends AbstractJpaDao<Bed> implements BedDAO {
 	@Transactional
 	public Set<Bed> findBedByBedTypeDescription(String bedTypeDescription, int startResult, int maxRows) throws DataAccessException {
 		Query query = createNamedQuery("findBedByBedTypeDescription", startResult, maxRows, bedTypeDescription);
-		return new LinkedHashSet<Bed>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findBedByBedTypeCodeContaining
-	 *
-	 */
-	@Transactional
-	public Set<Bed> findBedByBedTypeCodeContaining(String bedTypeCode) throws DataAccessException {
-
-		return findBedByBedTypeCodeContaining(bedTypeCode, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findBedByBedTypeCodeContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Bed> findBedByBedTypeCodeContaining(String bedTypeCode, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findBedByBedTypeCodeContaining", startResult, maxRows, bedTypeCode);
-		return new LinkedHashSet<Bed>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findBedByBedIdContaining
-	 *
-	 */
-	@Transactional
-	public Set<Bed> findBedByBedIdContaining(String bedId) throws DataAccessException {
-
-		return findBedByBedIdContaining(bedId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findBedByBedIdContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Bed> findBedByBedIdContaining(String bedId, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findBedByBedIdContaining", startResult, maxRows, bedId);
 		return new LinkedHashSet<Bed>(query.getResultList());
 	}
 

@@ -7,6 +7,8 @@ import java.lang.StringBuilder;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,7 +26,6 @@ import javax.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = "findAllBeds", query = "select myBed from Bed myBed"),
 		@NamedQuery(name = "findBedByBedId", query = "select myBed from Bed myBed where myBed.bedId = ?1"),
-		@NamedQuery(name = "findBedByBedIdContaining", query = "select myBed from Bed myBed where myBed.bedId like ?1"),
 		@NamedQuery(name = "findBedByBedTypeCode", query = "select myBed from Bed myBed where myBed.bedTypeCode = ?1"),
 		@NamedQuery(name = "findBedByBedTypeCodeContaining", query = "select myBed from Bed myBed where myBed.bedTypeCode like ?1"),
 		@NamedQuery(name = "findBedByBedTypeDescription", query = "select myBed from Bed myBed where myBed.bedTypeDescription = ?1"),
@@ -32,19 +33,19 @@ import javax.persistence.*;
 		@NamedQuery(name = "findBedByPrimaryKey", query = "select myBed from Bed myBed where myBed.bedId = ?1") })
 @Table(catalog = "stubpms", name = "bed")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMS/com/pms/domain", name = "Bed")
-@XmlRootElement(namespace = "PMS/com/pms/domain")
+@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Bed")
+@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
 public class Bed implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 */
 
-	@Column(name = "bed_id", length = 10)
+	@Column(name = "bed_id", nullable = false)
 	@Basic(fetch = FetchType.EAGER)
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@XmlElement
-	String bedId;
+	Integer bedId;
 	/**
 	 */
 
@@ -68,13 +69,13 @@ public class Bed implements Serializable {
 
 	/**
 	 */
-	public void setBedId(String bedId) {
+	public void setBedId(Integer bedId) {
 		this.bedId = bedId;
 	}
 
 	/**
 	 */
-	public String getBedId() {
+	public Integer getBedId() {
 		return this.bedId;
 	}
 

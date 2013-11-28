@@ -15,40 +15,40 @@ import org.springframework.dao.DataAccessException;
 public interface RoomviewDAO extends JpaDao<Roomview> {
 
 	/**
-	 * JPQL Query - findRoomviewByRoomViewCodeContaining
+	 * JPQL Query - findRoomviewByRoomViewId
 	 *
 	 */
-	public Set<Roomview> findRoomviewByRoomViewCodeContaining(String roomViewCode) throws DataAccessException;
+	public Roomview findRoomviewByRoomViewId(Integer roomViewId) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomviewByRoomViewCodeContaining
+	 * JPQL Query - findRoomviewByRoomViewId
 	 *
 	 */
-	public Set<Roomview> findRoomviewByRoomViewCodeContaining(String roomViewCode, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomviewByRoomViewDescriptionContaining
-	 *
-	 */
-	public Set<Roomview> findRoomviewByRoomViewDescriptionContaining(String roomViewDescription) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomviewByRoomViewDescriptionContaining
-	 *
-	 */
-	public Set<Roomview> findRoomviewByRoomViewDescriptionContaining(String roomViewDescription, int startResult, int maxRows) throws DataAccessException;
+	public Roomview findRoomviewByRoomViewId(Integer roomViewId, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomviewByRoomViewCode
 	 *
 	 */
-	public Set<Roomview> findRoomviewByRoomViewCode(String roomViewCode_1) throws DataAccessException;
+	public Set<Roomview> findRoomviewByRoomViewCode(String roomViewCode) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomviewByRoomViewCode
 	 *
 	 */
-	public Set<Roomview> findRoomviewByRoomViewCode(String roomViewCode_1, int startResult, int maxRows) throws DataAccessException;
+	public Set<Roomview> findRoomviewByRoomViewCode(String roomViewCode, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomviewByRoomViewDescription
+	 *
+	 */
+	public Set<Roomview> findRoomviewByRoomViewDescription(String roomViewDescription) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomviewByRoomViewDescription
+	 *
+	 */
+	public Set<Roomview> findRoomviewByRoomViewDescription(String roomViewDescription, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findAllRoomviews
@@ -63,51 +63,39 @@ public interface RoomviewDAO extends JpaDao<Roomview> {
 	public Set<Roomview> findAllRoomviews(int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomviewByPrimaryKey
+	 * JPQL Query - findRoomviewByRoomViewCodeContaining
 	 *
 	 */
-	public Roomview findRoomviewByPrimaryKey(String roomViewId) throws DataAccessException;
+	public Set<Roomview> findRoomviewByRoomViewCodeContaining(String roomViewCode_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomviewByRoomViewCodeContaining
+	 *
+	 */
+	public Set<Roomview> findRoomviewByRoomViewCodeContaining(String roomViewCode_1, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomviewByRoomViewDescriptionContaining
+	 *
+	 */
+	public Set<Roomview> findRoomviewByRoomViewDescriptionContaining(String roomViewDescription_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomviewByRoomViewDescriptionContaining
+	 *
+	 */
+	public Set<Roomview> findRoomviewByRoomViewDescriptionContaining(String roomViewDescription_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomviewByPrimaryKey
 	 *
 	 */
-	public Roomview findRoomviewByPrimaryKey(String roomViewId, int startResult, int maxRows) throws DataAccessException;
+	public Roomview findRoomviewByPrimaryKey(Integer roomViewId_1) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomviewByRoomViewDescription
+	 * JPQL Query - findRoomviewByPrimaryKey
 	 *
 	 */
-	public Set<Roomview> findRoomviewByRoomViewDescription(String roomViewDescription_1) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomviewByRoomViewDescription
-	 *
-	 */
-	public Set<Roomview> findRoomviewByRoomViewDescription(String roomViewDescription_1, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomviewByRoomViewId
-	 *
-	 */
-	public Roomview findRoomviewByRoomViewId(String roomViewId_1) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomviewByRoomViewId
-	 *
-	 */
-	public Roomview findRoomviewByRoomViewId(String roomViewId_1, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomviewByRoomViewIdContaining
-	 *
-	 */
-	public Set<Roomview> findRoomviewByRoomViewIdContaining(String roomViewId_2) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomviewByRoomViewIdContaining
-	 *
-	 */
-	public Set<Roomview> findRoomviewByRoomViewIdContaining(String roomViewId_2, int startResult, int maxRows) throws DataAccessException;
+	public Roomview findRoomviewByPrimaryKey(Integer roomViewId_1, int startResult, int maxRows) throws DataAccessException;
 
 }

@@ -13,6 +13,28 @@ import java.util.Set;
 public interface BedService {
 
 	/**
+	 * Return all Bed entity
+	 * 
+	 */
+	public List<Bed> findAllBeds(Integer startResult, Integer maxRows);
+
+	/**
+	 * Save an existing Bed entity
+	 * 
+	 */
+	public void saveBed(Bed bed);
+
+	/**
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	public Bed deleteBedRoomtypes(Integer bed_bedId, Integer related_roomtypes_roomTypeId);
+
+	/**
+	 */
+	public Bed findBedByPrimaryKey(Integer bedId);
+
+	/**
 	 * Load an existing Bed entity
 	 * 
 	 */
@@ -22,19 +44,7 @@ public interface BedService {
 	 * Delete an existing Bed entity
 	 * 
 	 */
-	public void deleteBed(Bed bed);
-
-	/**
-	 * Save an existing Bed entity
-	 * 
-	 */
-	public void saveBed(Bed bed_1);
-
-	/**
-	 * Save an existing Roomtype entity
-	 * 
-	 */
-	public Bed saveBedRoomtypes(String bedId, Roomtype related_roomtypes);
+	public void deleteBed(Bed bed_1);
 
 	/**
 	 * Return a count of all Bed entity
@@ -43,18 +53,8 @@ public interface BedService {
 	public Integer countBeds();
 
 	/**
-	 * Delete an existing Roomtype entity
+	 * Save an existing Roomtype entity
 	 * 
 	 */
-	public Bed deleteBedRoomtypes(String bed_bedId, String related_roomtypes_roomTypeId);
-
-	/**
-	 */
-	public Bed findBedByPrimaryKey(String bedId_1);
-
-	/**
-	 * Return all Bed entity
-	 * 
-	 */
-	public List<Bed> findAllBeds(Integer startResult, Integer maxRows);
+	public Bed saveBedRoomtypes(Integer bedId_1, Roomtype related_roomtypes);
 }

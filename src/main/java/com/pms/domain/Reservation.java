@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -45,23 +47,22 @@ import javax.persistence.*;
 		@NamedQuery(name = "findReservationByNumberOfChildren", query = "select myReservation from Reservation myReservation where myReservation.numberOfChildren = ?1"),
 		@NamedQuery(name = "findReservationByNumberOfDays", query = "select myReservation from Reservation myReservation where myReservation.numberOfDays = ?1"),
 		@NamedQuery(name = "findReservationByPrimaryKey", query = "select myReservation from Reservation myReservation where myReservation.reservationId = ?1"),
-		@NamedQuery(name = "findReservationByReservationId", query = "select myReservation from Reservation myReservation where myReservation.reservationId = ?1"),
-		@NamedQuery(name = "findReservationByReservationIdContaining", query = "select myReservation from Reservation myReservation where myReservation.reservationId like ?1") })
+		@NamedQuery(name = "findReservationByReservationId", query = "select myReservation from Reservation myReservation where myReservation.reservationId = ?1") })
 @Table(catalog = "stubpms", name = "reservation")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMS/com/pms/domain", name = "Reservation")
-@XmlRootElement(namespace = "PMS/com/pms/domain")
+@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Reservation")
+@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
 public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 */
 
-	@Column(name = "reservation_id", length = 10, nullable = false)
+	@Column(name = "reservation_id", nullable = false)
 	@Basic(fetch = FetchType.EAGER)
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@XmlElement
-	String reservationId;
+	Integer reservationId;
 	/**
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
@@ -167,13 +168,13 @@ public class Reservation implements Serializable {
 
 	/**
 	 */
-	public void setReservationId(String reservationId) {
+	public void setReservationId(Integer reservationId) {
 		this.reservationId = reservationId;
 	}
 
 	/**
 	 */
-	public String getReservationId() {
+	public Integer getReservationId() {
 		return this.reservationId;
 	}
 

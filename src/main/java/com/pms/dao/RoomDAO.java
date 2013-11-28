@@ -15,76 +15,16 @@ import org.springframework.dao.DataAccessException;
 public interface RoomDAO extends JpaDao<Room> {
 
 	/**
-	 * JPQL Query - findRoomByPrimaryKey
+	 * JPQL Query - findRoomByRoomId
 	 *
 	 */
-	public Room findRoomByPrimaryKey(String roomId) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByPrimaryKey
-	 *
-	 */
-	public Room findRoomByPrimaryKey(String roomId, int startResult, int maxRows) throws DataAccessException;
+	public Room findRoomByRoomId(Integer roomId) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomByRoomId
 	 *
 	 */
-	public Room findRoomByRoomId(String roomId_1) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByRoomId
-	 *
-	 */
-	public Room findRoomByRoomId(String roomId_1, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByRoomCategoryContaining
-	 *
-	 */
-	public Set<Room> findRoomByRoomCategoryContaining(String roomCategory) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByRoomCategoryContaining
-	 *
-	 */
-	public Set<Room> findRoomByRoomCategoryContaining(String roomCategory, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByFloorNumberContaining
-	 *
-	 */
-	public Set<Room> findRoomByFloorNumberContaining(String floorNumber) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByFloorNumberContaining
-	 *
-	 */
-	public Set<Room> findRoomByFloorNumberContaining(String floorNumber, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByIsComposite
-	 *
-	 */
-	public Set<Room> findRoomByIsComposite(String isComposite) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByIsComposite
-	 *
-	 */
-	public Set<Room> findRoomByIsComposite(String isComposite, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByFloorNumber
-	 *
-	 */
-	public Set<Room> findRoomByFloorNumber(String floorNumber_1) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findRoomByFloorNumber
-	 *
-	 */
-	public Set<Room> findRoomByFloorNumber(String floorNumber_1, int startResult, int maxRows) throws DataAccessException;
+	public Room findRoomByRoomId(Integer roomId, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomByIsSmoking
@@ -114,13 +54,25 @@ public interface RoomDAO extends JpaDao<Room> {
 	 * JPQL Query - findRoomByIsCompositeContaining
 	 *
 	 */
-	public Set<Room> findRoomByIsCompositeContaining(String isComposite_1) throws DataAccessException;
+	public Set<Room> findRoomByIsCompositeContaining(String isComposite) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomByIsCompositeContaining
 	 *
 	 */
-	public Set<Room> findRoomByIsCompositeContaining(String isComposite_1, int startResult, int maxRows) throws DataAccessException;
+	public Set<Room> findRoomByIsCompositeContaining(String isComposite, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomByFloorNumber
+	 *
+	 */
+	public Set<Room> findRoomByFloorNumber(String floorNumber) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomByFloorNumber
+	 *
+	 */
+	public Set<Room> findRoomByFloorNumber(String floorNumber, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findRoomByIsSmokingContaining
@@ -135,6 +87,18 @@ public interface RoomDAO extends JpaDao<Room> {
 	public Set<Room> findRoomByIsSmokingContaining(String isSmoking_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
+	 * JPQL Query - findRoomByRoomCategoryContaining
+	 *
+	 */
+	public Set<Room> findRoomByRoomCategoryContaining(String roomCategory) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomByRoomCategoryContaining
+	 *
+	 */
+	public Set<Room> findRoomByRoomCategoryContaining(String roomCategory, int startResult, int maxRows) throws DataAccessException;
+
+	/**
 	 * JPQL Query - findRoomByRoomCategory
 	 *
 	 */
@@ -147,15 +111,39 @@ public interface RoomDAO extends JpaDao<Room> {
 	public Set<Room> findRoomByRoomCategory(String roomCategory_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomByRoomIdContaining
+	 * JPQL Query - findRoomByPrimaryKey
 	 *
 	 */
-	public Set<Room> findRoomByRoomIdContaining(String roomId_2) throws DataAccessException;
+	public Room findRoomByPrimaryKey(Integer roomId_1) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findRoomByRoomIdContaining
+	 * JPQL Query - findRoomByPrimaryKey
 	 *
 	 */
-	public Set<Room> findRoomByRoomIdContaining(String roomId_2, int startResult, int maxRows) throws DataAccessException;
+	public Room findRoomByPrimaryKey(Integer roomId_1, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomByIsComposite
+	 *
+	 */
+	public Set<Room> findRoomByIsComposite(String isComposite_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomByIsComposite
+	 *
+	 */
+	public Set<Room> findRoomByIsComposite(String isComposite_1, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomByFloorNumberContaining
+	 *
+	 */
+	public Set<Room> findRoomByFloorNumberContaining(String floorNumber_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findRoomByFloorNumberContaining
+	 *
+	 */
+	public Set<Room> findRoomByFloorNumberContaining(String floorNumber_1, int startResult, int maxRows) throws DataAccessException;
 
 }

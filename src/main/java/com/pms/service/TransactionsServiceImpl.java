@@ -46,6 +46,22 @@ public class TransactionsServiceImpl implements TransactionsService {
 	}
 
 	/**
+	 * Return a count of all Transactions entity
+	 * 
+	 */
+	@Transactional
+	public Integer countTransactionss() {
+		return ((Long) transactionsDAO.createQuerySingleResult("select count(o) from Transactions o").getSingleResult()).intValue();
+	}
+
+	/**
+	 */
+	@Transactional
+	public Transactions findTransactionsByPrimaryKey(Integer transactionId) {
+		return transactionsDAO.findTransactionsByPrimaryKey(transactionId);
+	}
+
+	/**
 	 * Delete an existing Transactions entity
 	 * 
 	 */
@@ -65,18 +81,11 @@ public class TransactionsServiceImpl implements TransactionsService {
 	}
 
 	/**
-	 */
-	@Transactional
-	public Transactions findTransactionsByPrimaryKey(String transactionId) {
-		return transactionsDAO.findTransactionsByPrimaryKey(transactionId);
-	}
-
-	/**
 	 * Save an existing Reservation entity
 	 * 
 	 */
 	@Transactional
-	public Transactions saveTransactionsReservation(String transactionId, Reservation related_reservation) {
+	public Transactions saveTransactionsReservation(Integer transactionId, Reservation related_reservation) {
 		Transactions transactions = transactionsDAO.findTransactionsByPrimaryKey(transactionId, -1, -1);
 		Reservation existingreservation = reservationDAO.findReservationByPrimaryKey(related_reservation.getReservationId());
 
@@ -113,29 +122,11 @@ public class TransactionsServiceImpl implements TransactionsService {
 	}
 
 	/**
-	 * Return all Transactions entity
-	 * 
-	 */
-	@Transactional
-	public List<Transactions> findAllTransactionss(Integer startResult, Integer maxRows) {
-		return new java.util.ArrayList<Transactions>(transactionsDAO.findAllTransactionss(startResult, maxRows));
-	}
-
-	/**
-	 * Return a count of all Transactions entity
-	 * 
-	 */
-	@Transactional
-	public Integer countTransactionss() {
-		return ((Long) transactionsDAO.createQuerySingleResult("select count(o) from Transactions o").getSingleResult()).intValue();
-	}
-
-	/**
 	 * Delete an existing Reservation entity
 	 * 
 	 */
 	@Transactional
-	public Transactions deleteTransactionsReservation(String transactions_transactionId, String related_reservation_reservationId) {
+	public Transactions deleteTransactionsReservation(Integer transactions_transactionId, Integer related_reservation_reservationId) {
 		Transactions transactions = transactionsDAO.findTransactionsByPrimaryKey(transactions_transactionId, -1, -1);
 		Reservation related_reservation = reservationDAO.findReservationByPrimaryKey(related_reservation_reservationId, -1, -1);
 
@@ -174,5 +165,14 @@ public class TransactionsServiceImpl implements TransactionsService {
 			transactions = transactionsDAO.store(transactions);
 		}
 		transactionsDAO.flush();
+	}
+
+	/**
+	 * Return all Transactions entity
+	 * 
+	 */
+	@Transactional
+	public List<Transactions> findAllTransactionss(Integer startResult, Integer maxRows) {
+		return new java.util.ArrayList<Transactions>(transactionsDAO.findAllTransactionss(startResult, maxRows));
 	}
 }

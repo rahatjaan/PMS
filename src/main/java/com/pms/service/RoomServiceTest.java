@@ -47,10 +47,10 @@ import org.springframework.web.context.request.SessionScope;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class })
 @ContextConfiguration(locations = {
-		"file:./src/main/resources/PMS-security-context.xml",
-		"file:./src/main/resources/PMS-service-context.xml",
-		"file:./src/main/resources/PMS-dao-context.xml",
-		"file:./src/main/resources/PMS-web-context.xml" })
+		"file:./src/main/resources/PMSSTUB-security-context.xml",
+		"file:./src/main/resources/PMSSTUB-service-context.xml",
+		"file:./src/main/resources/PMSSTUB-dao-context.xml",
+		"file:./src/main/resources/PMSSTUB-web-context.xml" })
 @Transactional
 public class RoomServiceTest {
 
@@ -78,17 +78,17 @@ public class RoomServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Return all Room entity
+	 * Save an existing Reservation entity
 	 * 
 	 */
 	@Test
-	public void findAllRooms() {
-		// TODO: JUnit - Populate test inputs for operation: findAllRooms 
-		Integer startResult = 0;
-		Integer maxRows = 0;
-		List<Room> response = null;
-		response = service.findAllRooms(startResult, maxRows);
-		// TODO: JUnit - Add assertions to test outputs of operation: findAllRooms
+	public void saveRoomReservations() {
+		// TODO: JUnit - Populate test inputs for operation: saveRoomReservations 
+		Integer roomId = 0;
+		Reservation related_reservations = new com.pms.domain.Reservation();
+		Room response = null;
+		response = service.saveRoomReservations(roomId, related_reservations);
+		// TODO: JUnit - Add assertions to test outputs of operation: saveRoomReservations
 	}
 
 	/**
@@ -99,23 +99,11 @@ public class RoomServiceTest {
 	@Test
 	public void saveRoomRoomtype() {
 		// TODO: JUnit - Populate test inputs for operation: saveRoomRoomtype 
-		String roomId = null;
+		Integer roomId_1 = 0;
 		Roomtype related_roomtype = new com.pms.domain.Roomtype();
 		Room response = null;
-		response = service.saveRoomRoomtype(roomId, related_roomtype);
+		response = service.saveRoomRoomtype(roomId_1, related_roomtype);
 		// TODO: JUnit - Add assertions to test outputs of operation: saveRoomRoomtype
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Load an existing Room entity
-	 * 
-	 */
-	@Test
-	public void loadRooms() {
-		Set<Room> response = null;
-		response = service.loadRooms();
-		// TODO: JUnit - Add assertions to test outputs of operation: loadRooms
 	}
 
 	/**
@@ -132,33 +120,6 @@ public class RoomServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Delete an existing Reservation entity
-	 * 
-	 */
-	@Test
-	public void deleteRoomReservations() {
-		// TODO: JUnit - Populate test inputs for operation: deleteRoomReservations 
-		String room_roomId = null;
-		String related_reservations_reservationId = null;
-		Room response = null;
-		response = service.deleteRoomReservations(room_roomId, related_reservations_reservationId);
-		// TODO: JUnit - Add assertions to test outputs of operation: deleteRoomReservations
-	}
-
-	/**
-	 * Operation Unit Test
-	 */
-	@Test
-	public void findRoomByPrimaryKey() {
-		// TODO: JUnit - Populate test inputs for operation: findRoomByPrimaryKey 
-		String roomId_1 = null;
-		Room response = null;
-		response = service.findRoomByPrimaryKey(roomId_1);
-		// TODO: JUnit - Add assertions to test outputs of operation: findRoomByPrimaryKey
-	}
-
-	/**
-	 * Operation Unit Test
 	 * Save an existing Room entity
 	 * 
 	 */
@@ -171,17 +132,56 @@ public class RoomServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Save an existing Reservation entity
+	 */
+	@Test
+	public void findRoomByPrimaryKey() {
+		// TODO: JUnit - Populate test inputs for operation: findRoomByPrimaryKey 
+		Integer roomId_2 = 0;
+		Room response = null;
+		response = service.findRoomByPrimaryKey(roomId_2);
+		// TODO: JUnit - Add assertions to test outputs of operation: findRoomByPrimaryKey
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Load an existing Room entity
 	 * 
 	 */
 	@Test
-	public void saveRoomReservations() {
-		// TODO: JUnit - Populate test inputs for operation: saveRoomReservations 
-		String roomId_2 = null;
-		Reservation related_reservations = new com.pms.domain.Reservation();
+	public void loadRooms() {
+		Set<Room> response = null;
+		response = service.loadRooms();
+		// TODO: JUnit - Add assertions to test outputs of operation: loadRooms
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Delete an existing Reservation entity
+	 * 
+	 */
+	@Test
+	public void deleteRoomReservations() {
+		// TODO: JUnit - Populate test inputs for operation: deleteRoomReservations 
+		Integer room_roomId = 0;
+		Integer related_reservations_reservationId = 0;
 		Room response = null;
-		response = service.saveRoomReservations(roomId_2, related_reservations);
-		// TODO: JUnit - Add assertions to test outputs of operation: saveRoomReservations
+		response = service.deleteRoomReservations(room_roomId, related_reservations_reservationId);
+		// TODO: JUnit - Add assertions to test outputs of operation: deleteRoomReservations
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Return all Room entity
+	 * 
+	 */
+	@Test
+	public void findAllRooms() {
+		// TODO: JUnit - Populate test inputs for operation: findAllRooms 
+		Integer startResult = 0;
+		Integer maxRows = 0;
+		List<Room> response = null;
+		response = service.findAllRooms(startResult, maxRows);
+		// TODO: JUnit - Add assertions to test outputs of operation: findAllRooms
 	}
 
 	/**
@@ -204,8 +204,8 @@ public class RoomServiceTest {
 	@Test
 	public void deleteRoomRoomtype() {
 		// TODO: JUnit - Populate test inputs for operation: deleteRoomRoomtype 
-		String room_roomId_1 = null;
-		String related_roomtype_roomTypeId = null;
+		Integer room_roomId_1 = 0;
+		Integer related_roomtype_roomTypeId = 0;
 		Room response = null;
 		response = service.deleteRoomRoomtype(room_roomId_1, related_roomtype_roomTypeId);
 		// TODO: JUnit - Add assertions to test outputs of operation: deleteRoomRoomtype

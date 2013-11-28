@@ -67,6 +67,28 @@ public class MembersDAOImpl extends AbstractJpaDao<Members> implements
 	}
 
 	/**
+	 * JPQL Query - findMembersByMemberIdContaining
+	 *
+	 */
+	@Transactional
+	public Set<Members> findMembersByMemberIdContaining(String memberId) throws DataAccessException {
+
+		return findMembersByMemberIdContaining(memberId, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findMembersByMemberIdContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Members> findMembersByMemberIdContaining(String memberId, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findMembersByMemberIdContaining", startResult, maxRows, memberId);
+		return new LinkedHashSet<Members>(query.getResultList());
+	}
+
+	/**
 	 * JPQL Query - findAllMemberss
 	 *
 	 */
@@ -179,28 +201,6 @@ public class MembersDAOImpl extends AbstractJpaDao<Members> implements
 	@Transactional
 	public Set<Members> findMembersByMembershipTypeContaining(String membershipType, int startResult, int maxRows) throws DataAccessException {
 		Query query = createNamedQuery("findMembersByMembershipTypeContaining", startResult, maxRows, membershipType);
-		return new LinkedHashSet<Members>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findMembersByMemberIdContaining
-	 *
-	 */
-	@Transactional
-	public Set<Members> findMembersByMemberIdContaining(String memberId) throws DataAccessException {
-
-		return findMembersByMemberIdContaining(memberId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findMembersByMemberIdContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Members> findMembersByMemberIdContaining(String memberId, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findMembersByMemberIdContaining", startResult, maxRows, memberId);
 		return new LinkedHashSet<Members>(query.getResultList());
 	}
 

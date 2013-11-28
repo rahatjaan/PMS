@@ -55,11 +55,106 @@ public class GuestServiceImpl implements GuestService {
 	}
 
 	/**
+	 * Delete an existing Reservation entity
+	 * 
+	 */
+	@Transactional
+	public Guest deleteGuestReservations(Integer guest_guestId, Integer related_reservations_reservationId) {
+		Reservation related_reservations = reservationDAO.findReservationByPrimaryKey(related_reservations_reservationId, -1, -1);
+
+		Guest guest = guestDAO.findGuestByPrimaryKey(guest_guestId, -1, -1);
+
+		related_reservations.setGuest(null);
+		guest.getReservations().remove(related_reservations);
+
+		reservationDAO.remove(related_reservations);
+		reservationDAO.flush();
+
+		return guest;
+	}
+
+	/**
+	 * Save an existing Guest entity
+	 * 
+	 */
+	@Transactional
+	public void saveGuest(Guest guest) {
+		Guest existingGuest = guestDAO.findGuestByPrimaryKey(guest.getGuestId());
+
+		if (existingGuest != null) {
+			if (existingGuest != guest) {
+				existingGuest.setGuestId(guest.getGuestId());
+				existingGuest.setNamePrefix(guest.getNamePrefix());
+				existingGuest.setFirstName(guest.getFirstName());
+				existingGuest.setLastName(guest.getLastName());
+				existingGuest.setAddress1(guest.getAddress1());
+				existingGuest.setAddress2(guest.getAddress2());
+				existingGuest.setEmail(guest.getEmail());
+				existingGuest.setCountry(guest.getCountry());
+				existingGuest.setMobileNumber(guest.getMobileNumber());
+			}
+			guest = guestDAO.store(existingGuest);
+		} else {
+			guest = guestDAO.store(guest);
+		}
+		guestDAO.flush();
+	}
+
+	/**
+	 * Delete an existing Guest entity
+	 * 
+	 */
+	@Transactional
+	public void deleteGuest(Guest guest) {
+		guestDAO.remove(guest);
+		guestDAO.flush();
+	}
+
+	/**
+	 * Return all Guest entity
+	 * 
+	 */
+	@Transactional
+	public List<Guest> findAllGuests(Integer startResult, Integer maxRows) {
+		return new java.util.ArrayList<Guest>(guestDAO.findAllGuests(startResult, maxRows));
+	}
+
+	/**
+	 */
+	@Transactional
+	public Guest findGuestByPrimaryKey(Integer guestId) {
+		return guestDAO.findGuestByPrimaryKey(guestId);
+	}
+
+	/**
+	 * Delete an existing Members entity
+	 * 
+	 */
+	@Transactional
+	public Guest deleteGuestMembers(Integer guest_guestId, String related_members_memberId) {
+		Guest guest = guestDAO.findGuestByPrimaryKey(guest_guestId, -1, -1);
+		Members related_members = membersDAO.findMembersByPrimaryKey(related_members_memberId, -1, -1);
+
+		guest.setMembers(null);
+		related_members.getGuests().remove(guest);
+		guest = guestDAO.store(guest);
+		guestDAO.flush();
+
+		related_members = membersDAO.store(related_members);
+		membersDAO.flush();
+
+		membersDAO.remove(related_members);
+		membersDAO.flush();
+
+		return guest;
+	}
+
+	/**
 	 * Save an existing Members entity
 	 * 
 	 */
 	@Transactional
-	public Guest saveGuestMembers(String guestId, Members related_members) {
+	public Guest saveGuestMembers(Integer guestId, Members related_members) {
 		Guest guest = guestDAO.findGuestByPrimaryKey(guestId, -1, -1);
 		Members existingmembers = membersDAO.findMembersByPrimaryKey(related_members.getMemberId());
 
@@ -85,11 +180,29 @@ public class GuestServiceImpl implements GuestService {
 	}
 
 	/**
+	 * Load an existing Guest entity
+	 * 
+	 */
+	@Transactional
+	public Set<Guest> loadGuests() {
+		return guestDAO.findAllGuests();
+	}
+
+	/**
+	 * Return a count of all Guest entity
+	 * 
+	 */
+	@Transactional
+	public Integer countGuests() {
+		return ((Long) guestDAO.createQuerySingleResult("select count(o) from Guest o").getSingleResult()).intValue();
+	}
+
+	/**
 	 * Save an existing Reservation entity
 	 * 
 	 */
 	@Transactional
-	public Guest saveGuestReservations(String guestId, Reservation related_reservations) {
+	public Guest saveGuestReservations(Integer guestId, Reservation related_reservations) {
 		Guest guest = guestDAO.findGuestByPrimaryKey(guestId, -1, -1);
 		Reservation existingreservations = reservationDAO.findReservationByPrimaryKey(related_reservations.getReservationId());
 
@@ -123,118 +236,5 @@ public class GuestServiceImpl implements GuestService {
 		guestDAO.flush();
 
 		return guest;
-	}
-
-	/**
-	 * Delete an existing Reservation entity
-	 * 
-	 */
-	@Transactional
-	public Guest deleteGuestReservations(String guest_guestId, String related_reservations_reservationId) {
-		Reservation related_reservations = reservationDAO.findReservationByPrimaryKey(related_reservations_reservationId, -1, -1);
-
-		Guest guest = guestDAO.findGuestByPrimaryKey(guest_guestId, -1, -1);
-
-		related_reservations.setGuest(null);
-		guest.getReservations().remove(related_reservations);
-
-		reservationDAO.remove(related_reservations);
-		reservationDAO.flush();
-
-		return guest;
-	}
-
-	/**
-	 * Return a count of all Guest entity
-	 * 
-	 */
-	@Transactional
-	public Integer countGuests() {
-		return ((Long) guestDAO.createQuerySingleResult("select count(o) from Guest o").getSingleResult()).intValue();
-	}
-
-	/**
-	 */
-	@Transactional
-	public Guest findGuestByPrimaryKey(String guestId) {
-		return guestDAO.findGuestByPrimaryKey(guestId);
-	}
-
-	/**
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	@Transactional
-	public void deleteGuest(Guest guest) {
-		guestDAO.remove(guest);
-		guestDAO.flush();
-	}
-
-	/**
-	 * Save an existing Guest entity
-	 * 
-	 */
-	@Transactional
-	public void saveGuest(Guest guest) {
-		Guest existingGuest = guestDAO.findGuestByPrimaryKey(guest.getGuestId());
-
-		if (existingGuest != null) {
-			if (existingGuest != guest) {
-				existingGuest.setGuestId(guest.getGuestId());
-				existingGuest.setNamePrefix(guest.getNamePrefix());
-				existingGuest.setFirstName(guest.getFirstName());
-				existingGuest.setLastName(guest.getLastName());
-				existingGuest.setAddress1(guest.getAddress1());
-				existingGuest.setAddress2(guest.getAddress2());
-				existingGuest.setEmail(guest.getEmail());
-				existingGuest.setCountry(guest.getCountry());
-				existingGuest.setMobileNumber(guest.getMobileNumber());
-			}
-			guest = guestDAO.store(existingGuest);
-		} else {
-			guest = guestDAO.store(guest);
-		}
-		guestDAO.flush();
-	}
-
-	/**
-	 * Delete an existing Members entity
-	 * 
-	 */
-	@Transactional
-	public Guest deleteGuestMembers(String guest_guestId, String related_members_memberId) {
-		Guest guest = guestDAO.findGuestByPrimaryKey(guest_guestId, -1, -1);
-		Members related_members = membersDAO.findMembersByPrimaryKey(related_members_memberId, -1, -1);
-
-		guest.setMembers(null);
-		related_members.getGuests().remove(guest);
-		guest = guestDAO.store(guest);
-		guestDAO.flush();
-
-		related_members = membersDAO.store(related_members);
-		membersDAO.flush();
-
-		membersDAO.remove(related_members);
-		membersDAO.flush();
-
-		return guest;
-	}
-
-	/**
-	 * Load an existing Guest entity
-	 * 
-	 */
-	@Transactional
-	public Set<Guest> loadGuests() {
-		return guestDAO.findAllGuests();
-	}
-
-	/**
-	 * Return all Guest entity
-	 * 
-	 */
-	@Transactional
-	public List<Guest> findAllGuests(Integer startResult, Integer maxRows) {
-		return new java.util.ArrayList<Guest>(guestDAO.findAllGuests(startResult, maxRows));
 	}
 }

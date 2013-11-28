@@ -7,6 +7,8 @@ import java.lang.StringBuilder;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,7 +36,6 @@ import javax.persistence.*;
 		@NamedQuery(name = "findGuestByFirstName", query = "select myGuest from Guest myGuest where myGuest.firstName = ?1"),
 		@NamedQuery(name = "findGuestByFirstNameContaining", query = "select myGuest from Guest myGuest where myGuest.firstName like ?1"),
 		@NamedQuery(name = "findGuestByGuestId", query = "select myGuest from Guest myGuest where myGuest.guestId = ?1"),
-		@NamedQuery(name = "findGuestByGuestIdContaining", query = "select myGuest from Guest myGuest where myGuest.guestId like ?1"),
 		@NamedQuery(name = "findGuestByLastName", query = "select myGuest from Guest myGuest where myGuest.lastName = ?1"),
 		@NamedQuery(name = "findGuestByLastNameContaining", query = "select myGuest from Guest myGuest where myGuest.lastName like ?1"),
 		@NamedQuery(name = "findGuestByMobileNumber", query = "select myGuest from Guest myGuest where myGuest.mobileNumber = ?1"),
@@ -44,19 +45,19 @@ import javax.persistence.*;
 		@NamedQuery(name = "findGuestByPrimaryKey", query = "select myGuest from Guest myGuest where myGuest.guestId = ?1") })
 @Table(catalog = "stubpms", name = "guest")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMS/com/pms/domain", name = "Guest")
-@XmlRootElement(namespace = "PMS/com/pms/domain")
+@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Guest")
+@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
 public class Guest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 */
 
-	@Column(name = "guest_id", length = 50, nullable = false)
+	@Column(name = "guest_id", nullable = false)
 	@Basic(fetch = FetchType.EAGER)
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@XmlElement
-	String guestId;
+	Integer guestId;
 	/**
 	 */
 
@@ -128,13 +129,13 @@ public class Guest implements Serializable {
 
 	/**
 	 */
-	public void setGuestId(String guestId) {
+	public void setGuestId(Integer guestId) {
 		this.guestId = guestId;
 	}
 
 	/**
 	 */
-	public String getGuestId() {
+	public Integer getGuestId() {
 		return this.guestId;
 	}
 

@@ -46,22 +46,20 @@ public class RoomviewServiceImpl implements RoomviewService {
 	}
 
 	/**
-	 * Delete an existing Roomtype entity
+	 */
+	@Transactional
+	public Roomview findRoomviewByPrimaryKey(Integer roomViewId) {
+		return roomviewDAO.findRoomviewByPrimaryKey(roomViewId);
+	}
+
+	/**
+	 * Delete an existing Roomview entity
 	 * 
 	 */
 	@Transactional
-	public Roomview deleteRoomviewRoomtypes(String roomview_roomViewId, String related_roomtypes_roomTypeId) {
-		Roomtype related_roomtypes = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId, -1, -1);
-
-		Roomview roomview = roomviewDAO.findRoomviewByPrimaryKey(roomview_roomViewId, -1, -1);
-
-		related_roomtypes.setRoomview(null);
-		roomview.getRoomtypes().remove(related_roomtypes);
-
-		roomtypeDAO.remove(related_roomtypes);
-		roomtypeDAO.flush();
-
-		return roomview;
+	public void deleteRoomview(Roomview roomview) {
+		roomviewDAO.remove(roomview);
+		roomviewDAO.flush();
 	}
 
 	/**
@@ -69,7 +67,7 @@ public class RoomviewServiceImpl implements RoomviewService {
 	 * 
 	 */
 	@Transactional
-	public Roomview saveRoomviewRoomtypes(String roomViewId, Roomtype related_roomtypes) {
+	public Roomview saveRoomviewRoomtypes(Integer roomViewId, Roomtype related_roomtypes) {
 		Roomview roomview = roomviewDAO.findRoomviewByPrimaryKey(roomViewId, -1, -1);
 		Roomtype existingroomtypes = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes.getRoomTypeId());
 
@@ -100,10 +98,40 @@ public class RoomviewServiceImpl implements RoomviewService {
 	}
 
 	/**
+	 * Load an existing Roomview entity
+	 * 
 	 */
 	@Transactional
-	public Roomview findRoomviewByPrimaryKey(String roomViewId) {
-		return roomviewDAO.findRoomviewByPrimaryKey(roomViewId);
+	public Set<Roomview> loadRoomviews() {
+		return roomviewDAO.findAllRoomviews();
+	}
+
+	/**
+	 * Return a count of all Roomview entity
+	 * 
+	 */
+	@Transactional
+	public Integer countRoomviews() {
+		return ((Long) roomviewDAO.createQuerySingleResult("select count(o) from Roomview o").getSingleResult()).intValue();
+	}
+
+	/**
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	@Transactional
+	public Roomview deleteRoomviewRoomtypes(Integer roomview_roomViewId, Integer related_roomtypes_roomTypeId) {
+		Roomtype related_roomtypes = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId, -1, -1);
+
+		Roomview roomview = roomviewDAO.findRoomviewByPrimaryKey(roomview_roomViewId, -1, -1);
+
+		related_roomtypes.setRoomview(null);
+		roomview.getRoomtypes().remove(related_roomtypes);
+
+		roomtypeDAO.remove(related_roomtypes);
+		roomtypeDAO.flush();
+
+		return roomview;
 	}
 
 	/**
@@ -124,34 +152,6 @@ public class RoomviewServiceImpl implements RoomviewService {
 		} else {
 			roomview = roomviewDAO.store(roomview);
 		}
-		roomviewDAO.flush();
-	}
-
-	/**
-	 * Return a count of all Roomview entity
-	 * 
-	 */
-	@Transactional
-	public Integer countRoomviews() {
-		return ((Long) roomviewDAO.createQuerySingleResult("select count(o) from Roomview o").getSingleResult()).intValue();
-	}
-
-	/**
-	 * Load an existing Roomview entity
-	 * 
-	 */
-	@Transactional
-	public Set<Roomview> loadRoomviews() {
-		return roomviewDAO.findAllRoomviews();
-	}
-
-	/**
-	 * Delete an existing Roomview entity
-	 * 
-	 */
-	@Transactional
-	public void deleteRoomview(Roomview roomview) {
-		roomviewDAO.remove(roomview);
 		roomviewDAO.flush();
 	}
 

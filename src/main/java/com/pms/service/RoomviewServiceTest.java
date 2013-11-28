@@ -46,10 +46,10 @@ import org.springframework.web.context.request.SessionScope;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class })
 @ContextConfiguration(locations = {
-		"file:./src/main/resources/PMS-security-context.xml",
-		"file:./src/main/resources/PMS-service-context.xml",
-		"file:./src/main/resources/PMS-dao-context.xml",
-		"file:./src/main/resources/PMS-web-context.xml" })
+		"file:./src/main/resources/PMSSTUB-security-context.xml",
+		"file:./src/main/resources/PMSSTUB-service-context.xml",
+		"file:./src/main/resources/PMSSTUB-dao-context.xml",
+		"file:./src/main/resources/PMSSTUB-web-context.xml" })
 @Transactional
 public class RoomviewServiceTest {
 
@@ -77,17 +77,26 @@ public class RoomviewServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Delete an existing Roomtype entity
+	 */
+	@Test
+	public void findRoomviewByPrimaryKey() {
+		// TODO: JUnit - Populate test inputs for operation: findRoomviewByPrimaryKey 
+		Integer roomViewId = 0;
+		Roomview response = null;
+		response = service.findRoomviewByPrimaryKey(roomViewId);
+		// TODO: JUnit - Add assertions to test outputs of operation: findRoomviewByPrimaryKey
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Delete an existing Roomview entity
 	 * 
 	 */
 	@Test
-	public void deleteRoomviewRoomtypes() {
-		// TODO: JUnit - Populate test inputs for operation: deleteRoomviewRoomtypes 
-		String roomview_roomViewId = null;
-		String related_roomtypes_roomTypeId = null;
-		Roomview response = null;
-		response = service.deleteRoomviewRoomtypes(roomview_roomViewId, related_roomtypes_roomTypeId);
-		// TODO: JUnit - Add assertions to test outputs of operation: deleteRoomviewRoomtypes
+	public void deleteRoomview() {
+		// TODO: JUnit - Populate test inputs for operation: deleteRoomview 
+		Roomview roomview = new com.pms.domain.Roomview();
+		service.deleteRoomview(roomview);
 	}
 
 	/**
@@ -98,47 +107,11 @@ public class RoomviewServiceTest {
 	@Test
 	public void saveRoomviewRoomtypes() {
 		// TODO: JUnit - Populate test inputs for operation: saveRoomviewRoomtypes 
-		String roomViewId = null;
+		Integer roomViewId_1 = 0;
 		Roomtype related_roomtypes = new com.pms.domain.Roomtype();
 		Roomview response = null;
-		response = service.saveRoomviewRoomtypes(roomViewId, related_roomtypes);
+		response = service.saveRoomviewRoomtypes(roomViewId_1, related_roomtypes);
 		// TODO: JUnit - Add assertions to test outputs of operation: saveRoomviewRoomtypes
-	}
-
-	/**
-	 * Operation Unit Test
-	 */
-	@Test
-	public void findRoomviewByPrimaryKey() {
-		// TODO: JUnit - Populate test inputs for operation: findRoomviewByPrimaryKey 
-		String roomViewId_1 = null;
-		Roomview response = null;
-		response = service.findRoomviewByPrimaryKey(roomViewId_1);
-		// TODO: JUnit - Add assertions to test outputs of operation: findRoomviewByPrimaryKey
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Save an existing Roomview entity
-	 * 
-	 */
-	@Test
-	public void saveRoomview() {
-		// TODO: JUnit - Populate test inputs for operation: saveRoomview 
-		Roomview roomview = new com.pms.domain.Roomview();
-		service.saveRoomview(roomview);
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Return a count of all Roomview entity
-	 * 
-	 */
-	@Test
-	public void countRoomviews() {
-		Integer response = null;
-		response = service.countRoomviews();
-		// TODO: JUnit - Add assertions to test outputs of operation: countRoomviews
 	}
 
 	/**
@@ -155,14 +128,41 @@ public class RoomviewServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Delete an existing Roomview entity
+	 * Return a count of all Roomview entity
 	 * 
 	 */
 	@Test
-	public void deleteRoomview() {
-		// TODO: JUnit - Populate test inputs for operation: deleteRoomview 
+	public void countRoomviews() {
+		Integer response = null;
+		response = service.countRoomviews();
+		// TODO: JUnit - Add assertions to test outputs of operation: countRoomviews
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	@Test
+	public void deleteRoomviewRoomtypes() {
+		// TODO: JUnit - Populate test inputs for operation: deleteRoomviewRoomtypes 
+		Integer roomview_roomViewId = 0;
+		Integer related_roomtypes_roomTypeId = 0;
+		Roomview response = null;
+		response = service.deleteRoomviewRoomtypes(roomview_roomViewId, related_roomtypes_roomTypeId);
+		// TODO: JUnit - Add assertions to test outputs of operation: deleteRoomviewRoomtypes
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Save an existing Roomview entity
+	 * 
+	 */
+	@Test
+	public void saveRoomview() {
+		// TODO: JUnit - Populate test inputs for operation: saveRoomview 
 		Roomview roomview_1 = new com.pms.domain.Roomview();
-		service.deleteRoomview(roomview_1);
+		service.saveRoomview(roomview_1);
 	}
 
 	/**

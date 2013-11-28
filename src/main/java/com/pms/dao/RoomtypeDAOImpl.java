@@ -67,50 +67,28 @@ public class RoomtypeDAOImpl extends AbstractJpaDao<Roomtype> implements
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByPrimaryKey
+	 * JPQL Query - findRoomtypeByRoomTypeId
 	 *
 	 */
 	@Transactional
-	public Roomtype findRoomtypeByPrimaryKey(String roomTypeId) throws DataAccessException {
+	public Roomtype findRoomtypeByRoomTypeId(Integer roomTypeId) throws DataAccessException {
 
-		return findRoomtypeByPrimaryKey(roomTypeId, -1, -1);
+		return findRoomtypeByRoomTypeId(roomTypeId, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByPrimaryKey
+	 * JPQL Query - findRoomtypeByRoomTypeId
 	 *
 	 */
 
 	@Transactional
-	public Roomtype findRoomtypeByPrimaryKey(String roomTypeId, int startResult, int maxRows) throws DataAccessException {
+	public Roomtype findRoomtypeByRoomTypeId(Integer roomTypeId, int startResult, int maxRows) throws DataAccessException {
 		try {
-			Query query = createNamedQuery("findRoomtypeByPrimaryKey", startResult, maxRows, roomTypeId);
+			Query query = createNamedQuery("findRoomtypeByRoomTypeId", startResult, maxRows, roomTypeId);
 			return (com.pms.domain.Roomtype) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
 		}
-	}
-
-	/**
-	 * JPQL Query - findAllRoomtypes
-	 *
-	 */
-	@Transactional
-	public Set<Roomtype> findAllRoomtypes() throws DataAccessException {
-
-		return findAllRoomtypes(-1, -1);
-	}
-
-	/**
-	 * JPQL Query - findAllRoomtypes
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Roomtype> findAllRoomtypes(int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findAllRoomtypes", startResult, maxRows);
-		return new LinkedHashSet<Roomtype>(query.getResultList());
 	}
 
 	/**
@@ -132,141 +110,6 @@ public class RoomtypeDAOImpl extends AbstractJpaDao<Roomtype> implements
 	@Transactional
 	public Set<Roomtype> findRoomtypeByRoomDescription(String roomDescription, int startResult, int maxRows) throws DataAccessException {
 		Query query = createNamedQuery("findRoomtypeByRoomDescription", startResult, maxRows, roomDescription);
-		return new LinkedHashSet<Roomtype>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeId
-	 *
-	 */
-	@Transactional
-	public Roomtype findRoomtypeByRoomTypeId(String roomTypeId) throws DataAccessException {
-
-		return findRoomtypeByRoomTypeId(roomTypeId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeId
-	 *
-	 */
-
-	@Transactional
-	public Roomtype findRoomtypeByRoomTypeId(String roomTypeId, int startResult, int maxRows) throws DataAccessException {
-		try {
-			Query query = createNamedQuery("findRoomtypeByRoomTypeId", startResult, maxRows, roomTypeId);
-			return (com.pms.domain.Roomtype) query.getSingleResult();
-		} catch (NoResultException nre) {
-			return null;
-		}
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByIsReserved
-	 *
-	 */
-	@Transactional
-	public Set<Roomtype> findRoomtypeByIsReserved(String isReserved) throws DataAccessException {
-
-		return findRoomtypeByIsReserved(isReserved, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByIsReserved
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Roomtype> findRoomtypeByIsReserved(String isReserved, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByIsReserved", startResult, maxRows, isReserved);
-		return new LinkedHashSet<Roomtype>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeDescriptionContaining
-	 *
-	 */
-	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeDescriptionContaining(String roomTypeDescription) throws DataAccessException {
-
-		return findRoomtypeByRoomTypeDescriptionContaining(roomTypeDescription, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeDescriptionContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeDescriptionContaining(String roomTypeDescription, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByRoomTypeDescriptionContaining", startResult, maxRows, roomTypeDescription);
-		return new LinkedHashSet<Roomtype>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomDescriptionContaining
-	 *
-	 */
-	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomDescriptionContaining(String roomDescription) throws DataAccessException {
-
-		return findRoomtypeByRoomDescriptionContaining(roomDescription, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomDescriptionContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomDescriptionContaining(String roomDescription, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByRoomDescriptionContaining", startResult, maxRows, roomDescription);
-		return new LinkedHashSet<Roomtype>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeField
-	 *
-	 */
-	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeField(String roomTypeField) throws DataAccessException {
-
-		return findRoomtypeByRoomTypeField(roomTypeField, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeField
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeField(String roomTypeField, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByRoomTypeField", startResult, maxRows, roomTypeField);
-		return new LinkedHashSet<Roomtype>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeIdContaining
-	 *
-	 */
-	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeIdContaining(String roomTypeId) throws DataAccessException {
-
-		return findRoomtypeByRoomTypeIdContaining(roomTypeId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomtypeByRoomTypeIdContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeIdContaining(String roomTypeId, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByRoomTypeIdContaining", startResult, maxRows, roomTypeId);
 		return new LinkedHashSet<Roomtype>(query.getResultList());
 	}
 
@@ -293,46 +136,46 @@ public class RoomtypeDAOImpl extends AbstractJpaDao<Roomtype> implements
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomLocation
+	 * JPQL Query - findRoomtypeByRoomTypeCode
 	 *
 	 */
 	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomLocation(String roomLocation) throws DataAccessException {
+	public Set<Roomtype> findRoomtypeByRoomTypeCode(String roomTypeCode) throws DataAccessException {
 
-		return findRoomtypeByRoomLocation(roomLocation, -1, -1);
+		return findRoomtypeByRoomTypeCode(roomTypeCode, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomLocation
+	 * JPQL Query - findRoomtypeByRoomTypeCode
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomLocation(String roomLocation, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByRoomLocation", startResult, maxRows, roomLocation);
+	public Set<Roomtype> findRoomtypeByRoomTypeCode(String roomTypeCode, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomtypeByRoomTypeCode", startResult, maxRows, roomTypeCode);
 		return new LinkedHashSet<Roomtype>(query.getResultList());
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeCodeContaining
+	 * JPQL Query - findRoomtypeByIsReserved
 	 *
 	 */
 	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeCodeContaining(String roomTypeCode) throws DataAccessException {
+	public Set<Roomtype> findRoomtypeByIsReserved(String isReserved) throws DataAccessException {
 
-		return findRoomtypeByRoomTypeCodeContaining(roomTypeCode, -1, -1);
+		return findRoomtypeByIsReserved(isReserved, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeCodeContaining
+	 * JPQL Query - findRoomtypeByIsReserved
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeCodeContaining(String roomTypeCode, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByRoomTypeCodeContaining", startResult, maxRows, roomTypeCode);
+	public Set<Roomtype> findRoomtypeByIsReserved(String isReserved, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomtypeByIsReserved", startResult, maxRows, isReserved);
 		return new LinkedHashSet<Roomtype>(query.getResultList());
 	}
 
@@ -359,25 +202,50 @@ public class RoomtypeDAOImpl extends AbstractJpaDao<Roomtype> implements
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeDescription
+	 * JPQL Query - findRoomtypeByRoomTypeCodeContaining
 	 *
 	 */
 	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeDescription(String roomTypeDescription) throws DataAccessException {
+	public Set<Roomtype> findRoomtypeByRoomTypeCodeContaining(String roomTypeCode) throws DataAccessException {
 
-		return findRoomtypeByRoomTypeDescription(roomTypeDescription, -1, -1);
+		return findRoomtypeByRoomTypeCodeContaining(roomTypeCode, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeDescription
+	 * JPQL Query - findRoomtypeByRoomTypeCodeContaining
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeDescription(String roomTypeDescription, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByRoomTypeDescription", startResult, maxRows, roomTypeDescription);
+	public Set<Roomtype> findRoomtypeByRoomTypeCodeContaining(String roomTypeCode, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomtypeByRoomTypeCodeContaining", startResult, maxRows, roomTypeCode);
 		return new LinkedHashSet<Roomtype>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByPrimaryKey
+	 *
+	 */
+	@Transactional
+	public Roomtype findRoomtypeByPrimaryKey(Integer roomTypeId) throws DataAccessException {
+
+		return findRoomtypeByPrimaryKey(roomTypeId, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByPrimaryKey
+	 *
+	 */
+
+	@Transactional
+	public Roomtype findRoomtypeByPrimaryKey(Integer roomTypeId, int startResult, int maxRows) throws DataAccessException {
+		try {
+			Query query = createNamedQuery("findRoomtypeByPrimaryKey", startResult, maxRows, roomTypeId);
+			return (com.pms.domain.Roomtype) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
 	}
 
 	/**
@@ -403,24 +271,134 @@ public class RoomtypeDAOImpl extends AbstractJpaDao<Roomtype> implements
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeCode
+	 * JPQL Query - findRoomtypeByRoomLocation
 	 *
 	 */
 	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeCode(String roomTypeCode) throws DataAccessException {
+	public Set<Roomtype> findRoomtypeByRoomLocation(String roomLocation) throws DataAccessException {
 
-		return findRoomtypeByRoomTypeCode(roomTypeCode, -1, -1);
+		return findRoomtypeByRoomLocation(roomLocation, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findRoomtypeByRoomTypeCode
+	 * JPQL Query - findRoomtypeByRoomLocation
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Roomtype> findRoomtypeByRoomTypeCode(String roomTypeCode, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomtypeByRoomTypeCode", startResult, maxRows, roomTypeCode);
+	public Set<Roomtype> findRoomtypeByRoomLocation(String roomLocation, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomtypeByRoomLocation", startResult, maxRows, roomLocation);
+		return new LinkedHashSet<Roomtype>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeDescription
+	 *
+	 */
+	@Transactional
+	public Set<Roomtype> findRoomtypeByRoomTypeDescription(String roomTypeDescription) throws DataAccessException {
+
+		return findRoomtypeByRoomTypeDescription(roomTypeDescription, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeDescription
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Roomtype> findRoomtypeByRoomTypeDescription(String roomTypeDescription, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomtypeByRoomTypeDescription", startResult, maxRows, roomTypeDescription);
+		return new LinkedHashSet<Roomtype>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeField
+	 *
+	 */
+	@Transactional
+	public Set<Roomtype> findRoomtypeByRoomTypeField(String roomTypeField) throws DataAccessException {
+
+		return findRoomtypeByRoomTypeField(roomTypeField, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeField
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Roomtype> findRoomtypeByRoomTypeField(String roomTypeField, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomtypeByRoomTypeField", startResult, maxRows, roomTypeField);
+		return new LinkedHashSet<Roomtype>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findAllRoomtypes
+	 *
+	 */
+	@Transactional
+	public Set<Roomtype> findAllRoomtypes() throws DataAccessException {
+
+		return findAllRoomtypes(-1, -1);
+	}
+
+	/**
+	 * JPQL Query - findAllRoomtypes
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Roomtype> findAllRoomtypes(int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findAllRoomtypes", startResult, maxRows);
+		return new LinkedHashSet<Roomtype>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomDescriptionContaining
+	 *
+	 */
+	@Transactional
+	public Set<Roomtype> findRoomtypeByRoomDescriptionContaining(String roomDescription) throws DataAccessException {
+
+		return findRoomtypeByRoomDescriptionContaining(roomDescription, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomDescriptionContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Roomtype> findRoomtypeByRoomDescriptionContaining(String roomDescription, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomtypeByRoomDescriptionContaining", startResult, maxRows, roomDescription);
+		return new LinkedHashSet<Roomtype>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeDescriptionContaining
+	 *
+	 */
+	@Transactional
+	public Set<Roomtype> findRoomtypeByRoomTypeDescriptionContaining(String roomTypeDescription) throws DataAccessException {
+
+		return findRoomtypeByRoomTypeDescriptionContaining(roomTypeDescription, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomtypeByRoomTypeDescriptionContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Roomtype> findRoomtypeByRoomTypeDescriptionContaining(String roomTypeDescription, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomtypeByRoomTypeDescriptionContaining", startResult, maxRows, roomTypeDescription);
 		return new LinkedHashSet<Roomtype>(query.getResultList());
 	}
 

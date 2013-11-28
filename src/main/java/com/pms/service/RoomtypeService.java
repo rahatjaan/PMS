@@ -18,61 +18,17 @@ public interface RoomtypeService {
 	 * Save an existing Roomview entity
 	 * 
 	 */
-	public Roomtype saveRoomtypeRoomview(String roomTypeId, Roomview related_roomview);
-
-	/**
-	 * Load an existing Roomtype entity
-	 * 
-	 */
-	public Set<Roomtype> loadRoomtypes();
-
-	/**
-	 * Delete an existing Bed entity
-	 * 
-	 */
-	public Roomtype deleteRoomtypeBed(String roomtype_roomTypeId, String related_bed_bedId);
-
-	/**
-	 * Save an existing Roomtype entity
-	 * 
-	 */
-	public void saveRoomtype(Roomtype roomtype);
-
-	/**
-	 * Save an existing Bed entity
-	 * 
-	 */
-	public Roomtype saveRoomtypeBed(String roomTypeId_1, Bed related_bed);
-
-	/**
-	 * Return a count of all Roomtype entity
-	 * 
-	 */
-	public Integer countRoomtypes();
-
-	/**
-	 * Save an existing Room entity
-	 * 
-	 */
-	public Roomtype saveRoomtypeRooms(String roomTypeId_2, Room related_rooms);
-
-	/**
-	 * Delete an existing Roomview entity
-	 * 
-	 */
-	public Roomtype deleteRoomtypeRoomview(String roomtype_roomTypeId_1, String related_roomview_roomViewId);
-
-	/**
-	 * Delete an existing Room entity
-	 * 
-	 */
-	public Roomtype deleteRoomtypeRooms(String roomtype_roomTypeId_2, String related_rooms_roomId);
+	public Roomtype saveRoomtypeRoomview(Integer roomTypeId, Roomview related_roomview);
 
 	/**
 	 * Delete an existing Roomtype entity
 	 * 
 	 */
-	public void deleteRoomtype(Roomtype roomtype_1);
+	public void deleteRoomtype(Roomtype roomtype);
+
+	/**
+	 */
+	public Roomtype findRoomtypeByPrimaryKey(Integer roomTypeId_1);
 
 	/**
 	 * Return all Roomtype entity
@@ -81,6 +37,50 @@ public interface RoomtypeService {
 	public List<Roomtype> findAllRoomtypes(Integer startResult, Integer maxRows);
 
 	/**
+	 * Load an existing Roomtype entity
+	 * 
 	 */
-	public Roomtype findRoomtypeByPrimaryKey(String roomTypeId_3);
+	public Set<Roomtype> loadRoomtypes();
+
+	/**
+	 * Return a count of all Roomtype entity
+	 * 
+	 */
+	public Integer countRoomtypes();
+
+	/**
+	 * Save an existing Roomtype entity
+	 * 
+	 */
+	public void saveRoomtype(Roomtype roomtype_1);
+
+	/**
+	 * Save an existing Room entity
+	 * 
+	 */
+	public Roomtype saveRoomtypeRooms(Integer roomTypeId_2, Room related_rooms);
+
+	/**
+	 * Delete an existing Bed entity
+	 * 
+	 */
+	public Roomtype deleteRoomtypeBed(Integer roomtype_roomTypeId, Integer related_bed_bedId);
+
+	/**
+	 * Save an existing Bed entity
+	 * 
+	 */
+	public Roomtype saveRoomtypeBed(Integer roomTypeId_3, Bed related_bed);
+
+	/**
+	 * Delete an existing Roomview entity
+	 * 
+	 */
+	public Roomtype deleteRoomtypeRoomview(Integer roomtype_roomTypeId_1, Integer related_roomview_roomViewId);
+
+	/**
+	 * Delete an existing Room entity
+	 * 
+	 */
+	public Roomtype deleteRoomtypeRooms(Integer roomtype_roomTypeId_2, Integer related_rooms_roomId);
 }

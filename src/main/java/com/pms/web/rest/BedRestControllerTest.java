@@ -29,10 +29,10 @@ import org.springframework.web.context.request.SessionScope;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-		"file:./src/main/resources/PMS-security-context.xml",
-		"file:./src/main/resources/PMS-service-context.xml",
-		"file:./src/main/resources/PMS-dao-context.xml",
-		"file:./src/main/resources/PMS-web-context.xml" })
+		"file:./src/main/resources/PMSSTUB-security-context.xml",
+		"file:./src/main/resources/PMSSTUB-service-context.xml",
+		"file:./src/main/resources/PMSSTUB-dao-context.xml",
+		"file:./src/main/resources/PMSSTUB-web-context.xml" })
 public class BedRestControllerTest {
 	/**
 	 * The Spring application context.

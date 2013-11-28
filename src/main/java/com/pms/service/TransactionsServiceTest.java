@@ -46,10 +46,10 @@ import org.springframework.web.context.request.SessionScope;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class })
 @ContextConfiguration(locations = {
-		"file:./src/main/resources/PMS-security-context.xml",
-		"file:./src/main/resources/PMS-service-context.xml",
-		"file:./src/main/resources/PMS-dao-context.xml",
-		"file:./src/main/resources/PMS-web-context.xml" })
+		"file:./src/main/resources/PMSSTUB-security-context.xml",
+		"file:./src/main/resources/PMSSTUB-service-context.xml",
+		"file:./src/main/resources/PMSSTUB-dao-context.xml",
+		"file:./src/main/resources/PMSSTUB-web-context.xml" })
 @Transactional
 public class TransactionsServiceTest {
 
@@ -73,6 +73,30 @@ public class TransactionsServiceTest {
 	 */
 	public TransactionsServiceTest() {
 		setupRequestContext();
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Return a count of all Transactions entity
+	 * 
+	 */
+	@Test
+	public void countTransactionss() {
+		Integer response = null;
+		response = service.countTransactionss();
+		// TODO: JUnit - Add assertions to test outputs of operation: countTransactionss
+	}
+
+	/**
+	 * Operation Unit Test
+	 */
+	@Test
+	public void findTransactionsByPrimaryKey() {
+		// TODO: JUnit - Populate test inputs for operation: findTransactionsByPrimaryKey 
+		Integer transactionId = 0;
+		Transactions response = null;
+		response = service.findTransactionsByPrimaryKey(transactionId);
+		// TODO: JUnit - Add assertions to test outputs of operation: findTransactionsByPrimaryKey
 	}
 
 	/**
@@ -101,56 +125,17 @@ public class TransactionsServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 */
-	@Test
-	public void findTransactionsByPrimaryKey() {
-		// TODO: JUnit - Populate test inputs for operation: findTransactionsByPrimaryKey 
-		String transactionId = null;
-		Transactions response = null;
-		response = service.findTransactionsByPrimaryKey(transactionId);
-		// TODO: JUnit - Add assertions to test outputs of operation: findTransactionsByPrimaryKey
-	}
-
-	/**
-	 * Operation Unit Test
 	 * Save an existing Reservation entity
 	 * 
 	 */
 	@Test
 	public void saveTransactionsReservation() {
 		// TODO: JUnit - Populate test inputs for operation: saveTransactionsReservation 
-		String transactionId_1 = null;
+		Integer transactionId_1 = 0;
 		Reservation related_reservation = new com.pms.domain.Reservation();
 		Transactions response = null;
 		response = service.saveTransactionsReservation(transactionId_1, related_reservation);
 		// TODO: JUnit - Add assertions to test outputs of operation: saveTransactionsReservation
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Return all Transactions entity
-	 * 
-	 */
-	@Test
-	public void findAllTransactionss() {
-		// TODO: JUnit - Populate test inputs for operation: findAllTransactionss 
-		Integer startResult = 0;
-		Integer maxRows = 0;
-		List<Transactions> response = null;
-		response = service.findAllTransactionss(startResult, maxRows);
-		// TODO: JUnit - Add assertions to test outputs of operation: findAllTransactionss
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Return a count of all Transactions entity
-	 * 
-	 */
-	@Test
-	public void countTransactionss() {
-		Integer response = null;
-		response = service.countTransactionss();
-		// TODO: JUnit - Add assertions to test outputs of operation: countTransactionss
 	}
 
 	/**
@@ -161,8 +146,8 @@ public class TransactionsServiceTest {
 	@Test
 	public void deleteTransactionsReservation() {
 		// TODO: JUnit - Populate test inputs for operation: deleteTransactionsReservation 
-		String transactions_transactionId = null;
-		String related_reservation_reservationId = null;
+		Integer transactions_transactionId = 0;
+		Integer related_reservation_reservationId = 0;
 		Transactions response = null;
 		response = service.deleteTransactionsReservation(transactions_transactionId, related_reservation_reservationId);
 		// TODO: JUnit - Add assertions to test outputs of operation: deleteTransactionsReservation
@@ -178,6 +163,21 @@ public class TransactionsServiceTest {
 		// TODO: JUnit - Populate test inputs for operation: saveTransactions 
 		Transactions transactions_1 = new com.pms.domain.Transactions();
 		service.saveTransactions(transactions_1);
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Return all Transactions entity
+	 * 
+	 */
+	@Test
+	public void findAllTransactionss() {
+		// TODO: JUnit - Populate test inputs for operation: findAllTransactionss 
+		Integer startResult = 0;
+		Integer maxRows = 0;
+		List<Transactions> response = null;
+		response = service.findAllTransactionss(startResult, maxRows);
+		// TODO: JUnit - Add assertions to test outputs of operation: findAllTransactionss
 	}
 
 	/**

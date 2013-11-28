@@ -95,6 +95,15 @@
 						&nbsp;
 						</td>
 					</tr>
+					<tr>
+						<td  class="label">
+							<fmt:message key="members.memberid.title"/>:
+						</td>
+						<td>
+							${guest.members.memberId}
+						&nbsp;
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<div class="clear">&nbsp;</div>

@@ -17,24 +17,6 @@
 				<tbody>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="roomtype.roomtypeid.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="roomtype_roomTypeId" path="roomTypeId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "roomtype_roomTypeId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="roomtype.roomtypeid.help"/>", required : true}})); </script>
-								</c:when>
-								<c:otherwise>
-							${roomtype.roomTypeId}
-						&nbsp;
-									<form:hidden id="roomtype_roomTypeId" path="roomTypeId"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td class="label" valign="top">
 							<fmt:message key="roomtype.roomtypefield.title"/>:
 						</td>
 						<td>
@@ -76,6 +58,24 @@
 						<td>
 							<form:input id="roomtype_roomDescription" path="roomDescription" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "roomtype_roomDescription",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="roomtype.roomdescription.help"/>"}})); </script>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="roomview.roomviewid.title"/>:
+						</td>
+						<td>
+							<form:input id="roomtype_roomview_roomViewId" path="roomview.roomViewId" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "roomtype_roomview_roomViewId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="roomview.roomviewid.help"/>"}})); </script>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="bed.bedid.title"/>:
+						</td>
+						<td>
+							<form:input id="roomtype_bed_bedid" path="bed.bedId" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "roomtype_bed_bedid",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="bed.bedid.help"/>"}})); </script>
 						</td>
 					</tr>
 					<tr>

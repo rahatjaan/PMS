@@ -46,10 +46,10 @@ import org.springframework.web.context.request.SessionScope;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class })
 @ContextConfiguration(locations = {
-		"file:./src/main/resources/PMS-security-context.xml",
-		"file:./src/main/resources/PMS-service-context.xml",
-		"file:./src/main/resources/PMS-dao-context.xml",
-		"file:./src/main/resources/PMS-web-context.xml" })
+		"file:./src/main/resources/PMSSTUB-security-context.xml",
+		"file:./src/main/resources/PMSSTUB-service-context.xml",
+		"file:./src/main/resources/PMSSTUB-dao-context.xml",
+		"file:./src/main/resources/PMSSTUB-web-context.xml" })
 @Transactional
 public class BedServiceTest {
 
@@ -77,6 +77,60 @@ public class BedServiceTest {
 
 	/**
 	 * Operation Unit Test
+	 * Return all Bed entity
+	 * 
+	 */
+	@Test
+	public void findAllBeds() {
+		// TODO: JUnit - Populate test inputs for operation: findAllBeds 
+		Integer startResult = 0;
+		Integer maxRows = 0;
+		List<Bed> response = null;
+		response = service.findAllBeds(startResult, maxRows);
+		// TODO: JUnit - Add assertions to test outputs of operation: findAllBeds
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Save an existing Bed entity
+	 * 
+	 */
+	@Test
+	public void saveBed() {
+		// TODO: JUnit - Populate test inputs for operation: saveBed 
+		Bed bed = new com.pms.domain.Bed();
+		service.saveBed(bed);
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	@Test
+	public void deleteBedRoomtypes() {
+		// TODO: JUnit - Populate test inputs for operation: deleteBedRoomtypes 
+		Integer bed_bedId = 0;
+		Integer related_roomtypes_roomTypeId = 0;
+		Bed response = null;
+		response = service.deleteBedRoomtypes(bed_bedId, related_roomtypes_roomTypeId);
+		// TODO: JUnit - Add assertions to test outputs of operation: deleteBedRoomtypes
+	}
+
+	/**
+	 * Operation Unit Test
+	 */
+	@Test
+	public void findBedByPrimaryKey() {
+		// TODO: JUnit - Populate test inputs for operation: findBedByPrimaryKey 
+		Integer bedId = 0;
+		Bed response = null;
+		response = service.findBedByPrimaryKey(bedId);
+		// TODO: JUnit - Add assertions to test outputs of operation: findBedByPrimaryKey
+	}
+
+	/**
+	 * Operation Unit Test
 	 * Load an existing Bed entity
 	 * 
 	 */
@@ -95,35 +149,8 @@ public class BedServiceTest {
 	@Test
 	public void deleteBed() {
 		// TODO: JUnit - Populate test inputs for operation: deleteBed 
-		Bed bed = new com.pms.domain.Bed();
-		service.deleteBed(bed);
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Save an existing Bed entity
-	 * 
-	 */
-	@Test
-	public void saveBed() {
-		// TODO: JUnit - Populate test inputs for operation: saveBed 
 		Bed bed_1 = new com.pms.domain.Bed();
-		service.saveBed(bed_1);
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Save an existing Roomtype entity
-	 * 
-	 */
-	@Test
-	public void saveBedRoomtypes() {
-		// TODO: JUnit - Populate test inputs for operation: saveBedRoomtypes 
-		String bedId = null;
-		Roomtype related_roomtypes = new com.pms.domain.Roomtype();
-		Bed response = null;
-		response = service.saveBedRoomtypes(bedId, related_roomtypes);
-		// TODO: JUnit - Add assertions to test outputs of operation: saveBedRoomtypes
+		service.deleteBed(bed_1);
 	}
 
 	/**
@@ -140,44 +167,17 @@ public class BedServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Delete an existing Roomtype entity
+	 * Save an existing Roomtype entity
 	 * 
 	 */
 	@Test
-	public void deleteBedRoomtypes() {
-		// TODO: JUnit - Populate test inputs for operation: deleteBedRoomtypes 
-		String bed_bedId = null;
-		String related_roomtypes_roomTypeId = null;
+	public void saveBedRoomtypes() {
+		// TODO: JUnit - Populate test inputs for operation: saveBedRoomtypes 
+		Integer bedId_1 = 0;
+		Roomtype related_roomtypes = new com.pms.domain.Roomtype();
 		Bed response = null;
-		response = service.deleteBedRoomtypes(bed_bedId, related_roomtypes_roomTypeId);
-		// TODO: JUnit - Add assertions to test outputs of operation: deleteBedRoomtypes
-	}
-
-	/**
-	 * Operation Unit Test
-	 */
-	@Test
-	public void findBedByPrimaryKey() {
-		// TODO: JUnit - Populate test inputs for operation: findBedByPrimaryKey 
-		String bedId_1 = null;
-		Bed response = null;
-		response = service.findBedByPrimaryKey(bedId_1);
-		// TODO: JUnit - Add assertions to test outputs of operation: findBedByPrimaryKey
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Return all Bed entity
-	 * 
-	 */
-	@Test
-	public void findAllBeds() {
-		// TODO: JUnit - Populate test inputs for operation: findAllBeds 
-		Integer startResult = 0;
-		Integer maxRows = 0;
-		List<Bed> response = null;
-		response = service.findAllBeds(startResult, maxRows);
-		// TODO: JUnit - Add assertions to test outputs of operation: findAllBeds
+		response = service.saveBedRoomtypes(bedId_1, related_roomtypes);
+		// TODO: JUnit - Add assertions to test outputs of operation: saveBedRoomtypes
 	}
 
 	/**

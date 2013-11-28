@@ -17,32 +17,11 @@
 				<tbody>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="reservation.reservationid.title"/>:
+							<fmt:message key="room.roomid.title"/>:
 						</td>
 						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="reservation_reservationId" path="reservationId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "reservation_reservationId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="reservation.reservationid.help"/>", required : true}})); </script>
-								</c:when>
-								<c:otherwise>
-							${reservation.reservationId}
-						&nbsp;
-									<form:hidden id="reservation_reservationId" path="reservationId"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td class="label" valign="top">
-							<fmt:message key="room.title"/>:
-						</td>
-						<td>
-							<select name='room'>
-							    <c:forEach items="rooms" var="room">
-							            <option value='${room}'>${room}</option>
-							    </c:forEach>
-							</select>
+							<form:input id="reservation_room_roomId" path="room.roomId" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "reservation_room_roomId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="room.roomid.help"/>"}})); </script>
 						</td>
 					</tr>
 					<tr>
@@ -141,6 +120,15 @@
 						<td>
 							<form:input id="reservation_numberOfAdults" path="numberOfAdults" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "reservation_numberOfAdults",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="reservation.numberofadults.help"/>", constraints : {places:0}}})); </script>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="guest.guestid.title"/>:
+						</td>
+						<td>
+							<form:input id="reservation_guest_guestId" path="guest.guestId" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "reservation_guest_guestId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="guest.guestid.help"/>"}})); </script>
 						</td>
 					</tr>
 					<tr>

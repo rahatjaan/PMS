@@ -15,6 +15,18 @@ import org.springframework.dao.DataAccessException;
 public interface MembersDAO extends JpaDao<Members> {
 
 	/**
+	 * JPQL Query - findMembersByMemberIdContaining
+	 *
+	 */
+	public Set<Members> findMembersByMemberIdContaining(String memberId) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findMembersByMemberIdContaining
+	 *
+	 */
+	public Set<Members> findMembersByMemberIdContaining(String memberId, int startResult, int maxRows) throws DataAccessException;
+
+	/**
 	 * JPQL Query - findAllMemberss
 	 *
 	 */
@@ -30,13 +42,13 @@ public interface MembersDAO extends JpaDao<Members> {
 	 * JPQL Query - findMembersByPrimaryKey
 	 *
 	 */
-	public Members findMembersByPrimaryKey(String memberId) throws DataAccessException;
+	public Members findMembersByPrimaryKey(String memberId_1) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findMembersByPrimaryKey
 	 *
 	 */
-	public Members findMembersByPrimaryKey(String memberId, int startResult, int maxRows) throws DataAccessException;
+	public Members findMembersByPrimaryKey(String memberId_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findMembersByMembershipType
@@ -54,13 +66,13 @@ public interface MembersDAO extends JpaDao<Members> {
 	 * JPQL Query - findMembersByMemberId
 	 *
 	 */
-	public Members findMembersByMemberId(String memberId_1) throws DataAccessException;
+	public Members findMembersByMemberId(String memberId_2) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findMembersByMemberId
 	 *
 	 */
-	public Members findMembersByMemberId(String memberId_1, int startResult, int maxRows) throws DataAccessException;
+	public Members findMembersByMemberId(String memberId_2, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findMembersByMembershipTypeContaining
@@ -73,17 +85,5 @@ public interface MembersDAO extends JpaDao<Members> {
 	 *
 	 */
 	public Set<Members> findMembersByMembershipTypeContaining(String membershipType_1, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findMembersByMemberIdContaining
-	 *
-	 */
-	public Set<Members> findMembersByMemberIdContaining(String memberId_2) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findMembersByMemberIdContaining
-	 *
-	 */
-	public Set<Members> findMembersByMemberIdContaining(String memberId_2, int startResult, int maxRows) throws DataAccessException;
 
 }

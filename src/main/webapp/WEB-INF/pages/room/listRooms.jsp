@@ -22,6 +22,7 @@
 					<th class="thead"><fmt:message key="room.issmoking.title"/></th>
 					<th class="thead"><fmt:message key="room.iscomposite.title"/></th>
 					<th class="thead"><fmt:message key="room.floornumber.title"/></th>
+					<th class="thead"><fmt:message key="roomtype.roomtypeid.title"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,6 +64,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.floorNumber}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.roomtype.roomTypeId}
 						&nbsp;
 					</td>
 				</tr>

@@ -73,14 +73,45 @@ public class ReservationRestController {
 	private ReservationService reservationService;
 
 	/**
-	 * Delete an existing Reservation entity
+	 * Select an existing Reservation entity
 	 * 
 	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}", method = RequestMethod.GET)
 	@ResponseBody
-	public void deleteReservation(@PathVariable String reservation_reservationId) {
-		Reservation reservation = reservationDAO.findReservationByPrimaryKey(reservation_reservationId);
-		reservationService.deleteReservation(reservation);
+	public Reservation loadReservation(@PathVariable Integer reservation_reservationId) {
+		return reservationDAO.findReservationByPrimaryKey(reservation_reservationId);
+	}
+
+	/**
+	 * Get Guest entity by Reservation
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest", method = RequestMethod.GET)
+	@ResponseBody
+	public Guest getReservationGuest(@PathVariable Integer reservation_reservationId) {
+		return reservationDAO.findReservationByPrimaryKey(reservation_reservationId).getGuest();
+	}
+
+	/**
+	 * Create a new Transactions entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses", method = RequestMethod.POST)
+	@ResponseBody
+	public Transactions newReservationTransactionses(@PathVariable Integer reservation_reservationId, @RequestBody Transactions transactions) {
+		reservationService.saveReservationTransactionses(reservation_reservationId, transactions);
+		return transactionsDAO.findTransactionsByPrimaryKey(transactions.getTransactionId());
+	}
+
+	/**
+	 * Create a new Room entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room", method = RequestMethod.POST)
+	@ResponseBody
+	public Room newReservationRoom(@PathVariable Integer reservation_reservationId, @RequestBody Room room) {
+		reservationService.saveReservationRoom(reservation_reservationId, room);
+		return roomDAO.findRoomByPrimaryKey(room.getRoomId());
 	}
 
 	/**
@@ -89,20 +120,171 @@ public class ReservationRestController {
 	 */
 	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses/{transactions_transactionId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Transactions loadReservationTransactionses(@PathVariable String reservation_reservationId, @PathVariable String related_transactionses_transactionId) {
+	public Transactions loadReservationTransactionses(@PathVariable Integer reservation_reservationId, @PathVariable Integer related_transactionses_transactionId) {
 		Transactions transactions = transactionsDAO.findTransactionsByPrimaryKey(related_transactionses_transactionId, -1, -1);
 
 		return transactions;
 	}
 
 	/**
-	 * Select an existing Reservation entity
+	 * Create a new Guest entity
 	 * 
 	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest", method = RequestMethod.POST)
 	@ResponseBody
-	public Reservation loadReservation(@PathVariable String reservation_reservationId) {
-		return reservationDAO.findReservationByPrimaryKey(reservation_reservationId);
+	public Guest newReservationGuest(@PathVariable Integer reservation_reservationId, @RequestBody Guest guest) {
+		reservationService.saveReservationGuest(reservation_reservationId, guest);
+		return guestDAO.findGuestByPrimaryKey(guest.getGuestId());
+	}
+
+	/**
+	 * Show all Transactions entities by Reservation
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Transactions> getReservationTransactionses(@PathVariable Integer reservation_reservationId) {
+		return new java.util.ArrayList<Transactions>(reservationDAO.findReservationByPrimaryKey(reservation_reservationId).getTransactionses());
+	}
+
+	/**
+	 * Delete an existing Transactions entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses/{transactions_transactionId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteReservationTransactionses(@PathVariable Integer reservation_reservationId, @PathVariable Integer related_transactionses_transactionId) {
+		reservationService.deleteReservationTransactionses(reservation_reservationId, related_transactionses_transactionId);
+	}
+
+	/**
+	 * Save an existing Transactions entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses", method = RequestMethod.PUT)
+	@ResponseBody
+	public Transactions saveReservationTransactionses(@PathVariable Integer reservation_reservationId, @RequestBody Transactions transactionses) {
+		reservationService.saveReservationTransactionses(reservation_reservationId, transactionses);
+		return transactionsDAO.findTransactionsByPrimaryKey(transactionses.getTransactionId());
+	}
+
+	/**
+	 * View an existing Guest entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest/{guest_guestId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Guest loadReservationGuest(@PathVariable Integer reservation_reservationId, @PathVariable Integer related_guest_guestId) {
+		Guest guest = guestDAO.findGuestByPrimaryKey(related_guest_guestId, -1, -1);
+
+		return guest;
+	}
+
+	/**
+	 * Get Room entity by Reservation
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room", method = RequestMethod.GET)
+	@ResponseBody
+	public Room getReservationRoom(@PathVariable Integer reservation_reservationId) {
+		return reservationDAO.findReservationByPrimaryKey(reservation_reservationId).getRoom();
+	}
+
+	/**
+	 * Delete an existing Room entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room/{room_roomId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteReservationRoom(@PathVariable Integer reservation_reservationId, @PathVariable Integer related_room_roomId) {
+		reservationService.deleteReservationRoom(reservation_reservationId, related_room_roomId);
+	}
+
+	/**
+	 * Create a new Reservation entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation", method = RequestMethod.POST)
+	@ResponseBody
+	public Reservation newReservation(@RequestBody Reservation reservation) {
+		reservationService.saveReservation(reservation);
+		return reservationDAO.findReservationByPrimaryKey(reservation.getReservationId());
+	}
+
+	/**
+	 * Save an existing Room entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room", method = RequestMethod.PUT)
+	@ResponseBody
+	public Room saveReservationRoom(@PathVariable Integer reservation_reservationId, @RequestBody Room room) {
+		reservationService.saveReservationRoom(reservation_reservationId, room);
+		return roomDAO.findRoomByPrimaryKey(room.getRoomId());
+	}
+
+	/**
+	 * Save an existing Guest entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest", method = RequestMethod.PUT)
+	@ResponseBody
+	public Guest saveReservationGuest(@PathVariable Integer reservation_reservationId, @RequestBody Guest guest) {
+		reservationService.saveReservationGuest(reservation_reservationId, guest);
+		return guestDAO.findGuestByPrimaryKey(guest.getGuestId());
+	}
+
+	/**
+	 * Save an existing Reservation entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation", method = RequestMethod.PUT)
+	@ResponseBody
+	public Reservation saveReservation(@RequestBody Reservation reservation) {
+		reservationService.saveReservation(reservation);
+		return reservationDAO.findReservationByPrimaryKey(reservation.getReservationId());
+	}
+
+	/**
+	 * Delete an existing Reservation entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteReservation(@PathVariable Integer reservation_reservationId) {
+		Reservation reservation = reservationDAO.findReservationByPrimaryKey(reservation_reservationId);
+		reservationService.deleteReservation(reservation);
+	}
+
+	/**
+	 * View an existing Room entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room/{room_roomId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Room loadReservationRoom(@PathVariable Integer reservation_reservationId, @PathVariable Integer related_room_roomId) {
+		Room room = roomDAO.findRoomByPrimaryKey(related_room_roomId, -1, -1);
+
+		return room;
+	}
+
+	/**
+	 * Show all Reservation entities
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Reservation> listReservations() {
+		return new java.util.ArrayList<Reservation>(reservationService.loadReservations());
+	}
+
+	/**
+	 * Delete an existing Guest entity
+	 * 
+	 */
+	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest/{guest_guestId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteReservationGuest(@PathVariable Integer reservation_reservationId, @PathVariable Integer related_guest_guestId) {
+		reservationService.deleteReservationGuest(reservation_reservationId, related_guest_guestId);
 	}
 
 	/**
@@ -121,187 +303,5 @@ public class ReservationRestController {
 		binder.registerCustomEditor(String.class, new org.skyway.spring.util.databinding.StringEditor());
 		binder.registerCustomEditor(Long.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Long.class, true));
 		binder.registerCustomEditor(Double.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Double.class, true));
-	}
-
-	/**
-	 * Create a new Transactions entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses", method = RequestMethod.POST)
-	@ResponseBody
-	public Transactions newReservationTransactionses(@PathVariable String reservation_reservationId, @RequestBody Transactions transactions) {
-		reservationService.saveReservationTransactionses(reservation_reservationId, transactions);
-		return transactionsDAO.findTransactionsByPrimaryKey(transactions.getTransactionId());
-	}
-
-	/**
-	 * Show all Transactions entities by Reservation
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Transactions> getReservationTransactionses(@PathVariable String reservation_reservationId) {
-		return new java.util.ArrayList<Transactions>(reservationDAO.findReservationByPrimaryKey(reservation_reservationId).getTransactionses());
-	}
-
-	/**
-	 * Delete an existing Room entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room/{room_roomId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteReservationRoom(@PathVariable String reservation_reservationId, @PathVariable String related_room_roomId) {
-		reservationService.deleteReservationRoom(reservation_reservationId, related_room_roomId);
-	}
-
-	/**
-	 * Save an existing Transactions entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses", method = RequestMethod.PUT)
-	@ResponseBody
-	public Transactions saveReservationTransactionses(@PathVariable String reservation_reservationId, @RequestBody Transactions transactionses) {
-		reservationService.saveReservationTransactionses(reservation_reservationId, transactionses);
-		return transactionsDAO.findTransactionsByPrimaryKey(transactionses.getTransactionId());
-	}
-
-	/**
-	 * Show all Reservation entities
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Reservation> listReservations() {
-		return new java.util.ArrayList<Reservation>(reservationService.loadReservations());
-	}
-
-	/**
-	 * Get Room entity by Reservation
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room", method = RequestMethod.GET)
-	@ResponseBody
-	public Room getReservationRoom(@PathVariable String reservation_reservationId) {
-		return reservationDAO.findReservationByPrimaryKey(reservation_reservationId).getRoom();
-	}
-
-	/**
-	 * Delete an existing Transactions entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/transactionses/{transactions_transactionId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteReservationTransactionses(@PathVariable String reservation_reservationId, @PathVariable String related_transactionses_transactionId) {
-		reservationService.deleteReservationTransactionses(reservation_reservationId, related_transactionses_transactionId);
-	}
-
-	/**
-	 * View an existing Guest entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest/{guest_guestId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Guest loadReservationGuest(@PathVariable String reservation_reservationId, @PathVariable String related_guest_guestId) {
-		Guest guest = guestDAO.findGuestByPrimaryKey(related_guest_guestId, -1, -1);
-
-		return guest;
-	}
-
-	/**
-	 * Create a new Room entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room", method = RequestMethod.POST)
-	@ResponseBody
-	public Room newReservationRoom(@PathVariable String reservation_reservationId, @RequestBody Room room) {
-		reservationService.saveReservationRoom(reservation_reservationId, room);
-		return roomDAO.findRoomByPrimaryKey(room.getRoomId());
-	}
-
-	/**
-	 * Save an existing Room entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room", method = RequestMethod.PUT)
-	@ResponseBody
-	public Room saveReservationRoom(@PathVariable String reservation_reservationId, @RequestBody Room room) {
-		reservationService.saveReservationRoom(reservation_reservationId, room);
-		return roomDAO.findRoomByPrimaryKey(room.getRoomId());
-	}
-
-	/**
-	 * Create a new Reservation entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation", method = RequestMethod.POST)
-	@ResponseBody
-	public Reservation newReservation(@RequestBody Reservation reservation) {
-		reservationService.saveReservation(reservation);
-		return reservationDAO.findReservationByPrimaryKey(reservation.getReservationId());
-	}
-
-	/**
-	 * Get Guest entity by Reservation
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest", method = RequestMethod.GET)
-	@ResponseBody
-	public Guest getReservationGuest(@PathVariable String reservation_reservationId) {
-		return reservationDAO.findReservationByPrimaryKey(reservation_reservationId).getGuest();
-	}
-
-	/**
-	 * Save an existing Guest entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest", method = RequestMethod.PUT)
-	@ResponseBody
-	public Guest saveReservationGuest(@PathVariable String reservation_reservationId, @RequestBody Guest guest) {
-		reservationService.saveReservationGuest(reservation_reservationId, guest);
-		return guestDAO.findGuestByPrimaryKey(guest.getGuestId());
-	}
-
-	/**
-	 * View an existing Room entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/room/{room_roomId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Room loadReservationRoom(@PathVariable String reservation_reservationId, @PathVariable String related_room_roomId) {
-		Room room = roomDAO.findRoomByPrimaryKey(related_room_roomId, -1, -1);
-
-		return room;
-	}
-
-	/**
-	 * Save an existing Reservation entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation", method = RequestMethod.PUT)
-	@ResponseBody
-	public Reservation saveReservation(@RequestBody Reservation reservation) {
-		reservationService.saveReservation(reservation);
-		return reservationDAO.findReservationByPrimaryKey(reservation.getReservationId());
-	}
-
-	/**
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest/{guest_guestId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteReservationGuest(@PathVariable String reservation_reservationId, @PathVariable String related_guest_guestId) {
-		reservationService.deleteReservationGuest(reservation_reservationId, related_guest_guestId);
-	}
-
-	/**
-	 * Create a new Guest entity
-	 * 
-	 */
-	@RequestMapping(value = "/Reservation/{reservation_reservationId}/guest", method = RequestMethod.POST)
-	@ResponseBody
-	public Guest newReservationGuest(@PathVariable String reservation_reservationId, @RequestBody Guest guest) {
-		reservationService.saveReservationGuest(reservation_reservationId, guest);
-		return guestDAO.findGuestByPrimaryKey(guest.getGuestId());
 	}
 }

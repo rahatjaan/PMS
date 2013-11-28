@@ -17,25 +17,6 @@
 				<tbody>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="guest.guestid.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-								
-							<form:input id="guest_guestId" path="guestId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "guest_guestId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="guest.guestid.help"/>", required : true}})); </script>
-								</c:when>
-								<c:otherwise>
-							${guest.guestId}
-						&nbsp;
-									<form:hidden id="guest_guestId" path="guestId"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td class="label" valign="top">
 							<fmt:message key="guest.nameprefix.title"/>:
 						</td>
 						<td>
@@ -108,16 +89,15 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="guest.mobilenumber.title"/>:
+							<fmt:message key="members.memberid.title"/>:
 						</td>
 						<td>
-							<form:input id="members_memberId" path="members.memberId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "members_memberId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="members.memberid.help"/>"}})); </script>
+							<form:input id="guest_members_memberId" path="members.memberId" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "guest_members_memberId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="members.memberid.help"/>"}})); </script>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			
 			<span class="inputbutton"><input class="savebutton" id="save" type="submit" value="<fmt:message key="navigation.save"/>"/></span>
 			<script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'save', event:'onclick'}));</script>
 		</form:form>

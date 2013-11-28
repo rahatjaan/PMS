@@ -73,24 +73,14 @@ public class RoomviewRestController {
 	}
 
 	/**
-	 * Create a new Roomtype entity
+	 * Save an existing Roomtype entity
 	 * 
 	 */
-	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes", method = RequestMethod.POST)
+	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes", method = RequestMethod.PUT)
 	@ResponseBody
-	public Roomtype newRoomviewRoomtypes(@PathVariable String roomview_roomViewId, @RequestBody Roomtype roomtype) {
-		roomviewService.saveRoomviewRoomtypes(roomview_roomViewId, roomtype);
-		return roomtypeDAO.findRoomtypeByPrimaryKey(roomtype.getRoomTypeId());
-	}
-
-	/**
-	 * Delete an existing Roomtype entity
-	 * 
-	 */
-	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes/{roomtype_roomTypeId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteRoomviewRoomtypes(@PathVariable String roomview_roomViewId, @PathVariable String related_roomtypes_roomTypeId) {
-		roomviewService.deleteRoomviewRoomtypes(roomview_roomViewId, related_roomtypes_roomTypeId);
+	public Roomtype saveRoomviewRoomtypes(@PathVariable Integer roomview_roomViewId, @RequestBody Roomtype roomtypes) {
+		roomviewService.saveRoomviewRoomtypes(roomview_roomViewId, roomtypes);
+		return roomtypeDAO.findRoomtypeByPrimaryKey(roomtypes.getRoomTypeId());
 	}
 
 	/**
@@ -104,25 +94,13 @@ public class RoomviewRestController {
 	}
 
 	/**
-	 * Delete an existing Roomview entity
+	 * Delete an existing Roomtype entity
 	 * 
 	 */
-	@RequestMapping(value = "/Roomview/{roomview_roomViewId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes/{roomtype_roomTypeId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteRoomview(@PathVariable String roomview_roomViewId) {
-		Roomview roomview = roomviewDAO.findRoomviewByPrimaryKey(roomview_roomViewId);
-		roomviewService.deleteRoomview(roomview);
-	}
-
-	/**
-	 * Save an existing Roomtype entity
-	 * 
-	 */
-	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes", method = RequestMethod.PUT)
-	@ResponseBody
-	public Roomtype saveRoomviewRoomtypes(@PathVariable String roomview_roomViewId, @RequestBody Roomtype roomtypes) {
-		roomviewService.saveRoomviewRoomtypes(roomview_roomViewId, roomtypes);
-		return roomtypeDAO.findRoomtypeByPrimaryKey(roomtypes.getRoomTypeId());
+	public void deleteRoomviewRoomtypes(@PathVariable Integer roomview_roomViewId, @PathVariable Integer related_roomtypes_roomTypeId) {
+		roomviewService.deleteRoomviewRoomtypes(roomview_roomViewId, related_roomtypes_roomTypeId);
 	}
 
 	/**
@@ -131,8 +109,19 @@ public class RoomviewRestController {
 	 */
 	@RequestMapping(value = "/Roomview/{roomview_roomViewId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Roomview loadRoomview(@PathVariable String roomview_roomViewId) {
+	public Roomview loadRoomview(@PathVariable Integer roomview_roomViewId) {
 		return roomviewDAO.findRoomviewByPrimaryKey(roomview_roomViewId);
+	}
+
+	/**
+	 * Delete an existing Roomview entity
+	 * 
+	 */
+	@RequestMapping(value = "/Roomview/{roomview_roomViewId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteRoomview(@PathVariable Integer roomview_roomViewId) {
+		Roomview roomview = roomviewDAO.findRoomviewByPrimaryKey(roomview_roomViewId);
+		roomviewService.deleteRoomview(roomview);
 	}
 
 	/**
@@ -147,6 +136,28 @@ public class RoomviewRestController {
 	}
 
 	/**
+	 * Show all Roomtype entities by Roomview
+	 * 
+	 */
+	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Roomtype> getRoomviewRoomtypes(@PathVariable Integer roomview_roomViewId) {
+		return new java.util.ArrayList<Roomtype>(roomviewDAO.findRoomviewByPrimaryKey(roomview_roomViewId).getRoomtypes());
+	}
+
+	/**
+	 * View an existing Roomtype entity
+	 * 
+	 */
+	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes/{roomtype_roomTypeId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Roomtype loadRoomviewRoomtypes(@PathVariable Integer roomview_roomViewId, @PathVariable Integer related_roomtypes_roomTypeId) {
+		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId, -1, -1);
+
+		return roomtype;
+	}
+
+	/**
 	 * Save an existing Roomview entity
 	 * 
 	 */
@@ -158,24 +169,13 @@ public class RoomviewRestController {
 	}
 
 	/**
-	 * Show all Roomtype entities by Roomview
+	 * Create a new Roomtype entity
 	 * 
 	 */
-	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes", method = RequestMethod.GET)
+	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Roomtype> getRoomviewRoomtypes(@PathVariable String roomview_roomViewId) {
-		return new java.util.ArrayList<Roomtype>(roomviewDAO.findRoomviewByPrimaryKey(roomview_roomViewId).getRoomtypes());
-	}
-
-	/**
-	 * View an existing Roomtype entity
-	 * 
-	 */
-	@RequestMapping(value = "/Roomview/{roomview_roomViewId}/roomtypes/{roomtype_roomTypeId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Roomtype loadRoomviewRoomtypes(@PathVariable String roomview_roomViewId, @PathVariable String related_roomtypes_roomTypeId) {
-		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId, -1, -1);
-
-		return roomtype;
+	public Roomtype newRoomviewRoomtypes(@PathVariable Integer roomview_roomViewId, @RequestBody Roomtype roomtype) {
+		roomviewService.saveRoomviewRoomtypes(roomview_roomViewId, roomtype);
+		return roomtypeDAO.findRoomtypeByPrimaryKey(roomtype.getRoomTypeId());
 	}
 }

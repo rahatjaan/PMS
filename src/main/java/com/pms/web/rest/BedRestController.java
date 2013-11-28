@@ -55,6 +55,40 @@ public class BedRestController {
 	private BedService bedService;
 
 	/**
+	 * View an existing Roomtype entity
+	 * 
+	 */
+	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes/{roomtype_roomTypeId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Roomtype loadBedRoomtypes(@PathVariable Integer bed_bedId, @PathVariable Integer related_roomtypes_roomTypeId) {
+		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId, -1, -1);
+
+		return roomtype;
+	}
+
+	/**
+	 * Delete an existing Bed entity
+	 * 
+	 */
+	@RequestMapping(value = "/Bed/{bed_bedId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteBed(@PathVariable Integer bed_bedId) {
+		Bed bed = bedDAO.findBedByPrimaryKey(bed_bedId);
+		bedService.deleteBed(bed);
+	}
+
+	/**
+	 * Save an existing Roomtype entity
+	 * 
+	 */
+	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes", method = RequestMethod.PUT)
+	@ResponseBody
+	public Roomtype saveBedRoomtypes(@PathVariable Integer bed_bedId, @RequestBody Roomtype roomtypes) {
+		bedService.saveBedRoomtypes(bed_bedId, roomtypes);
+		return roomtypeDAO.findRoomtypeByPrimaryKey(roomtypes.getRoomTypeId());
+	}
+
+	/**
 	 * Save an existing Bed entity
 	 * 
 	 */
@@ -76,6 +110,37 @@ public class BedRestController {
 	}
 
 	/**
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes/{roomtype_roomTypeId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteBedRoomtypes(@PathVariable Integer bed_bedId, @PathVariable Integer related_roomtypes_roomTypeId) {
+		bedService.deleteBedRoomtypes(bed_bedId, related_roomtypes_roomTypeId);
+	}
+
+	/**
+	 * Show all Roomtype entities by Bed
+	 * 
+	 */
+	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Roomtype> getBedRoomtypes(@PathVariable Integer bed_bedId) {
+		return new java.util.ArrayList<Roomtype>(bedDAO.findBedByPrimaryKey(bed_bedId).getRoomtypes());
+	}
+
+	/**
+	 * Create a new Roomtype entity
+	 * 
+	 */
+	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes", method = RequestMethod.POST)
+	@ResponseBody
+	public Roomtype newBedRoomtypes(@PathVariable Integer bed_bedId, @RequestBody Roomtype roomtype) {
+		bedService.saveBedRoomtypes(bed_bedId, roomtype);
+		return roomtypeDAO.findRoomtypeByPrimaryKey(roomtype.getRoomTypeId());
+	}
+
+	/**
 	 * Create a new Bed entity
 	 * 
 	 */
@@ -87,45 +152,13 @@ public class BedRestController {
 	}
 
 	/**
-	 * Delete an existing Roomtype entity
-	 * 
-	 */
-	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes/{roomtype_roomTypeId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteBedRoomtypes(@PathVariable String bed_bedId, @PathVariable String related_roomtypes_roomTypeId) {
-		bedService.deleteBedRoomtypes(bed_bedId, related_roomtypes_roomTypeId);
-	}
-
-	/**
 	 * Select an existing Bed entity
 	 * 
 	 */
 	@RequestMapping(value = "/Bed/{bed_bedId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Bed loadBed(@PathVariable String bed_bedId) {
+	public Bed loadBed(@PathVariable Integer bed_bedId) {
 		return bedDAO.findBedByPrimaryKey(bed_bedId);
-	}
-
-	/**
-	 * Delete an existing Bed entity
-	 * 
-	 */
-	@RequestMapping(value = "/Bed/{bed_bedId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteBed(@PathVariable String bed_bedId) {
-		Bed bed = bedDAO.findBedByPrimaryKey(bed_bedId);
-		bedService.deleteBed(bed);
-	}
-
-	/**
-	 * Save an existing Roomtype entity
-	 * 
-	 */
-	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes", method = RequestMethod.PUT)
-	@ResponseBody
-	public Roomtype saveBedRoomtypes(@PathVariable String bed_bedId, @RequestBody Roomtype roomtypes) {
-		bedService.saveBedRoomtypes(bed_bedId, roomtypes);
-		return roomtypeDAO.findRoomtypeByPrimaryKey(roomtypes.getRoomTypeId());
 	}
 
 	/**
@@ -144,38 +177,5 @@ public class BedRestController {
 		binder.registerCustomEditor(String.class, new org.skyway.spring.util.databinding.StringEditor());
 		binder.registerCustomEditor(Long.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Long.class, true));
 		binder.registerCustomEditor(Double.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Double.class, true));
-	}
-
-	/**
-	 * Create a new Roomtype entity
-	 * 
-	 */
-	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes", method = RequestMethod.POST)
-	@ResponseBody
-	public Roomtype newBedRoomtypes(@PathVariable String bed_bedId, @RequestBody Roomtype roomtype) {
-		bedService.saveBedRoomtypes(bed_bedId, roomtype);
-		return roomtypeDAO.findRoomtypeByPrimaryKey(roomtype.getRoomTypeId());
-	}
-
-	/**
-	 * View an existing Roomtype entity
-	 * 
-	 */
-	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes/{roomtype_roomTypeId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Roomtype loadBedRoomtypes(@PathVariable String bed_bedId, @PathVariable String related_roomtypes_roomTypeId) {
-		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId, -1, -1);
-
-		return roomtype;
-	}
-
-	/**
-	 * Show all Roomtype entities by Bed
-	 * 
-	 */
-	@RequestMapping(value = "/Bed/{bed_bedId}/roomtypes", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Roomtype> getBedRoomtypes(@PathVariable String bed_bedId) {
-		return new java.util.ArrayList<Roomtype>(bedDAO.findBedByPrimaryKey(bed_bedId).getRoomtypes());
 	}
 }

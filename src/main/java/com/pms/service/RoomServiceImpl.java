@@ -55,123 +55,11 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	/**
-	 * Return all Room entity
-	 * 
-	 */
-	@Transactional
-	public List<Room> findAllRooms(Integer startResult, Integer maxRows) {
-		return new java.util.ArrayList<Room>(roomDAO.findAllRooms(startResult, maxRows));
-	}
-
-	/**
-	 * Save an existing Roomtype entity
-	 * 
-	 */
-	@Transactional
-	public Room saveRoomRoomtype(String roomId, Roomtype related_roomtype) {
-		Room room = roomDAO.findRoomByPrimaryKey(roomId, -1, -1);
-		Roomtype existingroomtype = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtype.getRoomTypeId());
-
-		// copy into the existing record to preserve existing relationships
-		if (existingroomtype != null) {
-			existingroomtype.setRoomTypeId(related_roomtype.getRoomTypeId());
-			existingroomtype.setRoomTypeField(related_roomtype.getRoomTypeField());
-			existingroomtype.setRoomTypeCode(related_roomtype.getRoomTypeCode());
-			existingroomtype.setRoomTypeDescription(related_roomtype.getRoomTypeDescription());
-			existingroomtype.setRoomLocation(related_roomtype.getRoomLocation());
-			existingroomtype.setRoomDescription(related_roomtype.getRoomDescription());
-			existingroomtype.setIsReserved(related_roomtype.getIsReserved());
-			related_roomtype = existingroomtype;
-		} else {
-			related_roomtype = roomtypeDAO.store(related_roomtype);
-			roomtypeDAO.flush();
-		}
-
-		room.setRoomtype(related_roomtype);
-		related_roomtype.getRooms().add(room);
-		room = roomDAO.store(room);
-		roomDAO.flush();
-
-		related_roomtype = roomtypeDAO.store(related_roomtype);
-		roomtypeDAO.flush();
-
-		return room;
-	}
-
-	/**
-	 * Load an existing Room entity
-	 * 
-	 */
-	@Transactional
-	public Set<Room> loadRooms() {
-		return roomDAO.findAllRooms();
-	}
-
-	/**
-	 * Delete an existing Room entity
-	 * 
-	 */
-	@Transactional
-	public void deleteRoom(Room room) {
-		roomDAO.remove(room);
-		roomDAO.flush();
-	}
-
-	/**
-	 * Delete an existing Reservation entity
-	 * 
-	 */
-	@Transactional
-	public Room deleteRoomReservations(String room_roomId, String related_reservations_reservationId) {
-		Reservation related_reservations = reservationDAO.findReservationByPrimaryKey(related_reservations_reservationId, -1, -1);
-
-		Room room = roomDAO.findRoomByPrimaryKey(room_roomId, -1, -1);
-
-		related_reservations.setRoom(null);
-		room.getReservations().remove(related_reservations);
-
-		reservationDAO.remove(related_reservations);
-		reservationDAO.flush();
-
-		return room;
-	}
-
-	/**
-	 */
-	@Transactional
-	public Room findRoomByPrimaryKey(String roomId) {
-		return roomDAO.findRoomByPrimaryKey(roomId);
-	}
-
-	/**
-	 * Save an existing Room entity
-	 * 
-	 */
-	@Transactional
-	public void saveRoom(Room room) {
-		Room existingRoom = roomDAO.findRoomByPrimaryKey(room.getRoomId());
-
-		if (existingRoom != null) {
-			if (existingRoom != room) {
-				existingRoom.setRoomId(room.getRoomId());
-				existingRoom.setRoomCategory(room.getRoomCategory());
-				existingRoom.setIsSmoking(room.getIsSmoking());
-				existingRoom.setIsComposite(room.getIsComposite());
-				existingRoom.setFloorNumber(room.getFloorNumber());
-			}
-			room = roomDAO.store(existingRoom);
-		} else {
-			room = roomDAO.store(room);
-		}
-		roomDAO.flush();
-	}
-
-	/**
 	 * Save an existing Reservation entity
 	 * 
 	 */
 	@Transactional
-	public Room saveRoomReservations(String roomId, Reservation related_reservations) {
+	public Room saveRoomReservations(Integer roomId, Reservation related_reservations) {
 		Room room = roomDAO.findRoomByPrimaryKey(roomId, -1, -1);
 		Reservation existingreservations = reservationDAO.findReservationByPrimaryKey(related_reservations.getReservationId());
 
@@ -208,6 +96,118 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	/**
+	 * Save an existing Roomtype entity
+	 * 
+	 */
+	@Transactional
+	public Room saveRoomRoomtype(Integer roomId, Roomtype related_roomtype) {
+		Room room = roomDAO.findRoomByPrimaryKey(roomId, -1, -1);
+		Roomtype existingroomtype = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtype.getRoomTypeId());
+
+		// copy into the existing record to preserve existing relationships
+		if (existingroomtype != null) {
+			existingroomtype.setRoomTypeId(related_roomtype.getRoomTypeId());
+			existingroomtype.setRoomTypeField(related_roomtype.getRoomTypeField());
+			existingroomtype.setRoomTypeCode(related_roomtype.getRoomTypeCode());
+			existingroomtype.setRoomTypeDescription(related_roomtype.getRoomTypeDescription());
+			existingroomtype.setRoomLocation(related_roomtype.getRoomLocation());
+			existingroomtype.setRoomDescription(related_roomtype.getRoomDescription());
+			existingroomtype.setIsReserved(related_roomtype.getIsReserved());
+			related_roomtype = existingroomtype;
+		} else {
+			related_roomtype = roomtypeDAO.store(related_roomtype);
+			roomtypeDAO.flush();
+		}
+
+		room.setRoomtype(related_roomtype);
+		related_roomtype.getRooms().add(room);
+		room = roomDAO.store(room);
+		roomDAO.flush();
+
+		related_roomtype = roomtypeDAO.store(related_roomtype);
+		roomtypeDAO.flush();
+
+		return room;
+	}
+
+	/**
+	 * Delete an existing Room entity
+	 * 
+	 */
+	@Transactional
+	public void deleteRoom(Room room) {
+		roomDAO.remove(room);
+		roomDAO.flush();
+	}
+
+	/**
+	 * Save an existing Room entity
+	 * 
+	 */
+	@Transactional
+	public void saveRoom(Room room) {
+		Room existingRoom = roomDAO.findRoomByPrimaryKey(room.getRoomId());
+
+		if (existingRoom != null) {
+			if (existingRoom != room) {
+				existingRoom.setRoomId(room.getRoomId());
+				existingRoom.setRoomCategory(room.getRoomCategory());
+				existingRoom.setIsSmoking(room.getIsSmoking());
+				existingRoom.setIsComposite(room.getIsComposite());
+				existingRoom.setFloorNumber(room.getFloorNumber());
+			}
+			room = roomDAO.store(existingRoom);
+		} else {
+			room = roomDAO.store(room);
+		}
+		roomDAO.flush();
+	}
+
+	/**
+	 */
+	@Transactional
+	public Room findRoomByPrimaryKey(Integer roomId) {
+		return roomDAO.findRoomByPrimaryKey(roomId);
+	}
+
+	/**
+	 * Load an existing Room entity
+	 * 
+	 */
+	@Transactional
+	public Set<Room> loadRooms() {
+		return roomDAO.findAllRooms();
+	}
+
+	/**
+	 * Delete an existing Reservation entity
+	 * 
+	 */
+	@Transactional
+	public Room deleteRoomReservations(Integer room_roomId, Integer related_reservations_reservationId) {
+		Reservation related_reservations = reservationDAO.findReservationByPrimaryKey(related_reservations_reservationId, -1, -1);
+
+		Room room = roomDAO.findRoomByPrimaryKey(room_roomId, -1, -1);
+
+		related_reservations.setRoom(null);
+		room.getReservations().remove(related_reservations);
+
+		reservationDAO.remove(related_reservations);
+		reservationDAO.flush();
+
+		return room;
+	}
+
+	/**
+	 * Return all Room entity
+	 * 
+	 */
+	@Transactional
+	public List<Room> findAllRooms(Integer startResult, Integer maxRows) {
+		return new java.util.ArrayList<Room>(roomDAO.findAllRooms(startResult, maxRows));
+	}
+
+	/**
 	 * Return a count of all Room entity
 	 * 
 	 */
@@ -221,7 +221,7 @@ public class RoomServiceImpl implements RoomService {
 	 * 
 	 */
 	@Transactional
-	public Room deleteRoomRoomtype(String room_roomId, String related_roomtype_roomTypeId) {
+	public Room deleteRoomRoomtype(Integer room_roomId, Integer related_roomtype_roomTypeId) {
 		Room room = roomDAO.findRoomByPrimaryKey(room_roomId, -1, -1);
 		Roomtype related_roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtype_roomTypeId, -1, -1);
 

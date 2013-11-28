@@ -7,6 +7,8 @@ import java.lang.StringBuilder;
 import java.util.Calendar;
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -30,22 +32,21 @@ import javax.persistence.*;
 		@NamedQuery(name = "findTransactionsByReferenceNumber", query = "select myTransactions from Transactions myTransactions where myTransactions.referenceNumber = ?1"),
 		@NamedQuery(name = "findTransactionsByReferenceNumberContaining", query = "select myTransactions from Transactions myTransactions where myTransactions.referenceNumber like ?1"),
 		@NamedQuery(name = "findTransactionsByTransactionDate", query = "select myTransactions from Transactions myTransactions where myTransactions.transactionDate = ?1"),
-		@NamedQuery(name = "findTransactionsByTransactionId", query = "select myTransactions from Transactions myTransactions where myTransactions.transactionId = ?1"),
-		@NamedQuery(name = "findTransactionsByTransactionIdContaining", query = "select myTransactions from Transactions myTransactions where myTransactions.transactionId like ?1") })
+		@NamedQuery(name = "findTransactionsByTransactionId", query = "select myTransactions from Transactions myTransactions where myTransactions.transactionId = ?1") })
 @Table(catalog = "stubpms", name = "transactions")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMS/com/pms/domain", name = "Transactions")
+@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Transactions")
 public class Transactions implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 */
 
-	@Column(name = "transaction_id", length = 50, nullable = false)
+	@Column(name = "transaction_id", nullable = false)
 	@Basic(fetch = FetchType.EAGER)
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@XmlElement
-	String transactionId;
+	Integer transactionId;
 	/**
 	 */
 	@Temporal(TemporalType.TIMESTAMP)
@@ -84,13 +85,13 @@ public class Transactions implements Serializable {
 
 	/**
 	 */
-	public void setTransactionId(String transactionId) {
+	public void setTransactionId(Integer transactionId) {
 		this.transactionId = transactionId;
 	}
 
 	/**
 	 */
-	public String getTransactionId() {
+	public Integer getTransactionId() {
 		return this.transactionId;
 	}
 

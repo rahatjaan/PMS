@@ -53,6 +53,15 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
+							<fmt:message key="roomview.roomviewid.title"/>:
+						</td>
+						<td>
+							${roomtype.roomview.roomViewId}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
 							<fmt:message key="roomtype.roomlocation.title"/>:
 						</td>
 						<td>
@@ -66,6 +75,15 @@
 						</td>
 						<td>
 							${roomtype.roomDescription}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="bed.bedid.title"/>:
+						</td>
+						<td>
+							${roomtype.bed.bedId}
 						&nbsp;
 						</td>
 					</tr>

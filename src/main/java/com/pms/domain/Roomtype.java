@@ -7,6 +7,8 @@ import java.lang.StringBuilder;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,23 +38,22 @@ import javax.persistence.*;
 		@NamedQuery(name = "findRoomtypeByRoomTypeDescriptionContaining", query = "select myRoomtype from Roomtype myRoomtype where myRoomtype.roomTypeDescription like ?1"),
 		@NamedQuery(name = "findRoomtypeByRoomTypeField", query = "select myRoomtype from Roomtype myRoomtype where myRoomtype.roomTypeField = ?1"),
 		@NamedQuery(name = "findRoomtypeByRoomTypeFieldContaining", query = "select myRoomtype from Roomtype myRoomtype where myRoomtype.roomTypeField like ?1"),
-		@NamedQuery(name = "findRoomtypeByRoomTypeId", query = "select myRoomtype from Roomtype myRoomtype where myRoomtype.roomTypeId = ?1"),
-		@NamedQuery(name = "findRoomtypeByRoomTypeIdContaining", query = "select myRoomtype from Roomtype myRoomtype where myRoomtype.roomTypeId like ?1") })
+		@NamedQuery(name = "findRoomtypeByRoomTypeId", query = "select myRoomtype from Roomtype myRoomtype where myRoomtype.roomTypeId = ?1") })
 @Table(catalog = "stubpms", name = "roomtype")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMS/com/pms/domain", name = "Roomtype")
-@XmlRootElement(namespace = "PMS/com/pms/domain")
+@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Roomtype")
+@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
 public class Roomtype implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 */
 
-	@Column(name = "room_type_id", length = 10)
+	@Column(name = "room_type_id", nullable = false)
 	@Basic(fetch = FetchType.EAGER)
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@XmlElement
-	String roomTypeId;
+	Integer roomTypeId;
 	/**
 	 */
 
@@ -116,13 +117,13 @@ public class Roomtype implements Serializable {
 
 	/**
 	 */
-	public void setRoomTypeId(String roomTypeId) {
+	public void setRoomTypeId(Integer roomTypeId) {
 		this.roomTypeId = roomTypeId;
 	}
 
 	/**
 	 */
-	public String getRoomTypeId() {
+	public Integer getRoomTypeId() {
 		return this.roomTypeId;
 	}
 

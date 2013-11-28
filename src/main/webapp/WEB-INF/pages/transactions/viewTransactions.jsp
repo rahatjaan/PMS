@@ -59,6 +59,15 @@
 						&nbsp;
 						</td>
 					</tr>
+					<tr>
+						<td  class="label">
+							<fmt:message key="reservation.reservationid.title"/>:
+						</td>
+						<td>
+							${transactions.reservation.reservationId}
+						&nbsp;
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<div class="clear">&nbsp;</div>

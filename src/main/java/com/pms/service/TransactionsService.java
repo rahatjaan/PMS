@@ -13,6 +13,16 @@ import java.util.Set;
 public interface TransactionsService {
 
 	/**
+	 * Return a count of all Transactions entity
+	 * 
+	 */
+	public Integer countTransactionss();
+
+	/**
+	 */
+	public Transactions findTransactionsByPrimaryKey(Integer transactionId);
+
+	/**
 	 * Delete an existing Transactions entity
 	 * 
 	 */
@@ -25,36 +35,26 @@ public interface TransactionsService {
 	public Set<Transactions> loadTransactionss();
 
 	/**
-	 */
-	public Transactions findTransactionsByPrimaryKey(String transactionId);
-
-	/**
 	 * Save an existing Reservation entity
 	 * 
 	 */
-	public Transactions saveTransactionsReservation(String transactionId_1, Reservation related_reservation);
-
-	/**
-	 * Return all Transactions entity
-	 * 
-	 */
-	public List<Transactions> findAllTransactionss(Integer startResult, Integer maxRows);
-
-	/**
-	 * Return a count of all Transactions entity
-	 * 
-	 */
-	public Integer countTransactionss();
+	public Transactions saveTransactionsReservation(Integer transactionId_1, Reservation related_reservation);
 
 	/**
 	 * Delete an existing Reservation entity
 	 * 
 	 */
-	public Transactions deleteTransactionsReservation(String transactions_transactionId, String related_reservation_reservationId);
+	public Transactions deleteTransactionsReservation(Integer transactions_transactionId, Integer related_reservation_reservationId);
 
 	/**
 	 * Save an existing Transactions entity
 	 * 
 	 */
 	public void saveTransactions(Transactions transactions_1);
+
+	/**
+	 * Return all Transactions entity
+	 * 
+	 */
+	public List<Transactions> findAllTransactionss(Integer startResult, Integer maxRows);
 }

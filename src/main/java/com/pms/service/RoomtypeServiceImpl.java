@@ -68,7 +68,7 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	 * 
 	 */
 	@Transactional
-	public Roomtype saveRoomtypeRoomview(String roomTypeId, Roomview related_roomview) {
+	public Roomtype saveRoomtypeRoomview(Integer roomTypeId, Roomview related_roomview) {
 		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomTypeId, -1, -1);
 		Roomview existingroomview = roomviewDAO.findRoomviewByPrimaryKey(related_roomview.getRoomViewId());
 
@@ -95,6 +95,32 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	}
 
 	/**
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	@Transactional
+	public void deleteRoomtype(Roomtype roomtype) {
+		roomtypeDAO.remove(roomtype);
+		roomtypeDAO.flush();
+	}
+
+	/**
+	 */
+	@Transactional
+	public Roomtype findRoomtypeByPrimaryKey(Integer roomTypeId) {
+		return roomtypeDAO.findRoomtypeByPrimaryKey(roomTypeId);
+	}
+
+	/**
+	 * Return all Roomtype entity
+	 * 
+	 */
+	@Transactional
+	public List<Roomtype> findAllRoomtypes(Integer startResult, Integer maxRows) {
+		return new java.util.ArrayList<Roomtype>(roomtypeDAO.findAllRoomtypes(startResult, maxRows));
+	}
+
+	/**
 	 * Load an existing Roomtype entity
 	 * 
 	 */
@@ -104,26 +130,12 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	}
 
 	/**
-	 * Delete an existing Bed entity
+	 * Return a count of all Roomtype entity
 	 * 
 	 */
 	@Transactional
-	public Roomtype deleteRoomtypeBed(String roomtype_roomTypeId, String related_bed_bedId) {
-		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtype_roomTypeId, -1, -1);
-		Bed related_bed = bedDAO.findBedByPrimaryKey(related_bed_bedId, -1, -1);
-
-		roomtype.setBed(null);
-		related_bed.getRoomtypes().remove(roomtype);
-		roomtype = roomtypeDAO.store(roomtype);
-		roomtypeDAO.flush();
-
-		related_bed = bedDAO.store(related_bed);
-		bedDAO.flush();
-
-		bedDAO.remove(related_bed);
-		bedDAO.flush();
-
-		return roomtype;
+	public Integer countRoomtypes() {
+		return ((Long) roomtypeDAO.createQuerySingleResult("select count(o) from Roomtype o").getSingleResult()).intValue();
 	}
 
 	/**
@@ -152,51 +164,11 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	}
 
 	/**
-	 * Save an existing Bed entity
-	 * 
-	 */
-	@Transactional
-	public Roomtype saveRoomtypeBed(String roomTypeId, Bed related_bed) {
-		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomTypeId, -1, -1);
-		Bed existingbed = bedDAO.findBedByPrimaryKey(related_bed.getBedId());
-
-		// copy into the existing record to preserve existing relationships
-		if (existingbed != null) {
-			existingbed.setBedId(related_bed.getBedId());
-			existingbed.setBedTypeCode(related_bed.getBedTypeCode());
-			existingbed.setBedTypeDescription(related_bed.getBedTypeDescription());
-			related_bed = existingbed;
-		} else {
-			related_bed = bedDAO.store(related_bed);
-			bedDAO.flush();
-		}
-
-		roomtype.setBed(related_bed);
-		related_bed.getRoomtypes().add(roomtype);
-		roomtype = roomtypeDAO.store(roomtype);
-		roomtypeDAO.flush();
-
-		related_bed = bedDAO.store(related_bed);
-		bedDAO.flush();
-
-		return roomtype;
-	}
-
-	/**
-	 * Return a count of all Roomtype entity
-	 * 
-	 */
-	@Transactional
-	public Integer countRoomtypes() {
-		return ((Long) roomtypeDAO.createQuerySingleResult("select count(o) from Roomtype o").getSingleResult()).intValue();
-	}
-
-	/**
 	 * Save an existing Room entity
 	 * 
 	 */
 	@Transactional
-	public Roomtype saveRoomtypeRooms(String roomTypeId, Room related_rooms) {
+	public Roomtype saveRoomtypeRooms(Integer roomTypeId, Room related_rooms) {
 		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomTypeId, -1, -1);
 		Room existingrooms = roomDAO.findRoomByPrimaryKey(related_rooms.getRoomId());
 
@@ -225,11 +197,65 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	}
 
 	/**
+	 * Delete an existing Bed entity
+	 * 
+	 */
+	@Transactional
+	public Roomtype deleteRoomtypeBed(Integer roomtype_roomTypeId, Integer related_bed_bedId) {
+		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtype_roomTypeId, -1, -1);
+		Bed related_bed = bedDAO.findBedByPrimaryKey(related_bed_bedId, -1, -1);
+
+		roomtype.setBed(null);
+		related_bed.getRoomtypes().remove(roomtype);
+		roomtype = roomtypeDAO.store(roomtype);
+		roomtypeDAO.flush();
+
+		related_bed = bedDAO.store(related_bed);
+		bedDAO.flush();
+
+		bedDAO.remove(related_bed);
+		bedDAO.flush();
+
+		return roomtype;
+	}
+
+	/**
+	 * Save an existing Bed entity
+	 * 
+	 */
+	@Transactional
+	public Roomtype saveRoomtypeBed(Integer roomTypeId, Bed related_bed) {
+		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomTypeId, -1, -1);
+		Bed existingbed = bedDAO.findBedByPrimaryKey(related_bed.getBedId());
+
+		// copy into the existing record to preserve existing relationships
+		if (existingbed != null) {
+			existingbed.setBedId(related_bed.getBedId());
+			existingbed.setBedTypeCode(related_bed.getBedTypeCode());
+			existingbed.setBedTypeDescription(related_bed.getBedTypeDescription());
+			related_bed = existingbed;
+		} else {
+			related_bed = bedDAO.store(related_bed);
+			bedDAO.flush();
+		}
+
+		roomtype.setBed(related_bed);
+		related_bed.getRoomtypes().add(roomtype);
+		roomtype = roomtypeDAO.store(roomtype);
+		roomtypeDAO.flush();
+
+		related_bed = bedDAO.store(related_bed);
+		bedDAO.flush();
+
+		return roomtype;
+	}
+
+	/**
 	 * Delete an existing Roomview entity
 	 * 
 	 */
 	@Transactional
-	public Roomtype deleteRoomtypeRoomview(String roomtype_roomTypeId, String related_roomview_roomViewId) {
+	public Roomtype deleteRoomtypeRoomview(Integer roomtype_roomTypeId, Integer related_roomview_roomViewId) {
 		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtype_roomTypeId, -1, -1);
 		Roomview related_roomview = roomviewDAO.findRoomviewByPrimaryKey(related_roomview_roomViewId, -1, -1);
 
@@ -252,7 +278,7 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 	 * 
 	 */
 	@Transactional
-	public Roomtype deleteRoomtypeRooms(String roomtype_roomTypeId, String related_rooms_roomId) {
+	public Roomtype deleteRoomtypeRooms(Integer roomtype_roomTypeId, Integer related_rooms_roomId) {
 		Room related_rooms = roomDAO.findRoomByPrimaryKey(related_rooms_roomId, -1, -1);
 
 		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtype_roomTypeId, -1, -1);
@@ -264,31 +290,5 @@ public class RoomtypeServiceImpl implements RoomtypeService {
 		roomDAO.flush();
 
 		return roomtype;
-	}
-
-	/**
-	 * Delete an existing Roomtype entity
-	 * 
-	 */
-	@Transactional
-	public void deleteRoomtype(Roomtype roomtype) {
-		roomtypeDAO.remove(roomtype);
-		roomtypeDAO.flush();
-	}
-
-	/**
-	 * Return all Roomtype entity
-	 * 
-	 */
-	@Transactional
-	public List<Roomtype> findAllRoomtypes(Integer startResult, Integer maxRows) {
-		return new java.util.ArrayList<Roomtype>(roomtypeDAO.findAllRoomtypes(startResult, maxRows));
-	}
-
-	/**
-	 */
-	@Transactional
-	public Roomtype findRoomtypeByPrimaryKey(String roomTypeId) {
-		return roomtypeDAO.findRoomtypeByPrimaryKey(roomTypeId);
 	}
 }

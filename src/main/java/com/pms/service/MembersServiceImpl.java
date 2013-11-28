@@ -46,71 +46,6 @@ public class MembersServiceImpl implements MembersService {
 	}
 
 	/**
-	 * Save an existing Members entity
-	 * 
-	 */
-	@Transactional
-	public void saveMembers(Members members) {
-		Members existingMembers = membersDAO.findMembersByPrimaryKey(members.getMemberId());
-
-		if (existingMembers != null) {
-			if (existingMembers != members) {
-				existingMembers.setMemberId(members.getMemberId());
-				existingMembers.setMembershipType(members.getMembershipType());
-			}
-			members = membersDAO.store(existingMembers);
-		} else {
-			members = membersDAO.store(members);
-		}
-		membersDAO.flush();
-	}
-
-	/**
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	@Transactional
-	public Members deleteMembersGuests(String members_memberId, String related_guests_guestId) {
-		Guest related_guests = guestDAO.findGuestByPrimaryKey(related_guests_guestId, -1, -1);
-
-		Members members = membersDAO.findMembersByPrimaryKey(members_memberId, -1, -1);
-
-		related_guests.setMembers(null);
-		members.getGuests().remove(related_guests);
-
-		guestDAO.remove(related_guests);
-		guestDAO.flush();
-
-		return members;
-	}
-
-	/**
-	 */
-	@Transactional
-	public Members findMembersByPrimaryKey(String memberId) {
-		return membersDAO.findMembersByPrimaryKey(memberId);
-	}
-
-	/**
-	 * Load an existing Members entity
-	 * 
-	 */
-	@Transactional
-	public Set<Members> loadMemberss() {
-		return membersDAO.findAllMemberss();
-	}
-
-	/**
-	 * Delete an existing Members entity
-	 * 
-	 */
-	@Transactional
-	public void deleteMembers(Members members) {
-		membersDAO.remove(members);
-		membersDAO.flush();
-	}
-
-	/**
 	 * Save an existing Guest entity
 	 * 
 	 */
@@ -154,6 +89,71 @@ public class MembersServiceImpl implements MembersService {
 	@Transactional
 	public List<Members> findAllMemberss(Integer startResult, Integer maxRows) {
 		return new java.util.ArrayList<Members>(membersDAO.findAllMemberss(startResult, maxRows));
+	}
+
+	/**
+	 * Load an existing Members entity
+	 * 
+	 */
+	@Transactional
+	public Set<Members> loadMemberss() {
+		return membersDAO.findAllMemberss();
+	}
+
+	/**
+	 */
+	@Transactional
+	public Members findMembersByPrimaryKey(String memberId) {
+		return membersDAO.findMembersByPrimaryKey(memberId);
+	}
+
+	/**
+	 * Save an existing Members entity
+	 * 
+	 */
+	@Transactional
+	public void saveMembers(Members members) {
+		Members existingMembers = membersDAO.findMembersByPrimaryKey(members.getMemberId());
+
+		if (existingMembers != null) {
+			if (existingMembers != members) {
+				existingMembers.setMemberId(members.getMemberId());
+				existingMembers.setMembershipType(members.getMembershipType());
+			}
+			members = membersDAO.store(existingMembers);
+		} else {
+			members = membersDAO.store(members);
+		}
+		membersDAO.flush();
+	}
+
+	/**
+	 * Delete an existing Members entity
+	 * 
+	 */
+	@Transactional
+	public void deleteMembers(Members members) {
+		membersDAO.remove(members);
+		membersDAO.flush();
+	}
+
+	/**
+	 * Delete an existing Guest entity
+	 * 
+	 */
+	@Transactional
+	public Members deleteMembersGuests(String members_memberId, Integer related_guests_guestId) {
+		Guest related_guests = guestDAO.findGuestByPrimaryKey(related_guests_guestId, -1, -1);
+
+		Members members = membersDAO.findMembersByPrimaryKey(members_memberId, -1, -1);
+
+		related_guests.setMembers(null);
+		members.getGuests().remove(related_guests);
+
+		guestDAO.remove(related_guests);
+		guestDAO.flush();
+
+		return members;
 	}
 
 	/**

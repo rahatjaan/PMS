@@ -17,24 +17,6 @@
 				<tbody>
 					<tr>
 						<td class="label" valign="top">
-							<fmt:message key="transactions.transactionid.title"/>:
-						</td>
-						<td>
-							<c:choose>
-								<c:when test='${newFlag}' >
-							<form:input id="transactions_transactionId" path="transactionId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "transactions_transactionId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="transactions.transactionid.help"/>", required : true}})); </script>
-								</c:when>
-								<c:otherwise>
-							${transactions.transactionId}
-						&nbsp;
-									<form:hidden id="transactions_transactionId" path="transactionId"/>
-								</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td class="label" valign="top">
 							<fmt:message key="transactions.transactiondate.title"/>:
 						</td>
 						<td>
@@ -67,6 +49,15 @@
 						<td>
 							<form:input id="transactions_description" path="description" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "transactions_description",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="transactions.description.help"/>"}})); </script>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="reservation.reservationid.title"/>:
+						</td>
+						<td>
+							<form:input id="transactions_reservation_reservationId" path="reservation.reservationId" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "transactions_reservation_reservationId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="reservation.reservationid.help"/>"}})); </script>
 						</td>
 					</tr>
 				</tbody>

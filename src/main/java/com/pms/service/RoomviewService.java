@@ -13,32 +13,20 @@ import java.util.Set;
 public interface RoomviewService {
 
 	/**
-	 * Delete an existing Roomtype entity
+	 */
+	public Roomview findRoomviewByPrimaryKey(Integer roomViewId);
+
+	/**
+	 * Delete an existing Roomview entity
 	 * 
 	 */
-	public Roomview deleteRoomviewRoomtypes(String roomview_roomViewId, String related_roomtypes_roomTypeId);
+	public void deleteRoomview(Roomview roomview);
 
 	/**
 	 * Save an existing Roomtype entity
 	 * 
 	 */
-	public Roomview saveRoomviewRoomtypes(String roomViewId, Roomtype related_roomtypes);
-
-	/**
-	 */
-	public Roomview findRoomviewByPrimaryKey(String roomViewId_1);
-
-	/**
-	 * Save an existing Roomview entity
-	 * 
-	 */
-	public void saveRoomview(Roomview roomview);
-
-	/**
-	 * Return a count of all Roomview entity
-	 * 
-	 */
-	public Integer countRoomviews();
+	public Roomview saveRoomviewRoomtypes(Integer roomViewId_1, Roomtype related_roomtypes);
 
 	/**
 	 * Load an existing Roomview entity
@@ -47,10 +35,22 @@ public interface RoomviewService {
 	public Set<Roomview> loadRoomviews();
 
 	/**
-	 * Delete an existing Roomview entity
+	 * Return a count of all Roomview entity
 	 * 
 	 */
-	public void deleteRoomview(Roomview roomview_1);
+	public Integer countRoomviews();
+
+	/**
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	public Roomview deleteRoomviewRoomtypes(Integer roomview_roomViewId, Integer related_roomtypes_roomTypeId);
+
+	/**
+	 * Save an existing Roomview entity
+	 * 
+	 */
+	public void saveRoomview(Roomview roomview_1);
 
 	/**
 	 * Return all Roomview entity

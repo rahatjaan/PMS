@@ -55,6 +55,91 @@ public class MembersRestController {
 	private MembersService membersService;
 
 	/**
+	 * Create a new Guest entity
+	 * 
+	 */
+	@RequestMapping(value = "/Members/{members_memberId}/guests", method = RequestMethod.POST)
+	@ResponseBody
+	public Guest newMembersGuests(@PathVariable String members_memberId, @RequestBody Guest guest) {
+		membersService.saveMembersGuests(members_memberId, guest);
+		return guestDAO.findGuestByPrimaryKey(guest.getGuestId());
+	}
+
+	/**
+	 * Show all Guest entities by Members
+	 * 
+	 */
+	@RequestMapping(value = "/Members/{members_memberId}/guests", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Guest> getMembersGuests(@PathVariable String members_memberId) {
+		return new java.util.ArrayList<Guest>(membersDAO.findMembersByPrimaryKey(members_memberId).getGuests());
+	}
+
+	/**
+	 * Delete an existing Guest entity
+	 * 
+	 */
+	@RequestMapping(value = "/Members/{members_memberId}/guests/{guest_guestId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteMembersGuests(@PathVariable String members_memberId, @PathVariable Integer related_guests_guestId) {
+		membersService.deleteMembersGuests(members_memberId, related_guests_guestId);
+	}
+
+	/**
+	 * Save an existing Members entity
+	 * 
+	 */
+	@RequestMapping(value = "/Members", method = RequestMethod.PUT)
+	@ResponseBody
+	public Members saveMembers(@RequestBody Members members) {
+		membersService.saveMembers(members);
+		return membersDAO.findMembersByPrimaryKey(members.getMemberId());
+	}
+
+	/**
+	 * Show all Members entities
+	 * 
+	 */
+	@RequestMapping(value = "/Members", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Members> listMemberss() {
+		return new java.util.ArrayList<Members>(membersService.loadMemberss());
+	}
+
+	/**
+	 * Select an existing Members entity
+	 * 
+	 */
+	@RequestMapping(value = "/Members/{members_memberId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Members loadMembers(@PathVariable String members_memberId) {
+		return membersDAO.findMembersByPrimaryKey(members_memberId);
+	}
+
+	/**
+	 * View an existing Guest entity
+	 * 
+	 */
+	@RequestMapping(value = "/Members/{members_memberId}/guests/{guest_guestId}", method = RequestMethod.GET)
+	@ResponseBody
+	public Guest loadMembersGuests(@PathVariable String members_memberId, @PathVariable Integer related_guests_guestId) {
+		Guest guest = guestDAO.findGuestByPrimaryKey(related_guests_guestId, -1, -1);
+
+		return guest;
+	}
+
+	/**
+	 * Delete an existing Members entity
+	 * 
+	 */
+	@RequestMapping(value = "/Members/{members_memberId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteMembers(@PathVariable String members_memberId) {
+		Members members = membersDAO.findMembersByPrimaryKey(members_memberId);
+		membersService.deleteMembers(members);
+	}
+
+	/**
 	 * Register custom, context-specific property editors
 	 * 
 	 */
@@ -73,36 +158,6 @@ public class MembersRestController {
 	}
 
 	/**
-	 * Select an existing Members entity
-	 * 
-	 */
-	@RequestMapping(value = "/Members/{members_memberId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Members loadMembers(@PathVariable String members_memberId) {
-		return membersDAO.findMembersByPrimaryKey(members_memberId);
-	}
-
-	/**
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	@RequestMapping(value = "/Members/{members_memberId}/guests/{guest_guestId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteMembersGuests(@PathVariable String members_memberId, @PathVariable String related_guests_guestId) {
-		membersService.deleteMembersGuests(members_memberId, related_guests_guestId);
-	}
-
-	/**
-	 * Show all Members entities
-	 * 
-	 */
-	@RequestMapping(value = "/Members", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Members> listMemberss() {
-		return new java.util.ArrayList<Members>(membersService.loadMemberss());
-	}
-
-	/**
 	 * Save an existing Guest entity
 	 * 
 	 */
@@ -114,39 +169,6 @@ public class MembersRestController {
 	}
 
 	/**
-	 * Show all Guest entities by Members
-	 * 
-	 */
-	@RequestMapping(value = "/Members/{members_memberId}/guests", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Guest> getMembersGuests(@PathVariable String members_memberId) {
-		return new java.util.ArrayList<Guest>(membersDAO.findMembersByPrimaryKey(members_memberId).getGuests());
-	}
-
-	/**
-	 * View an existing Guest entity
-	 * 
-	 */
-	@RequestMapping(value = "/Members/{members_memberId}/guests/{guest_guestId}", method = RequestMethod.GET)
-	@ResponseBody
-	public Guest loadMembersGuests(@PathVariable String members_memberId, @PathVariable String related_guests_guestId) {
-		Guest guest = guestDAO.findGuestByPrimaryKey(related_guests_guestId, -1, -1);
-
-		return guest;
-	}
-
-	/**
-	 * Save an existing Members entity
-	 * 
-	 */
-	@RequestMapping(value = "/Members", method = RequestMethod.PUT)
-	@ResponseBody
-	public Members saveMembers(@RequestBody Members members) {
-		membersService.saveMembers(members);
-		return membersDAO.findMembersByPrimaryKey(members.getMemberId());
-	}
-
-	/**
 	 * Create a new Members entity
 	 * 
 	 */
@@ -155,27 +177,5 @@ public class MembersRestController {
 	public Members newMembers(@RequestBody Members members) {
 		membersService.saveMembers(members);
 		return membersDAO.findMembersByPrimaryKey(members.getMemberId());
-	}
-
-	/**
-	 * Create a new Guest entity
-	 * 
-	 */
-	@RequestMapping(value = "/Members/{members_memberId}/guests", method = RequestMethod.POST)
-	@ResponseBody
-	public Guest newMembersGuests(@PathVariable String members_memberId, @RequestBody Guest guest) {
-		membersService.saveMembersGuests(members_memberId, guest);
-		return guestDAO.findGuestByPrimaryKey(guest.getGuestId());
-	}
-
-	/**
-	 * Delete an existing Members entity
-	 * 
-	 */
-	@RequestMapping(value = "/Members/{members_memberId}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public void deleteMembers(@PathVariable String members_memberId) {
-		Members members = membersDAO.findMembersByPrimaryKey(members_memberId);
-		membersService.deleteMembers(members);
 	}
 }

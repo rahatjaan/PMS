@@ -66,36 +66,11 @@ public class RoomDAOImpl extends AbstractJpaDao<Room> implements RoomDAO {
 	}
 
 	/**
-	 * JPQL Query - findRoomByPrimaryKey
-	 *
-	 */
-	@Transactional
-	public Room findRoomByPrimaryKey(String roomId) throws DataAccessException {
-
-		return findRoomByPrimaryKey(roomId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomByPrimaryKey
-	 *
-	 */
-
-	@Transactional
-	public Room findRoomByPrimaryKey(String roomId, int startResult, int maxRows) throws DataAccessException {
-		try {
-			Query query = createNamedQuery("findRoomByPrimaryKey", startResult, maxRows, roomId);
-			return (com.pms.domain.Room) query.getSingleResult();
-		} catch (NoResultException nre) {
-			return null;
-		}
-	}
-
-	/**
 	 * JPQL Query - findRoomByRoomId
 	 *
 	 */
 	@Transactional
-	public Room findRoomByRoomId(String roomId) throws DataAccessException {
+	public Room findRoomByRoomId(Integer roomId) throws DataAccessException {
 
 		return findRoomByRoomId(roomId, -1, -1);
 	}
@@ -106,101 +81,13 @@ public class RoomDAOImpl extends AbstractJpaDao<Room> implements RoomDAO {
 	 */
 
 	@Transactional
-	public Room findRoomByRoomId(String roomId, int startResult, int maxRows) throws DataAccessException {
+	public Room findRoomByRoomId(Integer roomId, int startResult, int maxRows) throws DataAccessException {
 		try {
 			Query query = createNamedQuery("findRoomByRoomId", startResult, maxRows, roomId);
 			return (com.pms.domain.Room) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
 		}
-	}
-
-	/**
-	 * JPQL Query - findRoomByRoomCategoryContaining
-	 *
-	 */
-	@Transactional
-	public Set<Room> findRoomByRoomCategoryContaining(String roomCategory) throws DataAccessException {
-
-		return findRoomByRoomCategoryContaining(roomCategory, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomByRoomCategoryContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Room> findRoomByRoomCategoryContaining(String roomCategory, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomByRoomCategoryContaining", startResult, maxRows, roomCategory);
-		return new LinkedHashSet<Room>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findRoomByFloorNumberContaining
-	 *
-	 */
-	@Transactional
-	public Set<Room> findRoomByFloorNumberContaining(String floorNumber) throws DataAccessException {
-
-		return findRoomByFloorNumberContaining(floorNumber, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomByFloorNumberContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Room> findRoomByFloorNumberContaining(String floorNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomByFloorNumberContaining", startResult, maxRows, floorNumber);
-		return new LinkedHashSet<Room>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findRoomByIsComposite
-	 *
-	 */
-	@Transactional
-	public Set<Room> findRoomByIsComposite(String isComposite) throws DataAccessException {
-
-		return findRoomByIsComposite(isComposite, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomByIsComposite
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Room> findRoomByIsComposite(String isComposite, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomByIsComposite", startResult, maxRows, isComposite);
-		return new LinkedHashSet<Room>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findRoomByFloorNumber
-	 *
-	 */
-	@Transactional
-	public Set<Room> findRoomByFloorNumber(String floorNumber) throws DataAccessException {
-
-		return findRoomByFloorNumber(floorNumber, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findRoomByFloorNumber
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Room> findRoomByFloorNumber(String floorNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomByFloorNumber", startResult, maxRows, floorNumber);
-		return new LinkedHashSet<Room>(query.getResultList());
 	}
 
 	/**
@@ -270,6 +157,28 @@ public class RoomDAOImpl extends AbstractJpaDao<Room> implements RoomDAO {
 	}
 
 	/**
+	 * JPQL Query - findRoomByFloorNumber
+	 *
+	 */
+	@Transactional
+	public Set<Room> findRoomByFloorNumber(String floorNumber) throws DataAccessException {
+
+		return findRoomByFloorNumber(floorNumber, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomByFloorNumber
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Room> findRoomByFloorNumber(String floorNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomByFloorNumber", startResult, maxRows, floorNumber);
+		return new LinkedHashSet<Room>(query.getResultList());
+	}
+
+	/**
 	 * JPQL Query - findRoomByIsSmokingContaining
 	 *
 	 */
@@ -288,6 +197,28 @@ public class RoomDAOImpl extends AbstractJpaDao<Room> implements RoomDAO {
 	@Transactional
 	public Set<Room> findRoomByIsSmokingContaining(String isSmoking, int startResult, int maxRows) throws DataAccessException {
 		Query query = createNamedQuery("findRoomByIsSmokingContaining", startResult, maxRows, isSmoking);
+		return new LinkedHashSet<Room>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findRoomByRoomCategoryContaining
+	 *
+	 */
+	@Transactional
+	public Set<Room> findRoomByRoomCategoryContaining(String roomCategory) throws DataAccessException {
+
+		return findRoomByRoomCategoryContaining(roomCategory, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomByRoomCategoryContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Room> findRoomByRoomCategoryContaining(String roomCategory, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomByRoomCategoryContaining", startResult, maxRows, roomCategory);
 		return new LinkedHashSet<Room>(query.getResultList());
 	}
 
@@ -314,24 +245,71 @@ public class RoomDAOImpl extends AbstractJpaDao<Room> implements RoomDAO {
 	}
 
 	/**
-	 * JPQL Query - findRoomByRoomIdContaining
+	 * JPQL Query - findRoomByPrimaryKey
 	 *
 	 */
 	@Transactional
-	public Set<Room> findRoomByRoomIdContaining(String roomId) throws DataAccessException {
+	public Room findRoomByPrimaryKey(Integer roomId) throws DataAccessException {
 
-		return findRoomByRoomIdContaining(roomId, -1, -1);
+		return findRoomByPrimaryKey(roomId, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findRoomByRoomIdContaining
+	 * JPQL Query - findRoomByPrimaryKey
+	 *
+	 */
+
+	@Transactional
+	public Room findRoomByPrimaryKey(Integer roomId, int startResult, int maxRows) throws DataAccessException {
+		try {
+			Query query = createNamedQuery("findRoomByPrimaryKey", startResult, maxRows, roomId);
+			return (com.pms.domain.Room) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+
+	/**
+	 * JPQL Query - findRoomByIsComposite
+	 *
+	 */
+	@Transactional
+	public Set<Room> findRoomByIsComposite(String isComposite) throws DataAccessException {
+
+		return findRoomByIsComposite(isComposite, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomByIsComposite
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Room> findRoomByRoomIdContaining(String roomId, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findRoomByRoomIdContaining", startResult, maxRows, roomId);
+	public Set<Room> findRoomByIsComposite(String isComposite, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomByIsComposite", startResult, maxRows, isComposite);
+		return new LinkedHashSet<Room>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findRoomByFloorNumberContaining
+	 *
+	 */
+	@Transactional
+	public Set<Room> findRoomByFloorNumberContaining(String floorNumber) throws DataAccessException {
+
+		return findRoomByFloorNumberContaining(floorNumber, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findRoomByFloorNumberContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Room> findRoomByFloorNumberContaining(String floorNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findRoomByFloorNumberContaining", startResult, maxRows, floorNumber);
 		return new LinkedHashSet<Room>(query.getResultList());
 	}
 

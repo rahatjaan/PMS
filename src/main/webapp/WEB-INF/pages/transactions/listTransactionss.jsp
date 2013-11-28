@@ -22,6 +22,7 @@
 					<th class="thead"><fmt:message key="transactions.referencenumber.title"/></th>
 					<th class="thead"><fmt:message key="transactions.charges.title"/></th>
 					<th class="thead"><fmt:message key="transactions.description.title"/></th>
+					<th class="thead"><fmt:message key="reservation.reservationid.title"/></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,6 +64,11 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.description}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.reservation.reservationId}
 						&nbsp;
 					</td>
 				</tr>

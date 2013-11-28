@@ -16,76 +16,16 @@ import org.springframework.dao.DataAccessException;
 public interface TransactionsDAO extends JpaDao<Transactions> {
 
 	/**
-	 * JPQL Query - findTransactionsByReferenceNumber
+	 * JPQL Query - findTransactionsByReferenceNumberContaining
 	 *
 	 */
-	public Set<Transactions> findTransactionsByReferenceNumber(String referenceNumber) throws DataAccessException;
+	public Set<Transactions> findTransactionsByReferenceNumberContaining(String referenceNumber) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findTransactionsByReferenceNumber
+	 * JPQL Query - findTransactionsByReferenceNumberContaining
 	 *
 	 */
-	public Set<Transactions> findTransactionsByReferenceNumber(String referenceNumber, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findAllTransactionss
-	 *
-	 */
-	public Set<Transactions> findAllTransactionss() throws DataAccessException;
-
-	/**
-	 * JPQL Query - findAllTransactionss
-	 *
-	 */
-	public Set<Transactions> findAllTransactionss(int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findTransactionsByDescription
-	 *
-	 */
-	public Set<Transactions> findTransactionsByDescription(String description) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findTransactionsByDescription
-	 *
-	 */
-	public Set<Transactions> findTransactionsByDescription(String description, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findTransactionsByPrimaryKey
-	 *
-	 */
-	public Transactions findTransactionsByPrimaryKey(String transactionId) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findTransactionsByPrimaryKey
-	 *
-	 */
-	public Transactions findTransactionsByPrimaryKey(String transactionId, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findTransactionsByTransactionIdContaining
-	 *
-	 */
-	public Set<Transactions> findTransactionsByTransactionIdContaining(String transactionId_1) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findTransactionsByTransactionIdContaining
-	 *
-	 */
-	public Set<Transactions> findTransactionsByTransactionIdContaining(String transactionId_1, int startResult, int maxRows) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findTransactionsByCharges
-	 *
-	 */
-	public Set<Transactions> findTransactionsByCharges(Integer charges) throws DataAccessException;
-
-	/**
-	 * JPQL Query - findTransactionsByCharges
-	 *
-	 */
-	public Set<Transactions> findTransactionsByCharges(Integer charges, int startResult, int maxRows) throws DataAccessException;
+	public Set<Transactions> findTransactionsByReferenceNumberContaining(String referenceNumber, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findTransactionsByTransactionDate
@@ -100,16 +40,64 @@ public interface TransactionsDAO extends JpaDao<Transactions> {
 	public Set<Transactions> findTransactionsByTransactionDate(Calendar transactionDate, int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findTransactionsByTransactionId
+	 * JPQL Query - findTransactionsByReferenceNumber
 	 *
 	 */
-	public Transactions findTransactionsByTransactionId(String transactionId_2) throws DataAccessException;
+	public Set<Transactions> findTransactionsByReferenceNumber(String referenceNumber_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findTransactionsByReferenceNumber
+	 *
+	 */
+	public Set<Transactions> findTransactionsByReferenceNumber(String referenceNumber_1, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findTransactionsByDescription
+	 *
+	 */
+	public Set<Transactions> findTransactionsByDescription(String description) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findTransactionsByDescription
+	 *
+	 */
+	public Set<Transactions> findTransactionsByDescription(String description, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findTransactionsByCharges
+	 *
+	 */
+	public Set<Transactions> findTransactionsByCharges(Integer charges) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findTransactionsByCharges
+	 *
+	 */
+	public Set<Transactions> findTransactionsByCharges(Integer charges, int startResult, int maxRows) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findTransactionsByPrimaryKey
+	 *
+	 */
+	public Transactions findTransactionsByPrimaryKey(Integer transactionId) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findTransactionsByPrimaryKey
+	 *
+	 */
+	public Transactions findTransactionsByPrimaryKey(Integer transactionId, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findTransactionsByTransactionId
 	 *
 	 */
-	public Transactions findTransactionsByTransactionId(String transactionId_2, int startResult, int maxRows) throws DataAccessException;
+	public Transactions findTransactionsByTransactionId(Integer transactionId_1) throws DataAccessException;
+
+	/**
+	 * JPQL Query - findTransactionsByTransactionId
+	 *
+	 */
+	public Transactions findTransactionsByTransactionId(Integer transactionId_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
 	 * JPQL Query - findTransactionsByDescriptionContaining
@@ -124,15 +112,15 @@ public interface TransactionsDAO extends JpaDao<Transactions> {
 	public Set<Transactions> findTransactionsByDescriptionContaining(String description_1, int startResult, int maxRows) throws DataAccessException;
 
 	/**
-	 * JPQL Query - findTransactionsByReferenceNumberContaining
+	 * JPQL Query - findAllTransactionss
 	 *
 	 */
-	public Set<Transactions> findTransactionsByReferenceNumberContaining(String referenceNumber_1) throws DataAccessException;
+	public Set<Transactions> findAllTransactionss() throws DataAccessException;
 
 	/**
-	 * JPQL Query - findTransactionsByReferenceNumberContaining
+	 * JPQL Query - findAllTransactionss
 	 *
 	 */
-	public Set<Transactions> findTransactionsByReferenceNumberContaining(String referenceNumber_1, int startResult, int maxRows) throws DataAccessException;
+	public Set<Transactions> findAllTransactionss(int startResult, int maxRows) throws DataAccessException;
 
 }

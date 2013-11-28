@@ -47,10 +47,10 @@ import org.springframework.web.context.request.SessionScope;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class })
 @ContextConfiguration(locations = {
-		"file:./src/main/resources/PMS-security-context.xml",
-		"file:./src/main/resources/PMS-service-context.xml",
-		"file:./src/main/resources/PMS-dao-context.xml",
-		"file:./src/main/resources/PMS-web-context.xml" })
+		"file:./src/main/resources/PMSSTUB-security-context.xml",
+		"file:./src/main/resources/PMSSTUB-service-context.xml",
+		"file:./src/main/resources/PMSSTUB-dao-context.xml",
+		"file:./src/main/resources/PMSSTUB-web-context.xml" })
 @Transactional
 public class GuestServiceTest {
 
@@ -78,83 +78,17 @@ public class GuestServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Save an existing Members entity
-	 * 
-	 */
-	@Test
-	public void saveGuestMembers() {
-		// TODO: JUnit - Populate test inputs for operation: saveGuestMembers 
-		String guestId = null;
-		Members related_members = new com.pms.domain.Members();
-		Guest response = null;
-		response = service.saveGuestMembers(guestId, related_members);
-		// TODO: JUnit - Add assertions to test outputs of operation: saveGuestMembers
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Save an existing Reservation entity
-	 * 
-	 */
-	@Test
-	public void saveGuestReservations() {
-		// TODO: JUnit - Populate test inputs for operation: saveGuestReservations 
-		String guestId_1 = null;
-		Reservation related_reservations = new com.pms.domain.Reservation();
-		Guest response = null;
-		response = service.saveGuestReservations(guestId_1, related_reservations);
-		// TODO: JUnit - Add assertions to test outputs of operation: saveGuestReservations
-	}
-
-	/**
-	 * Operation Unit Test
 	 * Delete an existing Reservation entity
 	 * 
 	 */
 	@Test
 	public void deleteGuestReservations() {
 		// TODO: JUnit - Populate test inputs for operation: deleteGuestReservations 
-		String guest_guestId = null;
-		String related_reservations_reservationId = null;
+		Integer guest_guestId = 0;
+		Integer related_reservations_reservationId = 0;
 		Guest response = null;
 		response = service.deleteGuestReservations(guest_guestId, related_reservations_reservationId);
 		// TODO: JUnit - Add assertions to test outputs of operation: deleteGuestReservations
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Return a count of all Guest entity
-	 * 
-	 */
-	@Test
-	public void countGuests() {
-		Integer response = null;
-		response = service.countGuests();
-		// TODO: JUnit - Add assertions to test outputs of operation: countGuests
-	}
-
-	/**
-	 * Operation Unit Test
-	 */
-	@Test
-	public void findGuestByPrimaryKey() {
-		// TODO: JUnit - Populate test inputs for operation: findGuestByPrimaryKey 
-		String guestId_2 = null;
-		Guest response = null;
-		response = service.findGuestByPrimaryKey(guestId_2);
-		// TODO: JUnit - Add assertions to test outputs of operation: findGuestByPrimaryKey
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	@Test
-	public void deleteGuest() {
-		// TODO: JUnit - Populate test inputs for operation: deleteGuest 
-		Guest guest = new com.pms.domain.Guest();
-		service.deleteGuest(guest);
 	}
 
 	/**
@@ -165,8 +99,47 @@ public class GuestServiceTest {
 	@Test
 	public void saveGuest() {
 		// TODO: JUnit - Populate test inputs for operation: saveGuest 
+		Guest guest = new com.pms.domain.Guest();
+		service.saveGuest(guest);
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Delete an existing Guest entity
+	 * 
+	 */
+	@Test
+	public void deleteGuest() {
+		// TODO: JUnit - Populate test inputs for operation: deleteGuest 
 		Guest guest_1 = new com.pms.domain.Guest();
-		service.saveGuest(guest_1);
+		service.deleteGuest(guest_1);
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Return all Guest entity
+	 * 
+	 */
+	@Test
+	public void findAllGuests() {
+		// TODO: JUnit - Populate test inputs for operation: findAllGuests 
+		Integer startResult = 0;
+		Integer maxRows = 0;
+		List<Guest> response = null;
+		response = service.findAllGuests(startResult, maxRows);
+		// TODO: JUnit - Add assertions to test outputs of operation: findAllGuests
+	}
+
+	/**
+	 * Operation Unit Test
+	 */
+	@Test
+	public void findGuestByPrimaryKey() {
+		// TODO: JUnit - Populate test inputs for operation: findGuestByPrimaryKey 
+		Integer guestId = 0;
+		Guest response = null;
+		response = service.findGuestByPrimaryKey(guestId);
+		// TODO: JUnit - Add assertions to test outputs of operation: findGuestByPrimaryKey
 	}
 
 	/**
@@ -177,11 +150,26 @@ public class GuestServiceTest {
 	@Test
 	public void deleteGuestMembers() {
 		// TODO: JUnit - Populate test inputs for operation: deleteGuestMembers 
-		String guest_guestId_1 = null;
+		Integer guest_guestId_1 = 0;
 		String related_members_memberId = null;
 		Guest response = null;
 		response = service.deleteGuestMembers(guest_guestId_1, related_members_memberId);
 		// TODO: JUnit - Add assertions to test outputs of operation: deleteGuestMembers
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Save an existing Members entity
+	 * 
+	 */
+	@Test
+	public void saveGuestMembers() {
+		// TODO: JUnit - Populate test inputs for operation: saveGuestMembers 
+		Integer guestId_1 = 0;
+		Members related_members = new com.pms.domain.Members();
+		Guest response = null;
+		response = service.saveGuestMembers(guestId_1, related_members);
+		// TODO: JUnit - Add assertions to test outputs of operation: saveGuestMembers
 	}
 
 	/**
@@ -198,17 +186,29 @@ public class GuestServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Return all Guest entity
+	 * Return a count of all Guest entity
 	 * 
 	 */
 	@Test
-	public void findAllGuests() {
-		// TODO: JUnit - Populate test inputs for operation: findAllGuests 
-		Integer startResult = 0;
-		Integer maxRows = 0;
-		List<Guest> response = null;
-		response = service.findAllGuests(startResult, maxRows);
-		// TODO: JUnit - Add assertions to test outputs of operation: findAllGuests
+	public void countGuests() {
+		Integer response = null;
+		response = service.countGuests();
+		// TODO: JUnit - Add assertions to test outputs of operation: countGuests
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Save an existing Reservation entity
+	 * 
+	 */
+	@Test
+	public void saveGuestReservations() {
+		// TODO: JUnit - Populate test inputs for operation: saveGuestReservations 
+		Integer guestId_2 = 0;
+		Reservation related_reservations = new com.pms.domain.Reservation();
+		Guest response = null;
+		response = service.saveGuestReservations(guestId_2, related_reservations);
+		// TODO: JUnit - Add assertions to test outputs of operation: saveGuestReservations
 	}
 
 	/**

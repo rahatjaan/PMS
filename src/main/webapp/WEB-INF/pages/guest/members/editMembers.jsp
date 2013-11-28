@@ -1,9 +1,9 @@
 <%@page language="java" isELIgnored="false" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <jsp:directive.include file="/WEB-INF/sitemesh-decorators/include.jsp"/>
-<fmt:setBundle basename="bundles.guest-resources"/>
+<fmt:setBundle basename="bundles.members-resources"/>
 <html>
 <head>
-<title>Edit <fmt:message key="guest.title"/> <fmt:message key="members.title"/></title>
+<title>Edit <fmt:message key="members.title"/></title>
 </head>
 <body>
 <div id="contentarea">      
@@ -11,8 +11,8 @@
 	<div id="brc"><div id="tb"><div id="tlc"><div id="trc">
 	<div id="content">
 		<h1><fmt:message key="navigation.edit"/> <fmt:message key="members.title"/></h1>
-		<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/selectGuest?guestIdKey=${guest_guestId}&"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>
-		<form:form action="${pageContext.request.contextPath}/saveGuestMembers" method="POST" modelAttribute="members">
+		<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexMembers"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>
+		<form:form action="${pageContext.request.contextPath}/saveMembers" method="POST" modelAttribute="members">
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
 					<tr>
@@ -46,15 +46,6 @@
 			</table>
 			<span class="inputbutton"><input class="savebutton" id="save" type="submit" value="<fmt:message key="navigation.save"/>"/></span>
 			<script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'save', event:'onclick'}));</script>
-				<input type="hidden" name="guest_guestId" value="${guest_guestId}" >
-				
-				
-				
-				
-				
-				
-				
-				
 		</form:form>
 		<div class="clear">&nbsp;</div>
 	</div>

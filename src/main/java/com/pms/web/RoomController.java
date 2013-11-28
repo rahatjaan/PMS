@@ -63,11 +63,44 @@ public class RoomController {
 	private RoomService roomService;
 
 	/**
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	@RequestMapping("/deleteRoomRoomtype")
+	public ModelAndView deleteRoomRoomtype(@RequestParam Integer room_roomId, @RequestParam Integer related_roomtype_roomTypeId) {
+		ModelAndView mav = new ModelAndView();
+
+		Room room = roomService.deleteRoomRoomtype(room_roomId, related_roomtype_roomTypeId);
+
+		mav.addObject("room_roomId", room_roomId);
+		mav.addObject("room", room);
+		mav.setViewName("room/viewRoom.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Save an existing Roomtype entity
+	 * 
+	 */
+	@RequestMapping("/saveRoomRoomtype")
+	public ModelAndView saveRoomRoomtype(@RequestParam Integer room_roomId, @ModelAttribute Roomtype roomtype) {
+		Room parent_room = roomService.saveRoomRoomtype(room_roomId, roomtype);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("room_roomId", room_roomId);
+		mav.addObject("room", parent_room);
+		mav.setViewName("room/viewRoom.jsp");
+
+		return mav;
+	}
+
+	/**
 	 * Edit an existing Roomtype entity
 	 * 
 	 */
 	@RequestMapping("/editRoomRoomtype")
-	public ModelAndView editRoomRoomtype(@RequestParam String room_roomId, @RequestParam String roomtype_roomTypeId) {
+	public ModelAndView editRoomRoomtype(@RequestParam Integer room_roomId, @RequestParam Integer roomtype_roomTypeId) {
 		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtype_roomTypeId, -1, -1);
 
 		ModelAndView mav = new ModelAndView();
@@ -79,132 +112,17 @@ public class RoomController {
 	}
 
 	/**
-	 * Save an existing Reservation entity
+	 * Edit an existing Room entity
 	 * 
 	 */
-	@RequestMapping("/saveRoomReservations")
-	public ModelAndView saveRoomReservations(@RequestParam String room_roomId, @ModelAttribute Reservation reservations) {
-		Room parent_room = roomService.saveRoomReservations(room_roomId, reservations);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("room_roomId", room_roomId);
-		mav.addObject("room", parent_room);
-		mav.setViewName("room/viewRoom.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * View an existing Roomtype entity
-	 * 
-	 */
-	@RequestMapping("/selectRoomRoomtype")
-	public ModelAndView selectRoomRoomtype(@RequestParam String room_roomId, @RequestParam String roomtype_roomTypeId) {
-		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtype_roomTypeId, -1, -1);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("room_roomId", room_roomId);
-		mav.addObject("roomtype", roomtype);
-		mav.setViewName("room/roomtype/viewRoomtype.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Show all Reservation entities by Room
-	 * 
-	 */
-	@RequestMapping("/listRoomReservations")
-	public ModelAndView listRoomReservations(@RequestParam String roomIdKey) {
+	@RequestMapping("/editRoom")
+	public ModelAndView editRoom(@RequestParam Integer roomIdKey) {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
-		mav.setViewName("room/reservations/listReservations.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Select the child Roomtype entity for display allowing the user to confirm that they would like to delete the entity
-	 * 
-	 */
-	@RequestMapping("/confirmDeleteRoomRoomtype")
-	public ModelAndView confirmDeleteRoomRoomtype(@RequestParam String room_roomId, @RequestParam String related_roomtype_roomTypeId) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("roomtype", roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtype_roomTypeId));
-		mav.addObject("room_roomId", room_roomId);
-		mav.setViewName("room/roomtype/deleteRoomtype.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Edit an existing Reservation entity
-	 * 
-	 */
-	@RequestMapping("/editRoomReservations")
-	public ModelAndView editRoomReservations(@RequestParam String room_roomId, @RequestParam String reservations_reservationId) {
-		Reservation reservation = reservationDAO.findReservationByPrimaryKey(reservations_reservationId, -1, -1);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("room_roomId", room_roomId);
-		mav.addObject("reservation", reservation);
-		mav.setViewName("room/reservations/editReservations.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Delete an existing Reservation entity
-	 * 
-	 */
-	@RequestMapping("/deleteRoomReservations")
-	public ModelAndView deleteRoomReservations(@RequestParam String room_roomId, @RequestParam String related_reservations_reservationId) {
-		ModelAndView mav = new ModelAndView();
-
-		Room room = roomService.deleteRoomReservations(room_roomId, related_reservations_reservationId);
-
-		mav.addObject("room_roomId", room_roomId);
-		mav.addObject("room", room);
-		mav.setViewName("room/viewRoom.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Save an existing Room entity
-	 * 
-	 */
-	@RequestMapping("/saveRoom")
-	public String saveRoom(@ModelAttribute Room room) {
-		roomService.saveRoom(room);
-		return "forward:/indexRoom";
-	}
-
-	/**
-	 * Create a new Room entity
-	 * 
-	 */
-	@RequestMapping("/newRoom")
-	public ModelAndView newRoom() {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("room", new Room());
-		mav.addObject("newFlag", true);
 		mav.setViewName("room/editRoom.jsp");
 
 		return mav;
-	}
-
-	/**
-	 */
-	@RequestMapping("/roomController/binary.action")
-	public ModelAndView streamBinary(@ModelAttribute HttpServletRequest request, @ModelAttribute HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("streamedBinaryContentView");
-		return mav;
-
 	}
 
 	/**
@@ -212,7 +130,7 @@ public class RoomController {
 	 * 
 	 */
 	@RequestMapping("/selectRoomReservations")
-	public ModelAndView selectRoomReservations(@RequestParam String room_roomId, @RequestParam String reservations_reservationId) {
+	public ModelAndView selectRoomReservations(@RequestParam Integer room_roomId, @RequestParam Integer reservations_reservationId) {
 		Reservation reservation = reservationDAO.findReservationByPrimaryKey(reservations_reservationId, -1, -1);
 
 		ModelAndView mav = new ModelAndView();
@@ -224,29 +142,35 @@ public class RoomController {
 	}
 
 	/**
-	 * Delete an existing Room entity
+	 * Select an existing Room entity
 	 * 
 	 */
-	@RequestMapping("/deleteRoom")
-	public String deleteRoom(@RequestParam String roomIdKey) {
-		Room room = roomDAO.findRoomByPrimaryKey(roomIdKey);
-		roomService.deleteRoom(room);
-		return "forward:/indexRoom";
+	@RequestMapping("/selectRoom")
+	public ModelAndView selectRoom(@RequestParam Integer roomIdKey) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
+		mav.setViewName("room/viewRoom.jsp");
+
+		return mav;
 	}
 
 	/**
-	 * Create a new Reservation entity
+	 * Register custom, context-specific property editors
 	 * 
 	 */
-	@RequestMapping("/newRoomReservations")
-	public ModelAndView newRoomReservations(@RequestParam String room_roomId) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("room_roomId", room_roomId);
-		mav.addObject("reservation", new Reservation());
-		mav.addObject("newFlag", true);
-		mav.setViewName("room/reservations/editReservations.jsp");
-
-		return mav;
+	@InitBinder
+	public void initBinder(WebDataBinder binder, HttpServletRequest request) { // Register static property editors.
+		binder.registerCustomEditor(java.util.Calendar.class, new org.skyway.spring.util.databinding.CustomCalendarEditor());
+		binder.registerCustomEditor(byte[].class, new org.springframework.web.multipart.support.ByteArrayMultipartFileEditor());
+		binder.registerCustomEditor(boolean.class, new org.skyway.spring.util.databinding.EnhancedBooleanEditor(false));
+		binder.registerCustomEditor(Boolean.class, new org.skyway.spring.util.databinding.EnhancedBooleanEditor(true));
+		binder.registerCustomEditor(java.math.BigDecimal.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(java.math.BigDecimal.class, true));
+		binder.registerCustomEditor(Integer.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Integer.class, true));
+		binder.registerCustomEditor(java.util.Date.class, new org.skyway.spring.util.databinding.CustomDateEditor());
+		binder.registerCustomEditor(String.class, new org.skyway.spring.util.databinding.StringEditor());
+		binder.registerCustomEditor(Long.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Long.class, true));
+		binder.registerCustomEditor(Double.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Double.class, true));
 	}
 
 	/**
@@ -254,7 +178,7 @@ public class RoomController {
 	 * 
 	 */
 	@RequestMapping("/confirmDeleteRoomReservations")
-	public ModelAndView confirmDeleteRoomReservations(@RequestParam String room_roomId, @RequestParam String related_reservations_reservationId) {
+	public ModelAndView confirmDeleteRoomReservations(@RequestParam Integer room_roomId, @RequestParam Integer related_reservations_reservationId) {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("reservation", reservationDAO.findReservationByPrimaryKey(related_reservations_reservationId));
@@ -280,57 +204,43 @@ public class RoomController {
 	}
 
 	/**
-	 * Show all Roomtype entities by Room
+	 * Create a new Room entity
 	 * 
 	 */
-	@RequestMapping("/listRoomRoomtype")
-	public ModelAndView listRoomRoomtype(@RequestParam String roomIdKey) {
+	@RequestMapping("/newRoom")
+	public ModelAndView newRoom() {
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
-		mav.setViewName("room/roomtype/listRoomtype.jsp");
+		mav.addObject("room", new Room());
+		mav.addObject("newFlag", true);
+		mav.setViewName("room/editRoom.jsp");
 
 		return mav;
 	}
 
 	/**
-	 * Delete an existing Roomtype entity
+	 * Edit an existing Reservation entity
 	 * 
 	 */
-	@RequestMapping("/deleteRoomRoomtype")
-	public ModelAndView deleteRoomRoomtype(@RequestParam String room_roomId, @RequestParam String related_roomtype_roomTypeId) {
+	@RequestMapping("/editRoomReservations")
+	public ModelAndView editRoomReservations(@RequestParam Integer room_roomId, @RequestParam Integer reservations_reservationId) {
+		Reservation reservation = reservationDAO.findReservationByPrimaryKey(reservations_reservationId, -1, -1);
+
 		ModelAndView mav = new ModelAndView();
-
-		Room room = roomService.deleteRoomRoomtype(room_roomId, related_roomtype_roomTypeId);
-
 		mav.addObject("room_roomId", room_roomId);
-		mav.addObject("room", room);
-		mav.setViewName("room/viewRoom.jsp");
+		mav.addObject("reservation", reservation);
+		mav.setViewName("room/reservations/editReservations.jsp");
 
 		return mav;
 	}
 
 	/**
-	 * Select the Room entity for display allowing the user to confirm that they would like to delete the entity
+	 * Save an existing Reservation entity
 	 * 
 	 */
-	@RequestMapping("/confirmDeleteRoom")
-	public ModelAndView confirmDeleteRoom(@RequestParam String roomIdKey) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
-		mav.setViewName("room/deleteRoom.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Save an existing Roomtype entity
-	 * 
-	 */
-	@RequestMapping("/saveRoomRoomtype")
-	public ModelAndView saveRoomRoomtype(@RequestParam String room_roomId, @ModelAttribute Roomtype roomtype) {
-		Room parent_room = roomService.saveRoomRoomtype(room_roomId, roomtype);
+	@RequestMapping("/saveRoomReservations")
+	public ModelAndView saveRoomReservations(@RequestParam Integer room_roomId, @ModelAttribute Reservation reservations) {
+		Room parent_room = roomService.saveRoomReservations(room_roomId, reservations);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("room_roomId", room_roomId);
@@ -341,44 +251,32 @@ public class RoomController {
 	}
 
 	/**
-	 * Create a new Roomtype entity
+	 * Show all Reservation entities by Room
 	 * 
 	 */
-	@RequestMapping("/newRoomRoomtype")
-	public ModelAndView newRoomRoomtype(@RequestParam String room_roomId) {
+	@RequestMapping("/listRoomReservations")
+	public ModelAndView listRoomReservations(@RequestParam Integer roomIdKey) {
 		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
+		mav.setViewName("room/reservations/listReservations.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Delete an existing Reservation entity
+	 * 
+	 */
+	@RequestMapping("/deleteRoomReservations")
+	public ModelAndView deleteRoomReservations(@RequestParam Integer room_roomId, @RequestParam Integer related_reservations_reservationId) {
+		ModelAndView mav = new ModelAndView();
+
+		Room room = roomService.deleteRoomReservations(room_roomId, related_reservations_reservationId);
+
 		mav.addObject("room_roomId", room_roomId);
-		mav.addObject("roomtype", new Roomtype());
-		mav.addObject("newFlag", true);
-		mav.setViewName("room/roomtype/editRoomtype.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Select an existing Room entity
-	 * 
-	 */
-	@RequestMapping("/selectRoom")
-	public ModelAndView selectRoom(@RequestParam String roomIdKey) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
+		mav.addObject("room", room);
 		mav.setViewName("room/viewRoom.jsp");
-
-		return mav;
-	}
-
-	/**
-	 * Edit an existing Room entity
-	 * 
-	 */
-	@RequestMapping("/editRoom")
-	public ModelAndView editRoom(@RequestParam String roomIdKey) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
-		mav.setViewName("room/editRoom.jsp");
 
 		return mav;
 	}
@@ -392,20 +290,122 @@ public class RoomController {
 	}
 
 	/**
-	 * Register custom, context-specific property editors
+	 * Select the child Roomtype entity for display allowing the user to confirm that they would like to delete the entity
 	 * 
 	 */
-	@InitBinder
-	public void initBinder(WebDataBinder binder, HttpServletRequest request) { // Register static property editors.
-		binder.registerCustomEditor(java.util.Calendar.class, new org.skyway.spring.util.databinding.CustomCalendarEditor());
-		binder.registerCustomEditor(byte[].class, new org.springframework.web.multipart.support.ByteArrayMultipartFileEditor());
-		binder.registerCustomEditor(boolean.class, new org.skyway.spring.util.databinding.EnhancedBooleanEditor(false));
-		binder.registerCustomEditor(Boolean.class, new org.skyway.spring.util.databinding.EnhancedBooleanEditor(true));
-		binder.registerCustomEditor(java.math.BigDecimal.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(java.math.BigDecimal.class, true));
-		binder.registerCustomEditor(Integer.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Integer.class, true));
-		binder.registerCustomEditor(java.util.Date.class, new org.skyway.spring.util.databinding.CustomDateEditor());
-		binder.registerCustomEditor(String.class, new org.skyway.spring.util.databinding.StringEditor());
-		binder.registerCustomEditor(Long.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Long.class, true));
-		binder.registerCustomEditor(Double.class, new org.skyway.spring.util.databinding.NaNHandlingNumberEditor(Double.class, true));
+	@RequestMapping("/confirmDeleteRoomRoomtype")
+	public ModelAndView confirmDeleteRoomRoomtype(@RequestParam Integer room_roomId, @RequestParam Integer related_roomtype_roomTypeId) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("roomtype", roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtype_roomTypeId));
+		mav.addObject("room_roomId", room_roomId);
+		mav.setViewName("room/roomtype/deleteRoomtype.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Save an existing Room entity
+	 * 
+	 */
+	@RequestMapping("/saveRoom")
+	public String saveRoom(@ModelAttribute Room room) {
+		roomService.saveRoom(room);
+		return "forward:/indexRoom";
+	}
+
+	/**
+	 * Create a new Reservation entity
+	 * 
+	 */
+	@RequestMapping("/newRoomReservations")
+	public ModelAndView newRoomReservations(@RequestParam Integer room_roomId) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("room_roomId", room_roomId);
+		mav.addObject("reservation", new Reservation());
+		mav.addObject("newFlag", true);
+		mav.setViewName("room/reservations/editReservations.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Create a new Roomtype entity
+	 * 
+	 */
+	@RequestMapping("/newRoomRoomtype")
+	public ModelAndView newRoomRoomtype(@RequestParam Integer room_roomId) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("room_roomId", room_roomId);
+		mav.addObject("roomtype", new Roomtype());
+		mav.addObject("newFlag", true);
+		mav.setViewName("room/roomtype/editRoomtype.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * View an existing Roomtype entity
+	 * 
+	 */
+	@RequestMapping("/selectRoomRoomtype")
+	public ModelAndView selectRoomRoomtype(@RequestParam Integer room_roomId, @RequestParam Integer roomtype_roomTypeId) {
+		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtype_roomTypeId, -1, -1);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("room_roomId", room_roomId);
+		mav.addObject("roomtype", roomtype);
+		mav.setViewName("room/roomtype/viewRoomtype.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Show all Roomtype entities by Room
+	 * 
+	 */
+	@RequestMapping("/listRoomRoomtype")
+	public ModelAndView listRoomRoomtype(@RequestParam Integer roomIdKey) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
+		mav.setViewName("room/roomtype/listRoomtype.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Select the Room entity for display allowing the user to confirm that they would like to delete the entity
+	 * 
+	 */
+	@RequestMapping("/confirmDeleteRoom")
+	public ModelAndView confirmDeleteRoom(@RequestParam Integer roomIdKey) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
+		mav.setViewName("room/deleteRoom.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Delete an existing Room entity
+	 * 
+	 */
+	@RequestMapping("/deleteRoom")
+	public String deleteRoom(@RequestParam Integer roomIdKey) {
+		Room room = roomDAO.findRoomByPrimaryKey(roomIdKey);
+		roomService.deleteRoom(room);
+		return "forward:/indexRoom";
+	}
+
+	/**
+	 */
+	@RequestMapping("/roomController/binary.action")
+	public ModelAndView streamBinary(@ModelAttribute HttpServletRequest request, @ModelAttribute HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("streamedBinaryContentView");
+		return mav;
+
 	}
 }

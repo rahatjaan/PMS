@@ -46,10 +46,10 @@ import org.springframework.web.context.request.SessionScope;
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class })
 @ContextConfiguration(locations = {
-		"file:./src/main/resources/PMS-security-context.xml",
-		"file:./src/main/resources/PMS-service-context.xml",
-		"file:./src/main/resources/PMS-dao-context.xml",
-		"file:./src/main/resources/PMS-web-context.xml" })
+		"file:./src/main/resources/PMSSTUB-security-context.xml",
+		"file:./src/main/resources/PMSSTUB-service-context.xml",
+		"file:./src/main/resources/PMSSTUB-dao-context.xml",
+		"file:./src/main/resources/PMSSTUB-web-context.xml" })
 @Transactional
 public class MembersServiceTest {
 
@@ -77,79 +77,16 @@ public class MembersServiceTest {
 
 	/**
 	 * Operation Unit Test
-	 * Save an existing Members entity
-	 * 
-	 */
-	@Test
-	public void saveMembers() {
-		// TODO: JUnit - Populate test inputs for operation: saveMembers 
-		Members members = new com.pms.domain.Members();
-		service.saveMembers(members);
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	@Test
-	public void deleteMembersGuests() {
-		// TODO: JUnit - Populate test inputs for operation: deleteMembersGuests 
-		String members_memberId = null;
-		String related_guests_guestId = null;
-		Members response = null;
-		response = service.deleteMembersGuests(members_memberId, related_guests_guestId);
-		// TODO: JUnit - Add assertions to test outputs of operation: deleteMembersGuests
-	}
-
-	/**
-	 * Operation Unit Test
-	 */
-	@Test
-	public void findMembersByPrimaryKey() {
-		// TODO: JUnit - Populate test inputs for operation: findMembersByPrimaryKey 
-		String memberId = null;
-		Members response = null;
-		response = service.findMembersByPrimaryKey(memberId);
-		// TODO: JUnit - Add assertions to test outputs of operation: findMembersByPrimaryKey
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Load an existing Members entity
-	 * 
-	 */
-	@Test
-	public void loadMemberss() {
-		Set<Members> response = null;
-		response = service.loadMemberss();
-		// TODO: JUnit - Add assertions to test outputs of operation: loadMemberss
-	}
-
-	/**
-	 * Operation Unit Test
-	 * Delete an existing Members entity
-	 * 
-	 */
-	@Test
-	public void deleteMembers() {
-		// TODO: JUnit - Populate test inputs for operation: deleteMembers 
-		Members members_1 = new com.pms.domain.Members();
-		service.deleteMembers(members_1);
-	}
-
-	/**
-	 * Operation Unit Test
 	 * Save an existing Guest entity
 	 * 
 	 */
 	@Test
 	public void saveMembersGuests() {
 		// TODO: JUnit - Populate test inputs for operation: saveMembersGuests 
-		String memberId_1 = null;
+		String memberId = null;
 		Guest related_guests = new com.pms.domain.Guest();
 		Members response = null;
-		response = service.saveMembersGuests(memberId_1, related_guests);
+		response = service.saveMembersGuests(memberId, related_guests);
 		// TODO: JUnit - Add assertions to test outputs of operation: saveMembersGuests
 	}
 
@@ -166,6 +103,69 @@ public class MembersServiceTest {
 		List<Members> response = null;
 		response = service.findAllMemberss(startResult, maxRows);
 		// TODO: JUnit - Add assertions to test outputs of operation: findAllMemberss
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Load an existing Members entity
+	 * 
+	 */
+	@Test
+	public void loadMemberss() {
+		Set<Members> response = null;
+		response = service.loadMemberss();
+		// TODO: JUnit - Add assertions to test outputs of operation: loadMemberss
+	}
+
+	/**
+	 * Operation Unit Test
+	 */
+	@Test
+	public void findMembersByPrimaryKey() {
+		// TODO: JUnit - Populate test inputs for operation: findMembersByPrimaryKey 
+		String memberId_1 = null;
+		Members response = null;
+		response = service.findMembersByPrimaryKey(memberId_1);
+		// TODO: JUnit - Add assertions to test outputs of operation: findMembersByPrimaryKey
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Save an existing Members entity
+	 * 
+	 */
+	@Test
+	public void saveMembers() {
+		// TODO: JUnit - Populate test inputs for operation: saveMembers 
+		Members members = new com.pms.domain.Members();
+		service.saveMembers(members);
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Delete an existing Members entity
+	 * 
+	 */
+	@Test
+	public void deleteMembers() {
+		// TODO: JUnit - Populate test inputs for operation: deleteMembers 
+		Members members_1 = new com.pms.domain.Members();
+		service.deleteMembers(members_1);
+	}
+
+	/**
+	 * Operation Unit Test
+	 * Delete an existing Guest entity
+	 * 
+	 */
+	@Test
+	public void deleteMembersGuests() {
+		// TODO: JUnit - Populate test inputs for operation: deleteMembersGuests 
+		String members_memberId = null;
+		Integer related_guests_guestId = 0;
+		Members response = null;
+		response = service.deleteMembersGuests(members_memberId, related_guests_guestId);
+		// TODO: JUnit - Add assertions to test outputs of operation: deleteMembersGuests
 	}
 
 	/**

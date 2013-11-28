@@ -66,50 +66,6 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 	}
 
 	/**
-	 * JPQL Query - findGuestByMobileNumber
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByMobileNumber(String mobileNumber) throws DataAccessException {
-
-		return findGuestByMobileNumber(mobileNumber, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByMobileNumber
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByMobileNumber(String mobileNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByMobileNumber", startResult, maxRows, mobileNumber);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByCountry
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByCountry(String country) throws DataAccessException {
-
-		return findGuestByCountry(country, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByCountry
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByCountry(String country, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByCountry", startResult, maxRows, country);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
 	 * JPQL Query - findGuestByAddress2
 	 *
 	 */
@@ -132,94 +88,50 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 	}
 
 	/**
-	 * JPQL Query - findGuestByAddress1Containing
+	 * JPQL Query - findGuestByPrimaryKey
 	 *
 	 */
 	@Transactional
-	public Set<Guest> findGuestByAddress1Containing(String address1) throws DataAccessException {
+	public Guest findGuestByPrimaryKey(Integer guestId) throws DataAccessException {
 
-		return findGuestByAddress1Containing(address1, -1, -1);
+		return findGuestByPrimaryKey(guestId, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findGuestByAddress1Containing
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByAddress1Containing(String address1, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByAddress1Containing", startResult, maxRows, address1);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByAddress1
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByAddress1(String address1) throws DataAccessException {
-
-		return findGuestByAddress1(address1, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByAddress1
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByAddress1(String address1, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByAddress1", startResult, maxRows, address1);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByNamePrefixContaining
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByNamePrefixContaining(String namePrefix) throws DataAccessException {
-
-		return findGuestByNamePrefixContaining(namePrefix, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByNamePrefixContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByNamePrefixContaining(String namePrefix, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByNamePrefixContaining", startResult, maxRows, namePrefix);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByGuestId
-	 *
-	 */
-	@Transactional
-	public Guest findGuestByGuestId(String guestId) throws DataAccessException {
-
-		return findGuestByGuestId(guestId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByGuestId
+	 * JPQL Query - findGuestByPrimaryKey
 	 *
 	 */
 
 	@Transactional
-	public Guest findGuestByGuestId(String guestId, int startResult, int maxRows) throws DataAccessException {
+	public Guest findGuestByPrimaryKey(Integer guestId, int startResult, int maxRows) throws DataAccessException {
 		try {
-			Query query = createNamedQuery("findGuestByGuestId", startResult, maxRows, guestId);
+			Query query = createNamedQuery("findGuestByPrimaryKey", startResult, maxRows, guestId);
 			return (com.pms.domain.Guest) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
 		}
+	}
+
+	/**
+	 * JPQL Query - findGuestByLastName
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByLastName(String lastName) throws DataAccessException {
+
+		return findGuestByLastName(lastName, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByLastName
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByLastName(String lastName, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByLastName", startResult, maxRows, lastName);
+		return new LinkedHashSet<Guest>(query.getResultList());
 	}
 
 	/**
@@ -263,6 +175,251 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 	@Transactional
 	public Set<Guest> findGuestByCountryContaining(String country, int startResult, int maxRows) throws DataAccessException {
 		Query query = createNamedQuery("findGuestByCountryContaining", startResult, maxRows, country);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByNamePrefixContaining
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByNamePrefixContaining(String namePrefix) throws DataAccessException {
+
+		return findGuestByNamePrefixContaining(namePrefix, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByNamePrefixContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByNamePrefixContaining(String namePrefix, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByNamePrefixContaining", startResult, maxRows, namePrefix);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByGuestId
+	 *
+	 */
+	@Transactional
+	public Guest findGuestByGuestId(Integer guestId) throws DataAccessException {
+
+		return findGuestByGuestId(guestId, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByGuestId
+	 *
+	 */
+
+	@Transactional
+	public Guest findGuestByGuestId(Integer guestId, int startResult, int maxRows) throws DataAccessException {
+		try {
+			Query query = createNamedQuery("findGuestByGuestId", startResult, maxRows, guestId);
+			return (com.pms.domain.Guest) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+
+	/**
+	 * JPQL Query - findAllGuests
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findAllGuests() throws DataAccessException {
+
+		return findAllGuests(-1, -1);
+	}
+
+	/**
+	 * JPQL Query - findAllGuests
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findAllGuests(int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findAllGuests", startResult, maxRows);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByLastNameContaining
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByLastNameContaining(String lastName) throws DataAccessException {
+
+		return findGuestByLastNameContaining(lastName, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByLastNameContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByLastNameContaining(String lastName, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByLastNameContaining", startResult, maxRows, lastName);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByMobileNumberContaining
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByMobileNumberContaining(String mobileNumber) throws DataAccessException {
+
+		return findGuestByMobileNumberContaining(mobileNumber, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByMobileNumberContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByMobileNumberContaining(String mobileNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByMobileNumberContaining", startResult, maxRows, mobileNumber);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByAddress1Containing
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByAddress1Containing(String address1) throws DataAccessException {
+
+		return findGuestByAddress1Containing(address1, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByAddress1Containing
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByAddress1Containing(String address1, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByAddress1Containing", startResult, maxRows, address1);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByEmailContaining
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByEmailContaining(String email) throws DataAccessException {
+
+		return findGuestByEmailContaining(email, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByEmailContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByEmailContaining(String email, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByEmailContaining", startResult, maxRows, email);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByFirstName
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByFirstName(String firstName) throws DataAccessException {
+
+		return findGuestByFirstName(firstName, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByFirstName
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByFirstName(String firstName, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByFirstName", startResult, maxRows, firstName);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByAddress1
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByAddress1(String address1) throws DataAccessException {
+
+		return findGuestByAddress1(address1, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByAddress1
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByAddress1(String address1, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByAddress1", startResult, maxRows, address1);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByCountry
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByCountry(String country) throws DataAccessException {
+
+		return findGuestByCountry(country, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByCountry
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByCountry(String country, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByCountry", startResult, maxRows, country);
+		return new LinkedHashSet<Guest>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findGuestByMobileNumber
+	 *
+	 */
+	@Transactional
+	public Set<Guest> findGuestByMobileNumber(String mobileNumber) throws DataAccessException {
+
+		return findGuestByMobileNumber(mobileNumber, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findGuestByMobileNumber
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Guest> findGuestByMobileNumber(String mobileNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findGuestByMobileNumber", startResult, maxRows, mobileNumber);
 		return new LinkedHashSet<Guest>(query.getResultList());
 	}
 
@@ -311,97 +468,6 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 	}
 
 	/**
-	 * JPQL Query - findGuestByMobileNumberContaining
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByMobileNumberContaining(String mobileNumber) throws DataAccessException {
-
-		return findGuestByMobileNumberContaining(mobileNumber, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByMobileNumberContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByMobileNumberContaining(String mobileNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByMobileNumberContaining", startResult, maxRows, mobileNumber);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByPrimaryKey
-	 *
-	 */
-	@Transactional
-	public Guest findGuestByPrimaryKey(String guestId) throws DataAccessException {
-
-		return findGuestByPrimaryKey(guestId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByPrimaryKey
-	 *
-	 */
-
-	@Transactional
-	public Guest findGuestByPrimaryKey(String guestId, int startResult, int maxRows) throws DataAccessException {
-		try {
-			Query query = createNamedQuery("findGuestByPrimaryKey", startResult, maxRows, guestId);
-			return (com.pms.domain.Guest) query.getSingleResult();
-		} catch (NoResultException nre) {
-			return null;
-		}
-	}
-
-	/**
-	 * JPQL Query - findGuestByGuestIdContaining
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByGuestIdContaining(String guestId) throws DataAccessException {
-
-		return findGuestByGuestIdContaining(guestId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByGuestIdContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByGuestIdContaining(String guestId, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByGuestIdContaining", startResult, maxRows, guestId);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByLastNameContaining
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByLastNameContaining(String lastName) throws DataAccessException {
-
-		return findGuestByLastNameContaining(lastName, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByLastNameContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByLastNameContaining(String lastName, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByLastNameContaining", startResult, maxRows, lastName);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
 	 * JPQL Query - findGuestByNamePrefix
 	 *
 	 */
@@ -420,94 +486,6 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 	@Transactional
 	public Set<Guest> findGuestByNamePrefix(String namePrefix, int startResult, int maxRows) throws DataAccessException {
 		Query query = createNamedQuery("findGuestByNamePrefix", startResult, maxRows, namePrefix);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByEmailContaining
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByEmailContaining(String email) throws DataAccessException {
-
-		return findGuestByEmailContaining(email, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByEmailContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByEmailContaining(String email, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByEmailContaining", startResult, maxRows, email);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findAllGuests
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findAllGuests() throws DataAccessException {
-
-		return findAllGuests(-1, -1);
-	}
-
-	/**
-	 * JPQL Query - findAllGuests
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findAllGuests(int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findAllGuests", startResult, maxRows);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByFirstName
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByFirstName(String firstName) throws DataAccessException {
-
-		return findGuestByFirstName(firstName, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByFirstName
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByFirstName(String firstName, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByFirstName", startResult, maxRows, firstName);
-		return new LinkedHashSet<Guest>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findGuestByLastName
-	 *
-	 */
-	@Transactional
-	public Set<Guest> findGuestByLastName(String lastName) throws DataAccessException {
-
-		return findGuestByLastName(lastName, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findGuestByLastName
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Guest> findGuestByLastName(String lastName, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findGuestByLastName", startResult, maxRows, lastName);
 		return new LinkedHashSet<Guest>(query.getResultList());
 	}
 

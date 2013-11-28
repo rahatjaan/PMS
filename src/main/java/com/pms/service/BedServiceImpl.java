@@ -46,22 +46,12 @@ public class BedServiceImpl implements BedService {
 	}
 
 	/**
-	 * Load an existing Bed entity
+	 * Return all Bed entity
 	 * 
 	 */
 	@Transactional
-	public Set<Bed> loadBeds() {
-		return bedDAO.findAllBeds();
-	}
-
-	/**
-	 * Delete an existing Bed entity
-	 * 
-	 */
-	@Transactional
-	public void deleteBed(Bed bed) {
-		bedDAO.remove(bed);
-		bedDAO.flush();
+	public List<Bed> findAllBeds(Integer startResult, Integer maxRows) {
+		return new java.util.ArrayList<Bed>(bedDAO.findAllBeds(startResult, maxRows));
 	}
 
 	/**
@@ -86,11 +76,65 @@ public class BedServiceImpl implements BedService {
 	}
 
 	/**
+	 * Delete an existing Roomtype entity
+	 * 
+	 */
+	@Transactional
+	public Bed deleteBedRoomtypes(Integer bed_bedId, Integer related_roomtypes_roomTypeId) {
+		Roomtype related_roomtypes = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId, -1, -1);
+
+		Bed bed = bedDAO.findBedByPrimaryKey(bed_bedId, -1, -1);
+
+		related_roomtypes.setBed(null);
+		bed.getRoomtypes().remove(related_roomtypes);
+
+		roomtypeDAO.remove(related_roomtypes);
+		roomtypeDAO.flush();
+
+		return bed;
+	}
+
+	/**
+	 */
+	@Transactional
+	public Bed findBedByPrimaryKey(Integer bedId) {
+		return bedDAO.findBedByPrimaryKey(bedId);
+	}
+
+	/**
+	 * Load an existing Bed entity
+	 * 
+	 */
+	@Transactional
+	public Set<Bed> loadBeds() {
+		return bedDAO.findAllBeds();
+	}
+
+	/**
+	 * Delete an existing Bed entity
+	 * 
+	 */
+	@Transactional
+	public void deleteBed(Bed bed) {
+		bedDAO.remove(bed);
+		bedDAO.flush();
+	}
+
+	/**
+	 * Return a count of all Bed entity
+	 * 
+	 */
+	@Transactional
+	public Integer countBeds() {
+		return ((Long) bedDAO.createQuerySingleResult("select count(o) from Bed o").getSingleResult()).intValue();
+	}
+
+	/**
 	 * Save an existing Roomtype entity
 	 * 
 	 */
 	@Transactional
-	public Bed saveBedRoomtypes(String bedId, Roomtype related_roomtypes) {
+	public Bed saveBedRoomtypes(Integer bedId, Roomtype related_roomtypes) {
 		Bed bed = bedDAO.findBedByPrimaryKey(bedId, -1, -1);
 		Roomtype existingroomtypes = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes.getRoomTypeId());
 
@@ -118,49 +162,5 @@ public class BedServiceImpl implements BedService {
 		bedDAO.flush();
 
 		return bed;
-	}
-
-	/**
-	 * Return a count of all Bed entity
-	 * 
-	 */
-	@Transactional
-	public Integer countBeds() {
-		return ((Long) bedDAO.createQuerySingleResult("select count(o) from Bed o").getSingleResult()).intValue();
-	}
-
-	/**
-	 * Delete an existing Roomtype entity
-	 * 
-	 */
-	@Transactional
-	public Bed deleteBedRoomtypes(String bed_bedId, String related_roomtypes_roomTypeId) {
-		Roomtype related_roomtypes = roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId, -1, -1);
-
-		Bed bed = bedDAO.findBedByPrimaryKey(bed_bedId, -1, -1);
-
-		related_roomtypes.setBed(null);
-		bed.getRoomtypes().remove(related_roomtypes);
-
-		roomtypeDAO.remove(related_roomtypes);
-		roomtypeDAO.flush();
-
-		return bed;
-	}
-
-	/**
-	 */
-	@Transactional
-	public Bed findBedByPrimaryKey(String bedId) {
-		return bedDAO.findBedByPrimaryKey(bedId);
-	}
-
-	/**
-	 * Return all Bed entity
-	 * 
-	 */
-	@Transactional
-	public List<Bed> findAllBeds(Integer startResult, Integer maxRows) {
-		return new java.util.ArrayList<Bed>(bedDAO.findAllBeds(startResult, maxRows));
 	}
 }

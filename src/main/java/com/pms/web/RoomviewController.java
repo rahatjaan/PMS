@@ -54,43 +54,11 @@ public class RoomviewController {
 	private RoomviewService roomviewService;
 
 	/**
-	 * Select the Roomview entity for display allowing the user to confirm that they would like to delete the entity
-	 * 
-	 */
-	@RequestMapping("/confirmDeleteRoomview")
-	public ModelAndView confirmDeleteRoomview(@RequestParam String roomViewIdKey) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("roomview", roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey));
-		mav.setViewName("roomview/deleteRoomview.jsp");
-
-		return mav;
-	}
-
-	/**
-	 */
-	@RequestMapping("/roomviewController/binary.action")
-	public ModelAndView streamBinary(@ModelAttribute HttpServletRequest request, @ModelAttribute HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("streamedBinaryContentView");
-		return mav;
-
-	}
-
-	/**
-	 * Entry point to show all Roomview entities
-	 * 
-	 */
-	public String indexRoomview() {
-		return "redirect:/indexRoomview";
-	}
-
-	/**
 	 * View an existing Roomtype entity
 	 * 
 	 */
 	@RequestMapping("/selectRoomviewRoomtypes")
-	public ModelAndView selectRoomviewRoomtypes(@RequestParam String roomview_roomViewId, @RequestParam String roomtypes_roomTypeId) {
+	public ModelAndView selectRoomviewRoomtypes(@RequestParam Integer roomview_roomViewId, @RequestParam Integer roomtypes_roomTypeId) {
 		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtypes_roomTypeId, -1, -1);
 
 		ModelAndView mav = new ModelAndView();
@@ -102,14 +70,18 @@ public class RoomviewController {
 	}
 
 	/**
-	 * Delete an existing Roomview entity
+	 * Show all Roomview entities
 	 * 
 	 */
-	@RequestMapping("/deleteRoomview")
-	public String deleteRoomview(@RequestParam String roomViewIdKey) {
-		Roomview roomview = roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey);
-		roomviewService.deleteRoomview(roomview);
-		return "forward:/indexRoomview";
+	@RequestMapping("/indexRoomview")
+	public ModelAndView listRoomviews() {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("roomviews", roomviewService.loadRoomviews());
+
+		mav.setViewName("roomview/listRoomviews.jsp");
+
+		return mav;
 	}
 
 	/**
@@ -117,7 +89,7 @@ public class RoomviewController {
 	 * 
 	 */
 	@RequestMapping("/deleteRoomviewRoomtypes")
-	public ModelAndView deleteRoomviewRoomtypes(@RequestParam String roomview_roomViewId, @RequestParam String related_roomtypes_roomTypeId) {
+	public ModelAndView deleteRoomviewRoomtypes(@RequestParam Integer roomview_roomViewId, @RequestParam Integer related_roomtypes_roomTypeId) {
 		ModelAndView mav = new ModelAndView();
 
 		Roomview roomview = roomviewService.deleteRoomviewRoomtypes(roomview_roomViewId, related_roomtypes_roomTypeId);
@@ -125,6 +97,44 @@ public class RoomviewController {
 		mav.addObject("roomview_roomViewId", roomview_roomViewId);
 		mav.addObject("roomview", roomview);
 		mav.setViewName("roomview/viewRoomview.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Save an existing Roomview entity
+	 * 
+	 */
+	@RequestMapping("/saveRoomview")
+	public String saveRoomview(@ModelAttribute Roomview roomview) {
+		roomviewService.saveRoomview(roomview);
+		return "forward:/indexRoomview";
+	}
+
+	/**
+	 * Edit an existing Roomview entity
+	 * 
+	 */
+	@RequestMapping("/editRoomview")
+	public ModelAndView editRoomview(@RequestParam Integer roomViewIdKey) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("roomview", roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey));
+		mav.setViewName("roomview/editRoomview.jsp");
+
+		return mav;
+	}
+
+	/**
+	 * Select the Roomview entity for display allowing the user to confirm that they would like to delete the entity
+	 * 
+	 */
+	@RequestMapping("/confirmDeleteRoomview")
+	public ModelAndView confirmDeleteRoomview(@RequestParam Integer roomViewIdKey) {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("roomview", roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey));
+		mav.setViewName("roomview/deleteRoomview.jsp");
 
 		return mav;
 	}
@@ -148,16 +158,15 @@ public class RoomviewController {
 	}
 
 	/**
-	 * Create a new Roomtype entity
+	 * Show all Roomtype entities by Roomview
 	 * 
 	 */
-	@RequestMapping("/newRoomviewRoomtypes")
-	public ModelAndView newRoomviewRoomtypes(@RequestParam String roomview_roomViewId) {
+	@RequestMapping("/listRoomviewRoomtypes")
+	public ModelAndView listRoomviewRoomtypes(@RequestParam Integer roomViewIdKey) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("roomview_roomViewId", roomview_roomViewId);
-		mav.addObject("roomtype", new Roomtype());
-		mav.addObject("newFlag", true);
-		mav.setViewName("roomview/roomtypes/editRoomtypes.jsp");
+
+		mav.addObject("roomview", roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey));
+		mav.setViewName("roomview/roomtypes/listRoomtypes.jsp");
 
 		return mav;
 	}
@@ -167,7 +176,7 @@ public class RoomviewController {
 	 * 
 	 */
 	@RequestMapping("/selectRoomview")
-	public ModelAndView selectRoomview(@RequestParam String roomViewIdKey) {
+	public ModelAndView selectRoomview(@RequestParam Integer roomViewIdKey) {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("roomview", roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey));
@@ -177,21 +186,11 @@ public class RoomviewController {
 	}
 
 	/**
-	 * Save an existing Roomview entity
-	 * 
-	 */
-	@RequestMapping("/saveRoomview")
-	public String saveRoomview(@ModelAttribute Roomview roomview) {
-		roomviewService.saveRoomview(roomview);
-		return "forward:/indexRoomview";
-	}
-
-	/**
 	 * Save an existing Roomtype entity
 	 * 
 	 */
 	@RequestMapping("/saveRoomviewRoomtypes")
-	public ModelAndView saveRoomviewRoomtypes(@RequestParam String roomview_roomViewId, @ModelAttribute Roomtype roomtypes) {
+	public ModelAndView saveRoomviewRoomtypes(@RequestParam Integer roomview_roomViewId, @ModelAttribute Roomtype roomtypes) {
 		Roomview parent_roomview = roomviewService.saveRoomviewRoomtypes(roomview_roomViewId, roomtypes);
 
 		ModelAndView mav = new ModelAndView();
@@ -203,46 +202,55 @@ public class RoomviewController {
 	}
 
 	/**
-	 * Edit an existing Roomview entity
+	 */
+	@RequestMapping("/roomviewController/binary.action")
+	public ModelAndView streamBinary(@ModelAttribute HttpServletRequest request, @ModelAttribute HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("streamedBinaryContentView");
+		return mav;
+
+	}
+
+	/**
+	 * Edit an existing Roomtype entity
 	 * 
 	 */
-	@RequestMapping("/editRoomview")
-	public ModelAndView editRoomview(@RequestParam String roomViewIdKey) {
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping("/editRoomviewRoomtypes")
+	public ModelAndView editRoomviewRoomtypes(@RequestParam Integer roomview_roomViewId, @RequestParam Integer roomtypes_roomTypeId) {
+		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtypes_roomTypeId, -1, -1);
 
-		mav.addObject("roomview", roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey));
-		mav.setViewName("roomview/editRoomview.jsp");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("roomview_roomViewId", roomview_roomViewId);
+		mav.addObject("roomtype", roomtype);
+		mav.setViewName("roomview/roomtypes/editRoomtypes.jsp");
 
 		return mav;
 	}
 
 	/**
-	 * Show all Roomtype entities by Roomview
+	 * Create a new Roomtype entity
 	 * 
 	 */
-	@RequestMapping("/listRoomviewRoomtypes")
-	public ModelAndView listRoomviewRoomtypes(@RequestParam String roomViewIdKey) {
+	@RequestMapping("/newRoomviewRoomtypes")
+	public ModelAndView newRoomviewRoomtypes(@RequestParam Integer roomview_roomViewId) {
 		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("roomview", roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey));
-		mav.setViewName("roomview/roomtypes/listRoomtypes.jsp");
+		mav.addObject("roomview_roomViewId", roomview_roomViewId);
+		mav.addObject("roomtype", new Roomtype());
+		mav.addObject("newFlag", true);
+		mav.setViewName("roomview/roomtypes/editRoomtypes.jsp");
 
 		return mav;
 	}
 
 	/**
-	 * Show all Roomview entities
+	 * Delete an existing Roomview entity
 	 * 
 	 */
-	@RequestMapping("/indexRoomview")
-	public ModelAndView listRoomviews() {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("roomviews", roomviewService.loadRoomviews());
-
-		mav.setViewName("roomview/listRoomviews.jsp");
-
-		return mav;
+	@RequestMapping("/deleteRoomview")
+	public String deleteRoomview(@RequestParam Integer roomViewIdKey) {
+		Roomview roomview = roomviewDAO.findRoomviewByPrimaryKey(roomViewIdKey);
+		roomviewService.deleteRoomview(roomview);
+		return "forward:/indexRoomview";
 	}
 
 	/**
@@ -250,7 +258,7 @@ public class RoomviewController {
 	 * 
 	 */
 	@RequestMapping("/confirmDeleteRoomviewRoomtypes")
-	public ModelAndView confirmDeleteRoomviewRoomtypes(@RequestParam String roomview_roomViewId, @RequestParam String related_roomtypes_roomTypeId) {
+	public ModelAndView confirmDeleteRoomviewRoomtypes(@RequestParam Integer roomview_roomViewId, @RequestParam Integer related_roomtypes_roomTypeId) {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("roomtype", roomtypeDAO.findRoomtypeByPrimaryKey(related_roomtypes_roomTypeId));
@@ -261,19 +269,11 @@ public class RoomviewController {
 	}
 
 	/**
-	 * Edit an existing Roomtype entity
+	 * Entry point to show all Roomview entities
 	 * 
 	 */
-	@RequestMapping("/editRoomviewRoomtypes")
-	public ModelAndView editRoomviewRoomtypes(@RequestParam String roomview_roomViewId, @RequestParam String roomtypes_roomTypeId) {
-		Roomtype roomtype = roomtypeDAO.findRoomtypeByPrimaryKey(roomtypes_roomTypeId, -1, -1);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("roomview_roomViewId", roomview_roomViewId);
-		mav.addObject("roomtype", roomtype);
-		mav.setViewName("roomview/roomtypes/editRoomtypes.jsp");
-
-		return mav;
+	public String indexRoomview() {
+		return "redirect:/indexRoomview";
 	}
 
 	/**

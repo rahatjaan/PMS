@@ -14,50 +14,44 @@ import java.util.Set;
 public interface GuestService {
 
 	/**
-	 * Save an existing Members entity
-	 * 
-	 */
-	public Guest saveGuestMembers(String guestId, Members related_members);
-
-	/**
-	 * Save an existing Reservation entity
-	 * 
-	 */
-	public Guest saveGuestReservations(String guestId_1, Reservation related_reservations);
-
-	/**
 	 * Delete an existing Reservation entity
 	 * 
 	 */
-	public Guest deleteGuestReservations(String guest_guestId, String related_reservations_reservationId);
-
-	/**
-	 * Return a count of all Guest entity
-	 * 
-	 */
-	public Integer countGuests();
-
-	/**
-	 */
-	public Guest findGuestByPrimaryKey(String guestId_2);
-
-	/**
-	 * Delete an existing Guest entity
-	 * 
-	 */
-	public void deleteGuest(Guest guest);
+	public Guest deleteGuestReservations(Integer guest_guestId, Integer related_reservations_reservationId);
 
 	/**
 	 * Save an existing Guest entity
 	 * 
 	 */
-	public void saveGuest(Guest guest_1);
+	public void saveGuest(Guest guest);
+
+	/**
+	 * Delete an existing Guest entity
+	 * 
+	 */
+	public void deleteGuest(Guest guest_1);
+
+	/**
+	 * Return all Guest entity
+	 * 
+	 */
+	public List<Guest> findAllGuests(Integer startResult, Integer maxRows);
+
+	/**
+	 */
+	public Guest findGuestByPrimaryKey(Integer guestId);
 
 	/**
 	 * Delete an existing Members entity
 	 * 
 	 */
-	public Guest deleteGuestMembers(String guest_guestId_1, String related_members_memberId);
+	public Guest deleteGuestMembers(Integer guest_guestId_1, String related_members_memberId);
+
+	/**
+	 * Save an existing Members entity
+	 * 
+	 */
+	public Guest saveGuestMembers(Integer guestId_1, Members related_members);
 
 	/**
 	 * Load an existing Guest entity
@@ -66,8 +60,14 @@ public interface GuestService {
 	public Set<Guest> loadGuests();
 
 	/**
-	 * Return all Guest entity
+	 * Return a count of all Guest entity
 	 * 
 	 */
-	public List<Guest> findAllGuests(Integer startResult, Integer maxRows);
+	public Integer countGuests();
+
+	/**
+	 * Save an existing Reservation entity
+	 * 
+	 */
+	public Guest saveGuestReservations(Integer guestId_2, Reservation related_reservations);
 }

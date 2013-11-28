@@ -67,46 +67,93 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 	}
 
 	/**
-	 * JPQL Query - findReservationByReservationIdContaining
+	 * JPQL Query - findReservationByCardType
 	 *
 	 */
 	@Transactional
-	public Set<Reservation> findReservationByReservationIdContaining(String reservationId) throws DataAccessException {
+	public Set<Reservation> findReservationByCardType(String cardType) throws DataAccessException {
 
-		return findReservationByReservationIdContaining(reservationId, -1, -1);
+		return findReservationByCardType(cardType, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findReservationByReservationIdContaining
+	 * JPQL Query - findReservationByCardType
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Reservation> findReservationByReservationIdContaining(String reservationId, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByReservationIdContaining", startResult, maxRows, reservationId);
+	public Set<Reservation> findReservationByCardType(String cardType, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByCardType", startResult, maxRows, cardType);
 		return new LinkedHashSet<Reservation>(query.getResultList());
 	}
 
 	/**
-	 * JPQL Query - findReservationByCurrencyCode
+	 * JPQL Query - findReservationByCardNumber
 	 *
 	 */
 	@Transactional
-	public Set<Reservation> findReservationByCurrencyCode(String currencyCode) throws DataAccessException {
+	public Set<Reservation> findReservationByCardNumber(String cardNumber) throws DataAccessException {
 
-		return findReservationByCurrencyCode(currencyCode, -1, -1);
+		return findReservationByCardNumber(cardNumber, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findReservationByCurrencyCode
+	 * JPQL Query - findReservationByCardNumber
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Reservation> findReservationByCurrencyCode(String currencyCode, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByCurrencyCode", startResult, maxRows, currencyCode);
+	public Set<Reservation> findReservationByCardNumber(String cardNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByCardNumber", startResult, maxRows, cardNumber);
+		return new LinkedHashSet<Reservation>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findReservationByReservationId
+	 *
+	 */
+	@Transactional
+	public Reservation findReservationByReservationId(Integer reservationId) throws DataAccessException {
+
+		return findReservationByReservationId(reservationId, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByReservationId
+	 *
+	 */
+
+	@Transactional
+	public Reservation findReservationByReservationId(Integer reservationId, int startResult, int maxRows) throws DataAccessException {
+		try {
+			Query query = createNamedQuery("findReservationByReservationId", startResult, maxRows, reservationId);
+			return (com.pms.domain.Reservation) query.getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+
+	/**
+	 * JPQL Query - findReservationByIsCheckedOut
+	 *
+	 */
+	@Transactional
+	public Set<Reservation> findReservationByIsCheckedOut(String isCheckedOut) throws DataAccessException {
+
+		return findReservationByIsCheckedOut(isCheckedOut, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByIsCheckedOut
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Reservation> findReservationByIsCheckedOut(String isCheckedOut, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByIsCheckedOut", startResult, maxRows, isCheckedOut);
 		return new LinkedHashSet<Reservation>(query.getResultList());
 	}
 
@@ -133,112 +180,24 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 	}
 
 	/**
-	 * JPQL Query - findReservationByCvvNumber
+	 * JPQL Query - findReservationByPrimaryKey
 	 *
 	 */
 	@Transactional
-	public Set<Reservation> findReservationByCvvNumber(String cvvNumber) throws DataAccessException {
+	public Reservation findReservationByPrimaryKey(Integer reservationId) throws DataAccessException {
 
-		return findReservationByCvvNumber(cvvNumber, -1, -1);
+		return findReservationByPrimaryKey(reservationId, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findReservationByCvvNumber
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByCvvNumber(String cvvNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByCvvNumber", startResult, maxRows, cvvNumber);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findReservationByCardTypeContaining
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByCardTypeContaining(String cardType) throws DataAccessException {
-
-		return findReservationByCardTypeContaining(cardType, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByCardTypeContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByCardTypeContaining(String cardType, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByCardTypeContaining", startResult, maxRows, cardType);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findReservationByCvvNumberContaining
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByCvvNumberContaining(String cvvNumber) throws DataAccessException {
-
-		return findReservationByCvvNumberContaining(cvvNumber, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByCvvNumberContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByCvvNumberContaining(String cvvNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByCvvNumberContaining", startResult, maxRows, cvvNumber);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findReservationByIsCheckedOutContaining
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByIsCheckedOutContaining(String isCheckedOut) throws DataAccessException {
-
-		return findReservationByIsCheckedOutContaining(isCheckedOut, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByIsCheckedOutContaining
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByIsCheckedOutContaining(String isCheckedOut, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByIsCheckedOutContaining", startResult, maxRows, isCheckedOut);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findReservationByReservationId
-	 *
-	 */
-	@Transactional
-	public Reservation findReservationByReservationId(String reservationId) throws DataAccessException {
-
-		return findReservationByReservationId(reservationId, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByReservationId
+	 * JPQL Query - findReservationByPrimaryKey
 	 *
 	 */
 
 	@Transactional
-	public Reservation findReservationByReservationId(String reservationId, int startResult, int maxRows) throws DataAccessException {
+	public Reservation findReservationByPrimaryKey(Integer reservationId, int startResult, int maxRows) throws DataAccessException {
 		try {
-			Query query = createNamedQuery("findReservationByReservationId", startResult, maxRows, reservationId);
+			Query query = createNamedQuery("findReservationByPrimaryKey", startResult, maxRows, reservationId);
 			return (com.pms.domain.Reservation) query.getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
@@ -268,50 +227,6 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 	}
 
 	/**
-	 * JPQL Query - findReservationByDepartureDate
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByDepartureDate(java.util.Calendar departureDate) throws DataAccessException {
-
-		return findReservationByDepartureDate(departureDate, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByDepartureDate
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByDepartureDate(java.util.Calendar departureDate, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByDepartureDate", startResult, maxRows, departureDate);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findReservationByNumberOfDays
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByNumberOfDays(Integer numberOfDays) throws DataAccessException {
-
-		return findReservationByNumberOfDays(numberOfDays, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByNumberOfDays
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByNumberOfDays(Integer numberOfDays, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByNumberOfDays", startResult, maxRows, numberOfDays);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
 	 * JPQL Query - findReservationByCardExpiryDateAfter
 	 *
 	 */
@@ -334,71 +249,24 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 	}
 
 	/**
-	 * JPQL Query - findReservationByPrimaryKey
+	 * JPQL Query - findReservationByCvvNumberContaining
 	 *
 	 */
 	@Transactional
-	public Reservation findReservationByPrimaryKey(String reservationId) throws DataAccessException {
+	public Set<Reservation> findReservationByCvvNumberContaining(String cvvNumber) throws DataAccessException {
 
-		return findReservationByPrimaryKey(reservationId, -1, -1);
+		return findReservationByCvvNumberContaining(cvvNumber, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findReservationByPrimaryKey
-	 *
-	 */
-
-	@Transactional
-	public Reservation findReservationByPrimaryKey(String reservationId, int startResult, int maxRows) throws DataAccessException {
-		try {
-			Query query = createNamedQuery("findReservationByPrimaryKey", startResult, maxRows, reservationId);
-			return (com.pms.domain.Reservation) query.getSingleResult();
-		} catch (NoResultException nre) {
-			return null;
-		}
-	}
-
-	/**
-	 * JPQL Query - findReservationByNumberOfChildren
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByNumberOfChildren(Integer numberOfChildren) throws DataAccessException {
-
-		return findReservationByNumberOfChildren(numberOfChildren, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByNumberOfChildren
+	 * JPQL Query - findReservationByCvvNumberContaining
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Reservation> findReservationByNumberOfChildren(Integer numberOfChildren, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByNumberOfChildren", startResult, maxRows, numberOfChildren);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findReservationByCardNumber
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByCardNumber(String cardNumber) throws DataAccessException {
-
-		return findReservationByCardNumber(cardNumber, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByCardNumber
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByCardNumber(String cardNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByCardNumber", startResult, maxRows, cardNumber);
+	public Set<Reservation> findReservationByCvvNumberContaining(String cvvNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByCvvNumberContaining", startResult, maxRows, cvvNumber);
 		return new LinkedHashSet<Reservation>(query.getResultList());
 	}
 
@@ -447,24 +315,112 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 	}
 
 	/**
-	 * JPQL Query - findReservationByIsCheckedOut
+	 * JPQL Query - findReservationByCvvNumber
 	 *
 	 */
 	@Transactional
-	public Set<Reservation> findReservationByIsCheckedOut(String isCheckedOut) throws DataAccessException {
+	public Set<Reservation> findReservationByCvvNumber(String cvvNumber) throws DataAccessException {
 
-		return findReservationByIsCheckedOut(isCheckedOut, -1, -1);
+		return findReservationByCvvNumber(cvvNumber, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findReservationByIsCheckedOut
+	 * JPQL Query - findReservationByCvvNumber
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Reservation> findReservationByIsCheckedOut(String isCheckedOut, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByIsCheckedOut", startResult, maxRows, isCheckedOut);
+	public Set<Reservation> findReservationByCvvNumber(String cvvNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByCvvNumber", startResult, maxRows, cvvNumber);
+		return new LinkedHashSet<Reservation>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findReservationByCardTypeContaining
+	 *
+	 */
+	@Transactional
+	public Set<Reservation> findReservationByCardTypeContaining(String cardType) throws DataAccessException {
+
+		return findReservationByCardTypeContaining(cardType, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByCardTypeContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Reservation> findReservationByCardTypeContaining(String cardType, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByCardTypeContaining", startResult, maxRows, cardType);
+		return new LinkedHashSet<Reservation>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findReservationByFolioNumberContaining
+	 *
+	 */
+	@Transactional
+	public Set<Reservation> findReservationByFolioNumberContaining(String folioNumber) throws DataAccessException {
+
+		return findReservationByFolioNumberContaining(folioNumber, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByFolioNumberContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Reservation> findReservationByFolioNumberContaining(String folioNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByFolioNumberContaining", startResult, maxRows, folioNumber);
+		return new LinkedHashSet<Reservation>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findReservationByFolioNumber
+	 *
+	 */
+	@Transactional
+	public Set<Reservation> findReservationByFolioNumber(String folioNumber) throws DataAccessException {
+
+		return findReservationByFolioNumber(folioNumber, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByFolioNumber
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Reservation> findReservationByFolioNumber(String folioNumber, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByFolioNumber", startResult, maxRows, folioNumber);
+		return new LinkedHashSet<Reservation>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findReservationByIsCheckedOutContaining
+	 *
+	 */
+	@Transactional
+	public Set<Reservation> findReservationByIsCheckedOutContaining(String isCheckedOut) throws DataAccessException {
+
+		return findReservationByIsCheckedOutContaining(isCheckedOut, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByIsCheckedOutContaining
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Reservation> findReservationByIsCheckedOutContaining(String isCheckedOut, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByIsCheckedOutContaining", startResult, maxRows, isCheckedOut);
 		return new LinkedHashSet<Reservation>(query.getResultList());
 	}
 
@@ -513,6 +469,72 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 	}
 
 	/**
+	 * JPQL Query - findReservationByCurrencyCode
+	 *
+	 */
+	@Transactional
+	public Set<Reservation> findReservationByCurrencyCode(String currencyCode) throws DataAccessException {
+
+		return findReservationByCurrencyCode(currencyCode, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByCurrencyCode
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Reservation> findReservationByCurrencyCode(String currencyCode, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByCurrencyCode", startResult, maxRows, currencyCode);
+		return new LinkedHashSet<Reservation>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findReservationByDepartureDate
+	 *
+	 */
+	@Transactional
+	public Set<Reservation> findReservationByDepartureDate(java.util.Calendar departureDate) throws DataAccessException {
+
+		return findReservationByDepartureDate(departureDate, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByDepartureDate
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Reservation> findReservationByDepartureDate(java.util.Calendar departureDate, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByDepartureDate", startResult, maxRows, departureDate);
+		return new LinkedHashSet<Reservation>(query.getResultList());
+	}
+
+	/**
+	 * JPQL Query - findReservationByNumberOfDays
+	 *
+	 */
+	@Transactional
+	public Set<Reservation> findReservationByNumberOfDays(Integer numberOfDays) throws DataAccessException {
+
+		return findReservationByNumberOfDays(numberOfDays, -1, -1);
+	}
+
+	/**
+	 * JPQL Query - findReservationByNumberOfDays
+	 *
+	 */
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Set<Reservation> findReservationByNumberOfDays(Integer numberOfDays, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByNumberOfDays", startResult, maxRows, numberOfDays);
+		return new LinkedHashSet<Reservation>(query.getResultList());
+	}
+
+	/**
 	 * JPQL Query - findReservationByArrivalDate
 	 *
 	 */
@@ -535,68 +557,24 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 	}
 
 	/**
-	 * JPQL Query - findReservationByFolioNumberContaining
+	 * JPQL Query - findReservationByNumberOfChildren
 	 *
 	 */
 	@Transactional
-	public Set<Reservation> findReservationByFolioNumberContaining(String folioNumber) throws DataAccessException {
+	public Set<Reservation> findReservationByNumberOfChildren(Integer numberOfChildren) throws DataAccessException {
 
-		return findReservationByFolioNumberContaining(folioNumber, -1, -1);
+		return findReservationByNumberOfChildren(numberOfChildren, -1, -1);
 	}
 
 	/**
-	 * JPQL Query - findReservationByFolioNumberContaining
+	 * JPQL Query - findReservationByNumberOfChildren
 	 *
 	 */
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public Set<Reservation> findReservationByFolioNumberContaining(String folioNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByFolioNumberContaining", startResult, maxRows, folioNumber);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findReservationByCardType
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByCardType(String cardType) throws DataAccessException {
-
-		return findReservationByCardType(cardType, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByCardType
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByCardType(String cardType, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByCardType", startResult, maxRows, cardType);
-		return new LinkedHashSet<Reservation>(query.getResultList());
-	}
-
-	/**
-	 * JPQL Query - findReservationByFolioNumber
-	 *
-	 */
-	@Transactional
-	public Set<Reservation> findReservationByFolioNumber(String folioNumber) throws DataAccessException {
-
-		return findReservationByFolioNumber(folioNumber, -1, -1);
-	}
-
-	/**
-	 * JPQL Query - findReservationByFolioNumber
-	 *
-	 */
-
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public Set<Reservation> findReservationByFolioNumber(String folioNumber, int startResult, int maxRows) throws DataAccessException {
-		Query query = createNamedQuery("findReservationByFolioNumber", startResult, maxRows, folioNumber);
+	public Set<Reservation> findReservationByNumberOfChildren(Integer numberOfChildren, int startResult, int maxRows) throws DataAccessException {
+		Query query = createNamedQuery("findReservationByNumberOfChildren", startResult, maxRows, numberOfChildren);
 		return new LinkedHashSet<Reservation>(query.getResultList());
 	}
 

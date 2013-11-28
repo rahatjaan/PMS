@@ -13,20 +13,16 @@ import java.util.Set;
 public interface MembersService {
 
 	/**
-	 * Save an existing Members entity
+	 * Save an existing Guest entity
 	 * 
 	 */
-	public void saveMembers(Members members);
+	public Members saveMembersGuests(String memberId, Guest related_guests);
 
 	/**
-	 * Delete an existing Guest entity
+	 * Return all Members entity
 	 * 
 	 */
-	public Members deleteMembersGuests(String members_memberId, String related_guests_guestId);
-
-	/**
-	 */
-	public Members findMembersByPrimaryKey(String memberId);
+	public List<Members> findAllMemberss(Integer startResult, Integer maxRows);
 
 	/**
 	 * Load an existing Members entity
@@ -35,22 +31,26 @@ public interface MembersService {
 	public Set<Members> loadMemberss();
 
 	/**
+	 */
+	public Members findMembersByPrimaryKey(String memberId_1);
+
+	/**
+	 * Save an existing Members entity
+	 * 
+	 */
+	public void saveMembers(Members members);
+
+	/**
 	 * Delete an existing Members entity
 	 * 
 	 */
 	public void deleteMembers(Members members_1);
 
 	/**
-	 * Save an existing Guest entity
+	 * Delete an existing Guest entity
 	 * 
 	 */
-	public Members saveMembersGuests(String memberId_1, Guest related_guests);
-
-	/**
-	 * Return all Members entity
-	 * 
-	 */
-	public List<Members> findAllMemberss(Integer startResult, Integer maxRows);
+	public Members deleteMembersGuests(String members_memberId, Integer related_guests_guestId);
 
 	/**
 	 * Return a count of all Members entity

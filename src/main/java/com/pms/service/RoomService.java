@@ -14,22 +14,16 @@ import java.util.Set;
 public interface RoomService {
 
 	/**
-	 * Return all Room entity
+	 * Save an existing Reservation entity
 	 * 
 	 */
-	public List<Room> findAllRooms(Integer startResult, Integer maxRows);
+	public Room saveRoomReservations(Integer roomId, Reservation related_reservations);
 
 	/**
 	 * Save an existing Roomtype entity
 	 * 
 	 */
-	public Room saveRoomRoomtype(String roomId, Roomtype related_roomtype);
-
-	/**
-	 * Load an existing Room entity
-	 * 
-	 */
-	public Set<Room> loadRooms();
+	public Room saveRoomRoomtype(Integer roomId_1, Roomtype related_roomtype);
 
 	/**
 	 * Delete an existing Room entity
@@ -38,26 +32,32 @@ public interface RoomService {
 	public void deleteRoom(Room room);
 
 	/**
-	 * Delete an existing Reservation entity
-	 * 
-	 */
-	public Room deleteRoomReservations(String room_roomId, String related_reservations_reservationId);
-
-	/**
-	 */
-	public Room findRoomByPrimaryKey(String roomId_1);
-
-	/**
 	 * Save an existing Room entity
 	 * 
 	 */
 	public void saveRoom(Room room_1);
 
 	/**
-	 * Save an existing Reservation entity
+	 */
+	public Room findRoomByPrimaryKey(Integer roomId_2);
+
+	/**
+	 * Load an existing Room entity
 	 * 
 	 */
-	public Room saveRoomReservations(String roomId_2, Reservation related_reservations);
+	public Set<Room> loadRooms();
+
+	/**
+	 * Delete an existing Reservation entity
+	 * 
+	 */
+	public Room deleteRoomReservations(Integer room_roomId, Integer related_reservations_reservationId);
+
+	/**
+	 * Return all Room entity
+	 * 
+	 */
+	public List<Room> findAllRooms(Integer startResult, Integer maxRows);
 
 	/**
 	 * Return a count of all Room entity
@@ -69,5 +69,5 @@ public interface RoomService {
 	 * Delete an existing Roomtype entity
 	 * 
 	 */
-	public Room deleteRoomRoomtype(String room_roomId_1, String related_roomtype_roomTypeId);
+	public Room deleteRoomRoomtype(Integer room_roomId_1, Integer related_roomtype_roomTypeId);
 }
