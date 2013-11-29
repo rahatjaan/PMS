@@ -44,7 +44,7 @@
  	<!-- ******************************************************************** -->
 	<!-- Register Multi Part Resolve -->
 	<!-- ******************************************************************** -->	
-	<bean id="multipartResolver" class="org.skyway.spring.util.web.binary.ModelBindingMultipartResolver" />
+	<!-- <bean id="multipartResolver" class="org.skyway.spring.util.web.binary.ModelBindingMultipartResolver" /> -->
 	
 	<!-- ******************************************************************** -->
 	<!-- Register Streamed Binary Content View -->
@@ -60,6 +60,8 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/pages/" />
 	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 	<bean id="iPhoneUserAgentViewResolver" class="org.skyway.spring.util.viewresolution.UserAgentViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

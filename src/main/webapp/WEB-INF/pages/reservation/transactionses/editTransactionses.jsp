@@ -56,8 +56,10 @@
 							<fmt:message key="reservation.reservationid.title"/>:
 						</td>
 						<td>
-							<form:input id="transactions_reservation_reservationId" path="reservation.reservationId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "transactions_reservation_reservationId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="reservation.reservationid.help"/>"}})); </script>
+							<form:select path="reservation.reservationId" items="${reservationlist}" cssStyle="width:300px;" />
+						</td>
+						<td style="border:0;">
+							<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newReservation"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="reservation.title"/></span></a></div>
 						</td>
 					</tr>
 				</tbody>

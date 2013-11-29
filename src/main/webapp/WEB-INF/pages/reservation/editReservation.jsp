@@ -20,8 +20,10 @@
 							<fmt:message key="room.roomid.title"/>:
 						</td>
 						<td>
-							<form:input id="reservation_room_roomId" path="room.roomId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "reservation_room_roomId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="room.roomid.help"/>"}})); </script>
+							<form:select path="room.roomId" items="${roomList}" cssStyle="width:300px;" />
+						</td>
+						<td style="border:0;">
+							<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoom"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="room.title"/></span></a></div>
 						</td>
 					</tr>
 					<tr>
@@ -29,8 +31,7 @@
 							<fmt:message key="reservation.arrivaldate.title"/>:
 						</td>
 						<td>
-							<input id="reservation_arrivalDate" name="arrivalDate" type="text" value="<fmt:formatDate value="${reservation.arrivalDate.time}" pattern="MM/dd/yyyy h:mm a"/>" style="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "reservation_arrivalDate",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="navigation.dateTime.title"/>"}})); </script>
+							<input id="reservation_arrivalDate" name="arrivalDate" type="text" value="<fmt:formatDate value="${reservation.arrivalDate.time}" pattern="yyyy-MM-dd"/>" dojoType="dijit.form.DateTextBox" constraints="{datePattern:'<fmt:message key="date.format"/>'}" trim="true" promptMessage="<fmt:message key="date.format" />" invalidMessage="<fmt:message key="date.format.invalid" /> <fmt:message key="date.format" />." style="width:300px;" />
 						</td>
 					</tr>
 					<tr>
@@ -47,8 +48,7 @@
 							<fmt:message key="reservation.departuredate.title"/>:
 						</td>
 						<td>
-							<input id="reservation_departureDate" name="departureDate" type="text" value="<fmt:formatDate value="${reservation.departureDate.time}" pattern="MM/dd/yyyy h:mm a"/>" style="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "reservation_departureDate",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="navigation.dateTime.title"/>"}})); </script>
+							<input id="reservation_departureDate" name="departureDate" type="text" value="<fmt:formatDate value="${reservation.departureDate.time}" pattern="yyyy-MM-dd"/>" dojoType="dijit.form.DateTextBox" constraints="{datePattern:'<fmt:message key="date.format"/>'}" trim="true" promptMessage="<fmt:message key="date.format" />" invalidMessage="<fmt:message key="date.format.invalid" /> <fmt:message key="date.format" />." style="width:300px;" />
 						</td>
 					</tr>
 					<tr>
@@ -127,8 +127,10 @@
 							<fmt:message key="guest.guestid.title"/>:
 						</td>
 						<td>
-							<form:input id="reservation_guest_guestId" path="guest.guestId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "reservation_guest_guestId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="guest.guestid.help"/>"}})); </script>
+							<form:select path="guest.guestId" items="${guestList}" cssStyle="width:300px;" />
+						</td>
+						<td style="border:0;">
+							<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newGuest"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="guest.title"/></span></a></div>
 						</td>
 					</tr>
 					<tr>

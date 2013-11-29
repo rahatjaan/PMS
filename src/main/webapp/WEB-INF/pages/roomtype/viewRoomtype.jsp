@@ -133,11 +133,10 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/editRoomtypeRoomview?roomtype_roomTypeId=${roomtype.roomTypeId}&roomview_roomViewId=${roomtype.roomview.roomViewId}&"><span><img src="images/icons/edit.gif" /><fmt:message key="navigation.edit"/></span></a></div>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/confirmDeleteRoomtypeRoomview?roomtype_roomTypeId=${roomtype.roomTypeId}&related_roomview_roomViewId=${roomtype.roomview.roomViewId}&"><span><img src="images/icons/delete.gif" /><fmt:message key="navigation.delete"/></span></a></div>
+			
 						</c:if>
 						<c:if test='${roomtype.roomview == null}'>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoomtypeRoomview?roomtype_roomTypeId=${roomtype.roomTypeId}&"><span><img src="images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="roomview.title"/></span></a></div>
+			
 						</c:if>
 			<div class="clear">&nbsp;</div>
 			<div class="spacer">&nbsp;</div>
@@ -175,17 +174,16 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/editRoomtypeBed?roomtype_roomTypeId=${roomtype.roomTypeId}&bed_bedId=${roomtype.bed.bedId}&"><span><img src="images/icons/edit.gif" /><fmt:message key="navigation.edit"/></span></a></div>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/confirmDeleteRoomtypeBed?roomtype_roomTypeId=${roomtype.roomTypeId}&related_bed_bedId=${roomtype.bed.bedId}&"><span><img src="images/icons/delete.gif" /><fmt:message key="navigation.delete"/></span></a></div>
+			
 						</c:if>
 						<c:if test='${roomtype.bed == null}'>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoomtypeBed?roomtype_roomTypeId=${roomtype.roomTypeId}&"><span><img src="images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="bed.title"/></span></a></div>
+			
 						</c:if>
 			<div class="clear">&nbsp;</div>
 			<div class="spacer">&nbsp;</div>
 			<h1><fmt:message key="room.title"/></h1>
 					
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoomtypeRooms?roomtype_roomTypeId=${roomtype.roomTypeId}&"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="room.title"/></span></a></div>
+			
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<thead>
 					<tr>

@@ -1,9 +1,14 @@
 package com.pms.web;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
 import com.pms.dao.ReservationDAO;
 import com.pms.dao.TransactionsDAO;
 
 import com.pms.domain.Reservation;
+import com.pms.domain.Roomtype;
 import com.pms.domain.Transactions;
 
 import com.pms.service.TransactionsService;
@@ -220,8 +225,13 @@ public class TransactionsController {
 	@RequestMapping("/newTransactions")
 	public ModelAndView newTransactions() {
 		ModelAndView mav = new ModelAndView();
-
+		Map<Integer,String> reservationlist = new LinkedHashMap<Integer,String>();
+		Set<Reservation> reservations = reservationDAO.findAllReservations();
+		for(Reservation rT : reservations){
+			reservationlist.put(rT.getReservationId(), rT.getGuest().getFirstName()+" "+rT.getGuest().getLastName());
+	    }
 		mav.addObject("transactions", new Transactions());
+		mav.addObject("reservationlist", reservationlist);
 		mav.addObject("newFlag", true);
 		mav.setViewName("transactions/editTransactions.jsp");
 

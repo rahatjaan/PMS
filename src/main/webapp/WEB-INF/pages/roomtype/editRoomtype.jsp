@@ -65,8 +65,10 @@
 							<fmt:message key="roomview.roomviewid.title"/>:
 						</td>
 						<td>
-							<form:input id="roomtype_roomview_roomViewId" path="roomview.roomViewId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "roomtype_roomview_roomViewId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="roomview.roomviewid.help"/>"}})); </script>
+							<form:select path="roomview.roomViewId" items="${roomViewList}" cssStyle="width:300px;" />
+						</td>
+						<td style="border:0;">
+							<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoomview"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="roomview.title"/></span></a></div>
 						</td>
 					</tr>
 					<tr>
@@ -74,8 +76,10 @@
 							<fmt:message key="bed.bedid.title"/>:
 						</td>
 						<td>
-							<form:input id="roomtype_bed_bedid" path="bed.bedId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "roomtype_bed_bedid",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="bed.bedid.help"/>"}})); </script>
+							<form:select path="bed.bedId" items="${bedList}" cssStyle="width:300px;" />
+						</td>
+						<td style="border:0;">
+							<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newBed"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="bed.title"/></span></a></div>
 						</td>
 					</tr>
 					<tr>

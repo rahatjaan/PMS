@@ -1,30 +1,34 @@
 package com.pms.web;
 
-import com.pms.dao.ReservationDAO;
-import com.pms.dao.RoomDAO;
-import com.pms.dao.RoomtypeDAO;
-
-import com.pms.domain.Reservation;
-import com.pms.domain.Room;
-import com.pms.domain.Roomtype;
-
-import com.pms.service.RoomService;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pms.dao.ReservationDAO;
+import com.pms.dao.RoomDAO;
+import com.pms.dao.RoomtypeDAO;
+import com.pms.domain.Reservation;
+import com.pms.domain.Room;
+import com.pms.domain.Roomtype;
+import com.pms.service.RoomService;
 
 /**
  * Spring MVC controller that handles CRUD requests for Room entities
@@ -210,8 +214,13 @@ public class RoomController {
 	@RequestMapping("/newRoom")
 	public ModelAndView newRoom() {
 		ModelAndView mav = new ModelAndView();
-
+		Map<Integer,String> roomTypeList = new LinkedHashMap<Integer,String>();
+		Set<Roomtype> roomTypeSet = roomtypeDAO.findAllRoomtypes();
+		for(Roomtype rT : roomTypeSet){
+			roomTypeList.put(rT.getRoomTypeId(), rT.getRoomTypeCode());
+	    }
 		mav.addObject("room", new Room());
+		mav.addObject("roomTypeList", roomTypeList);
 		mav.addObject("newFlag", true);
 		mav.setViewName("room/editRoom.jsp");
 
@@ -309,10 +318,150 @@ public class RoomController {
 	 * 
 	 */
 	@RequestMapping("/saveRoom")
-	public String saveRoom(@ModelAttribute Room room) {
+	public String saveRoom(@ModelAttribute Room room,@RequestParam(value = "file1") MultipartFile file1,@RequestParam(value = "file2") MultipartFile file2,@RequestParam(value = "file3") MultipartFile file3,@RequestParam(value = "file4") MultipartFile file4) {
+				System.out.println(file1.getOriginalFilename());
+				System.out.println(file2.getOriginalFilename());
+				System.out.println(file3.getOriginalFilename());
+				System.out.println(file4.getOriginalFilename());
+				System.out.println(System.getProperty("user.dir"));
+				InputStream inputStream = null;
+				OutputStream outputStream = null;
+				String path = System.getProperty("user.dir");
+				  
+				  
+				try {  
+					   inputStream = file1.getInputStream();  
+					  
+					   File newFile = new File("C:\\Program Files (x86)\\apache-tomcat-6.0.37\\webapps\\pms\\roomimages\\"+file1.getOriginalFilename());  
+					   if (!newFile.exists()) {  
+					    newFile.createNewFile();  
+					   }  
+					   outputStream = new FileOutputStream(newFile);  
+					   int read = 0;  
+					   byte[] bytes = new byte[1024];  
+					  
+					   while ((read = inputStream.read(bytes)) != -1) {  
+					    outputStream.write(bytes, 0, read);  
+					   }  
+					   room.setImage1(newFile.getAbsolutePath());
+					   outputStream.close();
+					   inputStream.close();
+					  } catch (IOException e) {  
+					   // TODO Auto-generated catch block  
+					   //e.printStackTrace();  
+					  }
+				
+				try {  
+					   inputStream = file2.getInputStream();  
+					  
+					   File newFile = new File("C:\\Program Files (x86)\\apache-tomcat-6.0.37\\webapps\\pms\\roomimages\\"+file2.getOriginalFilename());  
+					   if (!newFile.exists()) {  
+					    newFile.createNewFile();  
+					   }  
+					   outputStream = new FileOutputStream(newFile);  
+					   int read = 0;  
+					   byte[] bytes = new byte[1024];  
+					  
+					   while ((read = inputStream.read(bytes)) != -1) {  
+					    outputStream.write(bytes, 0, read);  
+					   }  
+					   outputStream.close();
+					   inputStream.close();
+					   room.setImage2(newFile.getAbsolutePath());
+					  } catch (IOException e) {  
+					   // TODO Auto-generated catch block  
+					   //e.printStackTrace();  
+					  }
+				
+				try {  
+					   inputStream = file3.getInputStream();  
+					  
+					   File newFile = new File("C:\\Program Files (x86)\\apache-tomcat-6.0.37\\webapps\\pms\\roomimages\\"+file3.getOriginalFilename());  
+					   if (!newFile.exists()) {  
+					    newFile.createNewFile();  
+					   }  
+					   outputStream = new FileOutputStream(newFile);  
+					   int read = 0;  
+					   byte[] bytes = new byte[1024];  
+					  
+					   while ((read = inputStream.read(bytes)) != -1) {  
+					    outputStream.write(bytes, 0, read);  
+					   }  
+					   outputStream.close();
+					   inputStream.close();
+					   room.setImage3(newFile.getAbsolutePath());
+					  } catch (IOException e) {  
+					   // TODO Auto-generated catch block  
+					   //e.printStackTrace();  
+					  }
+				
+				try {  
+					   inputStream = file4.getInputStream();  
+					  
+					   File newFile = new File("C:\\Program Files (x86)\\apache-tomcat-6.0.37\\webapps\\pms\\roomimages\\"+file4.getOriginalFilename());  
+					   if (!newFile.exists()) {  
+					    newFile.createNewFile();  
+					   }  
+					   outputStream = new FileOutputStream(newFile);  
+					   int read = 0;  
+					   byte[] bytes = new byte[1024];  
+					  
+					   while ((read = inputStream.read(bytes)) != -1) {  
+					    outputStream.write(bytes, 0, read);  
+					   }  
+					   outputStream.close();
+					   inputStream.close();
+					   room.setImage4(newFile.getAbsolutePath());
+					  } catch (IOException e) {  
+					   // TODO Auto-generated catch block  
+					   //e.printStackTrace();  
+					  }
+		
+		/*Blob blob = null;
+		try {
+			if(null != file1){
+				blob = Hibernate.createBlob(file1.getInputStream());
+				room.setImage1(blob);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        document.setFilename(file.getOriginalFilename());
+        document.setContent(blob);
+        document.setContentType(file.getContentType());
+		roomService.saveRoom(room);*/
 		roomService.saveRoom(room);
 		return "forward:/indexRoom";
 	}
+	
+	/*@RequestMapping("/fileUploadForm")
+	public String saveRoomWithFiles(@ModelAttribute("uploadedFile") UploadedFile uploadedFile) {
+		MultipartFile file = uploadedFile.getFile();
+		InputStream inputStream = null;  
+		OutputStream outputStream = null;
+		String fileName = file.getOriginalFilename();
+		try {  
+			   inputStream = file.getInputStream();  
+			  
+			   File newFile = new File("C:/" + fileName);  
+			   if (!newFile.exists()) {  
+			    newFile.createNewFile();  
+			   }  
+			   outputStream = new FileOutputStream(newFile);  
+			   int read = 0;  
+			   byte[] bytes = new byte[1024];  
+			  
+			   while ((read = inputStream.read(bytes)) != -1) {  
+			    outputStream.write(bytes, 0, read);  
+			   }  
+			 } catch (IOException e) {  
+			   // TODO Auto-generated catch block  
+			   e.printStackTrace();  
+			 }
+		//roomService.saveRoom(room);
+		return "forward:/indexRoom";
+	}*/
 
 	/**
 	 * Create a new Reservation entity

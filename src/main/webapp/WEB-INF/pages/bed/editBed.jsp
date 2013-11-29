@@ -20,7 +20,7 @@
 							<fmt:message key="bed.bedtypecode.title"/>:
 						</td>
 						<td>
-							<form:input id="bed_bedTypeCode" path="bedTypeCode" cssStyle="width:300px;"/>
+							<form:input id="bed_bedTypeCode" path="bedTypeCode" cssStyle="width:300px;" />
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "bed_bedTypeCode",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="bed.bedtypecode.help"/>"}})); </script>
 						</td>
 					</tr>

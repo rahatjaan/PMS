@@ -38,7 +38,7 @@
 			<div class="spacer">&nbsp;</div>
 			<h1><fmt:message key="guest.title"/></h1>
 					
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newMembersGuests?members_memberId=${members.memberId}&"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="guest.title"/></span></a></div>
+			
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<thead>
 					<tr>

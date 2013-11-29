@@ -196,11 +196,10 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/editTransactionsReservation?transactions_transactionId=${transactions.transactionId}&reservation_reservationId=${transactions.reservation.reservationId}&"><span><img src="images/icons/edit.gif" /><fmt:message key="navigation.edit"/></span></a></div>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/confirmDeleteTransactionsReservation?transactions_transactionId=${transactions.transactionId}&related_reservation_reservationId=${transactions.reservation.reservationId}&"><span><img src="images/icons/delete.gif" /><fmt:message key="navigation.delete"/></span></a></div>
+			
 						</c:if>
 						<c:if test='${transactions.reservation == null}'>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newTransactionsReservation?transactions_transactionId=${transactions.transactionId}&"><span><img src="images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="reservation.title"/></span></a></div>
+			
 						</c:if>
 			<div class="clear">&nbsp;</div>
 		</div>

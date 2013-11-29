@@ -142,17 +142,16 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/editRoomRoomtype?room_roomId=${room.roomId}&roomtype_roomTypeId=${room.roomtype.roomTypeId}&"><span><img src="images/icons/edit.gif" /><fmt:message key="navigation.edit"/></span></a></div>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/confirmDeleteRoomRoomtype?room_roomId=${room.roomId}&related_roomtype_roomTypeId=${room.roomtype.roomTypeId}&"><span><img src="images/icons/delete.gif" /><fmt:message key="navigation.delete"/></span></a></div>
+			
 						</c:if>
 						<c:if test='${room.roomtype == null}'>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoomRoomtype?room_roomId=${room.roomId}&"><span><img src="images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="roomtype.title"/></span></a></div>
+			
 						</c:if>
 			<div class="clear">&nbsp;</div>
 			<div class="spacer">&nbsp;</div>
 			<h1><fmt:message key="reservation.title"/></h1>
 					
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoomReservations?room_roomId=${room.roomId}&"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="reservation.title"/></span></a></div>
+			
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<thead>
 					<tr>

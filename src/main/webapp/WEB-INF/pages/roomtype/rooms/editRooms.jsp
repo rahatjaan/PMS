@@ -12,7 +12,7 @@
 	<div id="content">
 		<h1><fmt:message key="navigation.edit"/> <fmt:message key="room.title"/></h1>
 		<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexRoom"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>
-		<form:form action="${pageContext.request.contextPath}/saveRoom" method="POST" modelAttribute="room">
+		<form:form action="${pageContext.request.contextPath}/saveRoom" method="POST" modelAttribute="room" enctype="multipart/form-data">
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
 					<tr>
@@ -53,11 +53,45 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
+							Image1:
+						</td>
+						<td>
+							<input id="room_image1" name="file1" type="file" cssStyle="width:300px;"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Image2:
+						</td>
+						<td>
+							<input id="room_image1" name="file2" type="file" cssStyle="width:300px;"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Image3:
+						</td>
+						<td>
+							<input id="room_image1" name="file3" type="file" cssStyle="width:300px;"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Image4:
+						</td>
+						<td>
+							<input id="room_image1" name="file4" type="file" cssStyle="width:300px;"/>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
 							<fmt:message key="roomtype.roomtypeid.title"/>:
 						</td>
 						<td>
-							<form:input id="room_roomtype_roomTypeId" path="roomtype.roomTypeId" cssStyle="width:300px;"/>
-							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "room_roomtype_roomTypeId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="roomtype.roomtypeid.help"/>"}})); </script>
+							<form:select path="roomtype.roomTypeId" items="${roomTypeList}" cssStyle="width:300px;" />
+						</td>
+						<td style="border:0;">
+							<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoomtype"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="roomtype.title"/></span></a></div>
 						</td>
 					</tr>
 				</tbody>

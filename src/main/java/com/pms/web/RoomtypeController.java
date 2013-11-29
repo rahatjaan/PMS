@@ -1,32 +1,30 @@
 package com.pms.web;
 
-import com.pms.dao.BedDAO;
-import com.pms.dao.RoomDAO;
-import com.pms.dao.RoomtypeDAO;
-import com.pms.dao.RoomviewDAO;
-
-import com.pms.domain.Bed;
-import com.pms.domain.Room;
-import com.pms.domain.Roomtype;
-import com.pms.domain.Roomview;
-
-import com.pms.service.RoomtypeService;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pms.dao.BedDAO;
+import com.pms.dao.RoomDAO;
+import com.pms.dao.RoomtypeDAO;
+import com.pms.dao.RoomviewDAO;
+import com.pms.domain.Bed;
+import com.pms.domain.Room;
+import com.pms.domain.Roomtype;
+import com.pms.domain.Roomview;
+import com.pms.service.RoomtypeService;
 
 /**
  * Spring MVC controller that handles CRUD requests for Roomtype entities
@@ -396,6 +394,10 @@ public class RoomtypeController {
 	 */
 	@RequestMapping("/saveRoomtype")
 	public String saveRoomtype(@ModelAttribute Roomtype roomtype) {
+		/*Roomview rV = roomviewDAO.findRoomviewByPrimaryKey(roomtype.getRoomview().getRoomViewId());
+		Bed bed = bedDAO.findBedByBedId(roomtype.getBed().getBedId());
+		roomtype.setBed(bed);
+		roomtype.setRoomview(rV);*/
 		roomtypeService.saveRoomtype(roomtype);
 		return "forward:/indexRoomtype";
 	}
@@ -423,8 +425,21 @@ public class RoomtypeController {
 	@RequestMapping("/newRoomtype")
 	public ModelAndView newRoomtype() {
 		ModelAndView mav = new ModelAndView();
-
+		Map<Integer,String> roomViewList = new LinkedHashMap<Integer,String>();
+		Set<Roomview> roomTypeSet = roomviewDAO.findAllRoomviews();
+		for(Roomview rT : roomTypeSet){
+			roomViewList.put(rT.getRoomViewId(), rT.getRoomViewCode());
+	    }
+		
+		Map<Integer,String> bedList = new LinkedHashMap<Integer,String>();
+		Set<Bed> bedSet = bedDAO.findAllBeds();
+		for(Bed b : bedSet){
+			bedList.put(b.getBedId(), b.getBedTypeCode());
+	    }
+		
 		mav.addObject("roomtype", new Roomtype());
+		mav.addObject("roomViewList", roomViewList);
+		mav.addObject("bedList", bedList);
 		mav.addObject("newFlag", true);
 		mav.setViewName("roomtype/editRoomtype.jsp");
 

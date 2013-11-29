@@ -1,23 +1,34 @@
 package com.pms.domain;
 
 import java.io.Serializable;
-
-import java.lang.StringBuilder;
-
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-
-import javax.xml.bind.annotation.*;
-
-import javax.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  */
@@ -78,7 +89,41 @@ public class Room implements Serializable {
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
 	String floorNumber;
+	
+	@Column(name="image1")
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+    @Lob
+    private String image1;
+	
+	@Column(name="image2")
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+    @Lob
+    private String image2;
+	
+	@Column(name="image3")
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+    @Lob
+    private String image3;
+	
+	@Column(name="image4")
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+    @Lob
+    private String image4;/*
+	
+	private List<MultipartFile> files;
 
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
+*/
 	/**
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -137,6 +182,40 @@ public class Room implements Serializable {
 	 */
 	public String getIsComposite() {
 		return this.isComposite;
+	}
+	
+	
+
+	public String getImage1() {
+		return image1;
+	}
+
+	public void setImage1(String image1) {
+		this.image1 = image1;
+	}
+
+	public String getImage2() {
+		return image2;
+	}
+
+	public void setImage2(String image2) {
+		this.image2 = image2;
+	}
+
+	public String getImage3() {
+		return image3;
+	}
+
+	public void setImage3(String image3) {
+		this.image3 = image3;
+	}
+
+	public String getImage4() {
+		return image4;
+	}
+
+	public void setImage4(String image4) {
+		this.image4 = image4;
 	}
 
 	/**

@@ -241,11 +241,10 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/editReservationGuest?reservation_reservationId=${reservation.reservationId}&guest_guestId=${reservation.guest.guestId}&"><span><img src="images/icons/edit.gif" /><fmt:message key="navigation.edit"/></span></a></div>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/confirmDeleteReservationGuest?reservation_reservationId=${reservation.reservationId}&related_guest_guestId=${reservation.guest.guestId}&"><span><img src="images/icons/delete.gif" /><fmt:message key="navigation.delete"/></span></a></div>
+			
 						</c:if>
 						<c:if test='${reservation.guest == null}'>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newReservationGuest?reservation_reservationId=${reservation.reservationId}&"><span><img src="images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="guest.title"/></span></a></div>
+			
 						</c:if>
 			<div class="clear">&nbsp;</div>
 			<div class="spacer">&nbsp;</div>
@@ -301,17 +300,16 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/editReservationRoom?reservation_reservationId=${reservation.reservationId}&room_roomId=${reservation.room.roomId}&"><span><img src="images/icons/edit.gif" /><fmt:message key="navigation.edit"/></span></a></div>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/confirmDeleteReservationRoom?reservation_reservationId=${reservation.reservationId}&related_room_roomId=${reservation.room.roomId}&"><span><img src="images/icons/delete.gif" /><fmt:message key="navigation.delete"/></span></a></div>
+			
 						</c:if>
 						<c:if test='${reservation.room == null}'>
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newReservationRoom?reservation_reservationId=${reservation.reservationId}&"><span><img src="images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="room.title"/></span></a></div>
+			
 						</c:if>
 			<div class="clear">&nbsp;</div>
 			<div class="spacer">&nbsp;</div>
 			<h1><fmt:message key="transactions.title"/></h1>
 					
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newReservationTransactionses?reservation_reservationId=${reservation.reservationId}&"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="transactions.title"/></span></a></div>
+			
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<thead>
 					<tr>

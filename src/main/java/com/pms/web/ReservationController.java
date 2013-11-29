@@ -1,32 +1,35 @@
 package com.pms.web;
 
-import com.pms.dao.GuestDAO;
-import com.pms.dao.ReservationDAO;
-import com.pms.dao.RoomDAO;
-import com.pms.dao.TransactionsDAO;
-
-import com.pms.domain.Guest;
-import com.pms.domain.Reservation;
-import com.pms.domain.Room;
-import com.pms.domain.Transactions;
-
-import com.pms.service.ReservationService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.WebDataBinder;
-
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pms.dao.GuestDAO;
+import com.pms.dao.ReservationDAO;
+import com.pms.dao.RoomDAO;
+import com.pms.dao.TransactionsDAO;
+import com.pms.domain.Guest;
+import com.pms.domain.Reservation;
+import com.pms.domain.Room;
+import com.pms.domain.Transactions;
+import com.pms.service.ReservationService;
 
 /**
  * Spring MVC controller that handles CRUD requests for Reservation entities
@@ -78,8 +81,45 @@ public class ReservationController {
 	@RequestMapping("/newReservation")
 	public ModelAndView newReservation() {
 		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("reservation", new Reservation());
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		Date currentDate = Calendar.getInstance().getTime();
+		String stringDate = simpleDateFormat.format(currentDate);
+		try {
+			currentDate = simpleDateFormat.parse(stringDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Calendar cal = Calendar.getInstance();
+		 
+		cal.setTime(currentDate);
+		Reservation reservation = new Reservation();
+		reservation.setArrivalDate(cal);
+		reservation.setNumberOfDays(1);
+		Calendar cal1 = Calendar.getInstance();
+		cal1.setTime(currentDate);
+		cal1.add(Calendar.DATE, 1);
+		reservation.setDepartureDate(cal1);
+		UUID idOne = UUID.randomUUID();
+		reservation.setFolioNumber(idOne.toString().replaceAll("-", "").toUpperCase());
+		
+		Map<Integer,String> roomList = new LinkedHashMap<Integer,String>();
+		Set<Room> rooms = roomDAO.findAllRooms();
+		for(Room rT : rooms){
+			roomList.put(rT.getRoomId(), rT.getRoomCategory());
+	    }
+		
+		
+		Map<Integer,String> guestList = new LinkedHashMap<Integer,String>();
+		Set<Guest> guests = guestDAO.findAllGuests();
+		for(Guest rT : guests){
+			guestList.put(rT.getGuestId(), rT.getFirstName()+" "+rT.getLastName());
+	    }
+		
+		
+		mav.addObject("reservation", reservation);
+		mav.addObject("roomList", roomList);
+		mav.addObject("guestList", guestList);
 		mav.addObject("newFlag", true);
 		mav.setViewName("reservation/editReservation.jsp");
 

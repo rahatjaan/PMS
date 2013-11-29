@@ -147,6 +147,11 @@ public class Reservation implements Serializable {
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
 	String isCheckedOut;
+	
+	@Column(name = "signature")
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	byte[] signature;
 
 	/**
 	 */
@@ -425,6 +430,16 @@ public class Reservation implements Serializable {
 		int result = 1;
 		result = (int) (prime * result + ((reservationId == null) ? 0 : reservationId.hashCode()));
 		return result;
+	}
+	
+	
+
+	public byte[] getSignature() {
+		return signature;
+	}
+
+	public void setSignature(byte[] signature) {
+		this.signature = signature;
 	}
 
 	/**

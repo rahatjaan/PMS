@@ -47,7 +47,7 @@
 			<div class="spacer">&nbsp;</div>
 			<h1><fmt:message key="roomtype.title"/></h1>
 					
-			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newRoomviewRoomtypes?roomview_roomViewId=${roomview.roomViewId}&"><span><img src="${pageContext.request.contextPath}/images/icons/new.gif" /><fmt:message key="navigation.new"/> <fmt:message key="roomtype.title"/></span></a></div>
+			
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<thead>
 					<tr>
