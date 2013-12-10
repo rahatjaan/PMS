@@ -41,8 +41,8 @@ import javax.persistence.*;
 		@NamedQuery(name = "findRoomtypeByRoomTypeId", query = "select myRoomtype from Roomtype myRoomtype where myRoomtype.roomTypeId = ?1") })
 @Table(catalog = "stubpms", name = "roomtype")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Roomtype")
-@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
+@XmlType(namespace = "PMS/com/pms/domain", name = "Roomtype")
+@XmlRootElement(namespace = "PMS/com/pms/domain")
 public class Roomtype implements Serializable {
 	private static final long serialVersionUID = 1L;
 

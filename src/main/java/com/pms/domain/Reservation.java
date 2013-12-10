@@ -50,8 +50,8 @@ import javax.persistence.*;
 		@NamedQuery(name = "findReservationByReservationId", query = "select myReservation from Reservation myReservation where myReservation.reservationId = ?1") })
 @Table(catalog = "stubpms", name = "reservation")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Reservation")
-@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
+@XmlType(namespace = "PMS/com/pms/domain", name = "Reservation")
+@XmlRootElement(namespace = "PMS/com/pms/domain")
 public class Reservation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -170,6 +170,17 @@ public class Reservation implements Serializable {
 	@OneToMany(mappedBy = "reservation", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	@XmlElement(name = "", namespace = "")
 	java.util.Set<com.pms.domain.Transactions> transactionses;
+
+	private String error;
+	
+	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
 
 	/**
 	 */

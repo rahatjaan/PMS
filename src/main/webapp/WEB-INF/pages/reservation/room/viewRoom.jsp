@@ -69,6 +69,15 @@
 						&nbsp;
 						</td>
 					</tr>
+					<tr>
+						<td class="label" valign="top">
+							<fmt:message key="room.roomrate.title"/>:
+						</td>
+						<td>
+							${room.roomRate}
+						&nbsp;
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

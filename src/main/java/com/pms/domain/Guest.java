@@ -7,6 +7,9 @@ import java.lang.StringBuilder;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,8 +48,9 @@ import javax.persistence.*;
 		@NamedQuery(name = "findGuestByPrimaryKey", query = "select myGuest from Guest myGuest where myGuest.guestId = ?1") })
 @Table(catalog = "stubpms", name = "guest")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Guest")
-@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
+@XmlType(namespace = "PMS/com/pms/domain", name = "Guest")
+@XmlRootElement(namespace = "PMS/com/pms/domain")
+@XmlSeeAlso({Room.class})
 public class Guest implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -114,6 +118,21 @@ public class Guest implements Serializable {
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
 	String mobileNumber;
+
+	@Column(name = "userPic")
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	byte[] userPic;
+	
+	
+	
+	public byte[] getUserPic() {
+		return userPic;
+	}
+
+	public void setUserPic(byte[] userPic) {
+		this.userPic = userPic;
+	}
 
 	/**
 	 */

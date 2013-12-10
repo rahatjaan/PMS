@@ -61,6 +61,52 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
+							Room Rate:
+						</td>
+						<td>
+							${room.roomRate}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Image 1:
+						</td>
+						<td>
+							${room.image1}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Image 2:
+						</td>
+						<td>
+							${room.image2}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Image 3:
+						</td>
+						<td>
+							${room.image3}
+						&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Image 4:
+						</td>
+						<td>
+							${room.image4}
+						&nbsp;
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="label" valign="top">
 							<fmt:message key="roomtype.roomtypeid.title"/>:
 						</td>
 						<td>

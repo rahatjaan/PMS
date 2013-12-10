@@ -6,5 +6,6 @@
 	<import resource="classpath:PMS-security-context.xml"/>
 	<import resource="classpath:PMS-service-context.xml"/>
 	<import resource="classpath:PMS-dao-context.xml"/>
+	<import resource="classpath:PMS-webservice.xml" />
 	
 </beans>

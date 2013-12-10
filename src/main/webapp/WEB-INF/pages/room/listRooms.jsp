@@ -19,10 +19,16 @@
 					<th class="thead">&nbsp;</th>
 					<th class="thead"><fmt:message key="room.roomid.title"/></th>
 					<th class="thead"><fmt:message key="room.roomcategory.title"/></th>
+					<th class="thead">Room Rate</th>
 					<th class="thead"><fmt:message key="room.issmoking.title"/></th>
 					<th class="thead"><fmt:message key="room.iscomposite.title"/></th>
 					<th class="thead"><fmt:message key="room.floornumber.title"/></th>
 					<th class="thead"><fmt:message key="roomtype.roomtypeid.title"/></th>
+					<th class="thead">Image 1</th>
+					<th class="thead">Image 2</th>
+					<th class="thead">Image 3</th>
+					<th class="thead">Image 4</th>
+										
 				</tr>
 			</thead>
 			<tbody>
@@ -53,6 +59,11 @@
 					</td>
 					<td nowrap="nowrap" class="tabletd">
 						
+							${current.roomRate}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
 							${current.isSmoking}
 						&nbsp;
 					</td>
@@ -69,6 +80,26 @@
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.roomtype.roomTypeId}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.image1}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.image2}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.image3}
+						&nbsp;
+					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.image4}
 						&nbsp;
 					</td>
 				</tr>

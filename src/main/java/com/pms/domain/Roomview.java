@@ -33,8 +33,8 @@ import javax.persistence.*;
 		@NamedQuery(name = "findRoomviewByRoomViewId", query = "select myRoomview from Roomview myRoomview where myRoomview.roomViewId = ?1") })
 @Table(catalog = "stubpms", name = "roomview")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Roomview")
-@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
+@XmlType(namespace = "PMS/com/pms/domain", name = "Roomview")
+@XmlRootElement(namespace = "PMS/com/pms/domain")
 public class Roomview implements Serializable {
 	private static final long serialVersionUID = 1L;
 

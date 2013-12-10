@@ -40,6 +40,8 @@ public interface GuestService {
 	/**
 	 */
 	public Guest findGuestByPrimaryKey(Integer guestId);
+	
+	public Guest findGuestByLastNameEmail(String guestLastName, String email);
 
 	/**
 	 * Delete an existing Members entity

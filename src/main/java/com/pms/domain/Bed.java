@@ -33,8 +33,8 @@ import javax.persistence.*;
 		@NamedQuery(name = "findBedByPrimaryKey", query = "select myBed from Bed myBed where myBed.bedId = ?1") })
 @Table(catalog = "stubpms", name = "bed")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Bed")
-@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
+@XmlType(namespace = "PMS/com/pms/domain", name = "Bed")
+@XmlRootElement(namespace = "PMS/com/pms/domain")
 public class Bed implements Serializable {
 	private static final long serialVersionUID = 1L;
 

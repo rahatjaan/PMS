@@ -35,6 +35,15 @@
 					</tr>
 					<tr>
 						<td class="label" valign="top">
+							<fmt:message key="room.roomrate.title"/>:
+						</td>
+						<td>
+							<form:input id="room_roomRate" path="roomRate" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "room_roomRate",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="room.roomrate.help"/>"}})); </script>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
 							<fmt:message key="room.iscomposite.title"/>:
 						</td>
 						<td>

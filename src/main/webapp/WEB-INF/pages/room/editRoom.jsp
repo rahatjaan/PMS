@@ -16,6 +16,11 @@
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
 					<tr>
+						<td>
+							<form:hidden id="room_id" path="roomId" value=""/>
+						</td>
+					</tr>
+					<tr>
 						<td class="label" valign="top">
 							<fmt:message key="room.roomcategory.title"/>:
 						</td>
@@ -31,6 +36,15 @@
 						<td>
 							<form:input id="room_isSmoking" path="isSmoking" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "room_isSmoking",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="room.issmoking.help"/>"}})); </script>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Room Rate:
+						</td>
+						<td>
+							<form:input id="room_roomRate" path="roomRate" cssStyle="width:300px;"/>
+							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "room_roomRate",widgetType : "dijit.form.NumberTextBox",widgetAttrs : {promptMessage: "<fmt:message key="room.roomrate.help"/>"}})); </script>
 						</td>
 					</tr>
 					<tr>

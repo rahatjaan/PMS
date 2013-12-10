@@ -1,6 +1,7 @@
 package com.pms.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -48,8 +49,8 @@ import org.springframework.web.multipart.MultipartFile;
 		@NamedQuery(name = "findRoomByRoomId", query = "select myRoom from Room myRoom where myRoom.roomId = ?1") })
 @Table(catalog = "stubpms", name = "room")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Room")
-@XmlRootElement(namespace = "PMSSTUB/com/pms/domain")
+@XmlType(namespace = "PMS/com/pms/domain", name = "Room")
+@XmlRootElement(namespace = "PMS/com/pms/domain")
 public class Room implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -84,6 +85,11 @@ public class Room implements Serializable {
 	String isComposite;
 	/**
 	 */
+	
+	@Column(name = "room_rate", scale = 2, precision = 5)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	BigDecimal roomRate;
 
 	@Column(name = "floor_number", length = 50)
 	@Basic(fetch = FetchType.EAGER)
@@ -135,6 +141,18 @@ public class Room implements Serializable {
 	@OneToMany(mappedBy = "room", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
 	@XmlElement(name = "", namespace = "")
 	java.util.Set<com.pms.domain.Reservation> reservations;
+	
+	String error;
+	
+	
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
 
 	/**
 	 */
@@ -249,6 +267,14 @@ public class Room implements Serializable {
 		this.reservations = reservations;
 	}
 
+	public BigDecimal getRoomRate() {
+		return roomRate;
+	}
+
+	public void setRoomRate(BigDecimal roomRate) {
+		this.roomRate = roomRate;
+	}
+
 	/**
 	 */
 	@JsonIgnore
@@ -294,6 +320,8 @@ public class Room implements Serializable {
 
 		return buffer.toString();
 	}
+	
+	
 
 	/**
 	 */

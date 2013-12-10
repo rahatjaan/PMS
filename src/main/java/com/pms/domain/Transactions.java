@@ -35,7 +35,7 @@ import javax.persistence.*;
 		@NamedQuery(name = "findTransactionsByTransactionId", query = "select myTransactions from Transactions myTransactions where myTransactions.transactionId = ?1") })
 @Table(catalog = "stubpms", name = "transactions")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "PMSSTUB/com/pms/domain", name = "Transactions")
+@XmlType(namespace = "PMS/com/pms/domain", name = "Transactions")
 public class Transactions implements Serializable {
 	private static final long serialVersionUID = 1L;
 

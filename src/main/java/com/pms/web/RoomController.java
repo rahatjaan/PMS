@@ -121,9 +121,18 @@ public class RoomController {
 	 */
 	@RequestMapping("/editRoom")
 	public ModelAndView editRoom(@RequestParam Integer roomIdKey) {
-		ModelAndView mav = new ModelAndView();
-
-		mav.addObject("room", roomDAO.findRoomByPrimaryKey(roomIdKey));
+		ModelAndView mav = new ModelAndView();Map<Integer,String> roomTypeList = new LinkedHashMap<Integer,String>();
+		Set<Roomtype> roomTypeSet = roomtypeDAO.findAllRoomtypes();
+		Room r = roomDAO.findRoomByPrimaryKey(roomIdKey);
+		roomTypeList.put(r.getRoomtype().getRoomTypeId(), r.getRoomtype().getRoomTypeCode());
+		for(Roomtype rT : roomTypeSet){
+			if(rT.getRoomTypeId() == r.getRoomtype().getRoomTypeId()){
+				continue;
+			}
+			roomTypeList.put(rT.getRoomTypeId(), rT.getRoomTypeCode());
+	    }
+		mav.addObject("room", r);
+		mav.addObject("roomTypeList", roomTypeList);
 		mav.setViewName("room/editRoom.jsp");
 
 		return mav;
@@ -331,8 +340,8 @@ public class RoomController {
 				  
 				try {  
 					   inputStream = file1.getInputStream();  
-					  
-					   File newFile = new File("C:\\Program Files (x86)\\apache-tomcat-6.0.37\\webapps\\pms\\roomimages\\"+file1.getOriginalFilename());  
+					  System.out.println(file1.getOriginalFilename());
+					   File newFile = new File("/usr/local/pms/apache-tomcat-7.0.42/webapps/pms/roomimages/"+file1.getOriginalFilename());  
 					   if (!newFile.exists()) {  
 					    newFile.createNewFile();  
 					   }  
@@ -343,7 +352,7 @@ public class RoomController {
 					   while ((read = inputStream.read(bytes)) != -1) {  
 					    outputStream.write(bytes, 0, read);  
 					   }  
-					   room.setImage1(newFile.getAbsolutePath());
+					   room.setImage1("http://65.181.118.166:9090/pms/roomimages/"+file1.getOriginalFilename());
 					   outputStream.close();
 					   inputStream.close();
 					  } catch (IOException e) {  
@@ -353,8 +362,8 @@ public class RoomController {
 				
 				try {  
 					   inputStream = file2.getInputStream();  
-					  
-					   File newFile = new File("C:\\Program Files (x86)\\apache-tomcat-6.0.37\\webapps\\pms\\roomimages\\"+file2.getOriginalFilename());  
+					   System.out.println(file2.getOriginalFilename());
+					   File newFile = new File("/usr/local/pms/apache-tomcat-7.0.42/webapps/pms/roomimages/"+file2.getOriginalFilename());  
 					   if (!newFile.exists()) {  
 					    newFile.createNewFile();  
 					   }  
@@ -367,7 +376,7 @@ public class RoomController {
 					   }  
 					   outputStream.close();
 					   inputStream.close();
-					   room.setImage2(newFile.getAbsolutePath());
+					   room.setImage2("http://65.181.118.166:9090/pms/roomimages/"+file2.getOriginalFilename());
 					  } catch (IOException e) {  
 					   // TODO Auto-generated catch block  
 					   //e.printStackTrace();  
@@ -375,8 +384,8 @@ public class RoomController {
 				
 				try {  
 					   inputStream = file3.getInputStream();  
-					  
-					   File newFile = new File("C:\\Program Files (x86)\\apache-tomcat-6.0.37\\webapps\\pms\\roomimages\\"+file3.getOriginalFilename());  
+					   System.out.println(file3.getOriginalFilename());
+					   File newFile = new File("/usr/local/pms/apache-tomcat-7.0.42/webapps/pms/roomimages/"+file3.getOriginalFilename());  
 					   if (!newFile.exists()) {  
 					    newFile.createNewFile();  
 					   }  
@@ -389,7 +398,7 @@ public class RoomController {
 					   }  
 					   outputStream.close();
 					   inputStream.close();
-					   room.setImage3(newFile.getAbsolutePath());
+					   room.setImage3("http://65.181.118.166:9090/pms/roomimages/"+file3.getOriginalFilename());
 					  } catch (IOException e) {  
 					   // TODO Auto-generated catch block  
 					   //e.printStackTrace();  
@@ -397,8 +406,8 @@ public class RoomController {
 				
 				try {  
 					   inputStream = file4.getInputStream();  
-					  
-					   File newFile = new File("C:\\Program Files (x86)\\apache-tomcat-6.0.37\\webapps\\pms\\roomimages\\"+file4.getOriginalFilename());  
+					   System.out.println(file4.getOriginalFilename());
+					   File newFile = new File("/usr/local/pms/apache-tomcat-7.0.42/webapps/pms/roomimages/"+file4.getOriginalFilename());  
 					   if (!newFile.exists()) {  
 					    newFile.createNewFile();  
 					   }  
@@ -411,7 +420,7 @@ public class RoomController {
 					   }  
 					   outputStream.close();
 					   inputStream.close();
-					   room.setImage4(newFile.getAbsolutePath());
+					   room.setImage4("http://65.181.118.166:9090/pms/roomimages/"+file4.getOriginalFilename());
 					  } catch (IOException e) {  
 					   // TODO Auto-generated catch block  
 					   //e.printStackTrace();  
@@ -431,6 +440,10 @@ public class RoomController {
         document.setContent(blob);
         document.setContentType(file.getContentType());
 		roomService.saveRoom(room);*/
+				System.out.println("BEFORE SAVE: "+room.getImage1());
+				System.out.println("BEFORE SAVE: "+room.getImage2());
+				System.out.println("BEFORE SAVE: "+room.getImage3());
+				System.out.println("BEFORE SAVE: "+room.getImage4());
 		roomService.saveRoom(room);
 		return "forward:/indexRoom";
 	}

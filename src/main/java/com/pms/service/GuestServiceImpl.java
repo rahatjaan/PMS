@@ -237,4 +237,21 @@ public class GuestServiceImpl implements GuestService {
 
 		return guest;
 	}
+
+	@Override
+	public Guest findGuestByLastNameEmail(String guestLastName, String email) {
+		Set<Guest> guest = guestDAO.findGuestByEmail(email);
+		System.out.println("Guests found by EMAIL: "+guest.size());
+		for(Guest g: guest){
+			System.out.println("Guest Last Name: "+g.getLastName());
+			System.out.println("Guest Last Name Request: "+guestLastName);
+			boolean flag = g.getLastName().trim().equalsIgnoreCase(guestLastName.trim());
+			System.out.println("FLAG: "+flag);
+			if(flag){
+				System.out.println("INSIDE FLAG");
+				return g;
+			}
+		}
+		return null;
+	}
 }

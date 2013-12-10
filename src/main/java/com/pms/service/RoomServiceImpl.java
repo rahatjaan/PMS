@@ -152,9 +152,14 @@ public class RoomServiceImpl implements RoomService {
 			if (existingRoom != room) {
 				existingRoom.setRoomId(room.getRoomId());
 				existingRoom.setRoomCategory(room.getRoomCategory());
+				existingRoom.setRoomRate(room.getRoomRate());
 				existingRoom.setIsSmoking(room.getIsSmoking());
 				existingRoom.setIsComposite(room.getIsComposite());
 				existingRoom.setFloorNumber(room.getFloorNumber());
+				existingRoom.setImage1(room.getImage1());
+				existingRoom.setImage2(room.getImage2());
+				existingRoom.setImage3(room.getImage3());
+				existingRoom.setImage4(room.getImage4());
 			}
 			room = roomDAO.store(existingRoom);
 		} else {
