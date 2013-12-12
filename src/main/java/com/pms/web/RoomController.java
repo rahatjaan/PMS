@@ -335,7 +335,6 @@ public class RoomController {
 				System.out.println(System.getProperty("user.dir"));
 				InputStream inputStream = null;
 				OutputStream outputStream = null;
-				String path = System.getProperty("user.dir");
 				  
 				  
 				try {  

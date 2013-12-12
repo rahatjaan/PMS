@@ -2,7 +2,6 @@ package com.pms.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -29,7 +28,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  */

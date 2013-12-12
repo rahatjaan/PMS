@@ -2,7 +2,6 @@ package com.pms.webservice;
 
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,8 +71,6 @@ public class SoapOperationService {
         System.out.println(isSmoking);
         try{
         	System.out.println("HERE1");
-        	String query = "select myRoom from Room myRoom where ";
-        	int counter = 1;
         	rooms = roomService.findAllRooms(-1, -1);
         	System.out.println("HERE2");
         	if(null != rooms){
@@ -145,7 +142,6 @@ public class SoapOperationService {
     
     @WebMethod(operationName = "updateGuestStayInfo")
     public Reservation updateGuestStayInfo(@WebParam(name = "confirmationNumber") Integer reservationId,@WebParam(name = "departureDate") String departureDate,@WebParam(name = "guestLastName") String guestLastName,@WebParam(name = "guestEmail") String email) {
-    	Reservation res = new Reservation();
     	boolean flag = false;
     	try{
 	    	Guest guest = guestService.findGuestByLastNameEmail(guestLastName, email);
