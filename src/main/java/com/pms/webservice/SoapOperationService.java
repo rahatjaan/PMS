@@ -83,6 +83,8 @@ public class SoapOperationService {
         System.out.println(isSmoking);
         try{
         	System.out.println("HERE1");
+        	String query = "select myRoom from Room myRoom where ";
+        	int counter = 1;
         	rooms = roomService.findAllRooms(-1, -1);
         	System.out.println("HERE2");
         	if(null != rooms){
@@ -153,7 +155,6 @@ public class SoapOperationService {
         return room;
     }
     
-<<<<<<< HEAD
     @WebMethod(operationName = "updateReservation")
     public Reservation updateGuestStayInfo(@WebParam(name = "confirmationNumber") String reservationId,@WebParam(name = "departureDate") String departureDate,@WebParam(name = "arrivalDate") String arrivalDate,@WebParam(name = "reservationDetails") UpdateReservationReq resDetails) {
     	try{
@@ -189,10 +190,6 @@ public class SoapOperationService {
     
     private Reservation updateReservation(String reservationId,String departureDate,String arrivalDate,UpdateReservationReq resDetails){
     	Integer reservation_id;
-=======
-    @WebMethod(operationName = "updateGuestStayInfo")
-    public Reservation updateGuestStayInfo(@WebParam(name = "confirmationNumber") Integer reservationId,@WebParam(name = "departureDate") String departureDate,@WebParam(name = "guestLastName") String guestLastName,@WebParam(name = "guestEmail") String email) {
->>>>>>> 30bab868df3d2154ce37d96c3c120b825d55d852
     	boolean flag = false;
     	try{
 	    	Reservation reservation = reservationService.findReservationByConfirmationNumber(reservationId);

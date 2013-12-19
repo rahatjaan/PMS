@@ -4,23 +4,30 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.pms.dao.ReservationDAO;
+import com.pms.dao.TransactionsDAO;
+
+import com.pms.domain.Reservation;
+import com.pms.domain.Roomtype;
+import com.pms.domain.Transactions;
+
+import com.pms.service.TransactionsService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.WebDataBinder;
+
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.pms.dao.ReservationDAO;
-import com.pms.dao.TransactionsDAO;
-import com.pms.domain.Reservation;
-import com.pms.domain.Transactions;
-import com.pms.service.TransactionsService;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Spring MVC controller that handles CRUD requests for Transactions entities
