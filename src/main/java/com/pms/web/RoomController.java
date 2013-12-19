@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -228,7 +229,12 @@ public class RoomController {
 		for(Roomtype rT : roomTypeSet){
 			roomTypeList.put(rT.getRoomTypeId(), rT.getRoomTypeCode());
 	    }
-		mav.addObject("room", new Room());
+		Room room=new Room();
+		room.setIsComposite("0");
+		room.setIsSmoking("0");
+		room.setRoomRate(new BigDecimal(289.0));
+		room.setFloorNumber("1");
+		mav.addObject("room", room);
 		mav.addObject("roomTypeList", roomTypeList);
 		mav.addObject("newFlag", true);
 		mav.setViewName("room/editRoom.jsp");
@@ -335,7 +341,6 @@ public class RoomController {
 				System.out.println(System.getProperty("user.dir"));
 				InputStream inputStream = null;
 				OutputStream outputStream = null;
-				String path = System.getProperty("user.dir");
 				  
 				  
 				try {  
