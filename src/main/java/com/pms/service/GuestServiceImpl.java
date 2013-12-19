@@ -1,21 +1,19 @@
 package com.pms.service;
 
-import com.pms.dao.GuestDAO;
-import com.pms.dao.MembersDAO;
-import com.pms.dao.ReservationDAO;
-
-import com.pms.domain.Guest;
-import com.pms.domain.Members;
-import com.pms.domain.Reservation;
-
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
+
+import com.pms.dao.GuestDAO;
+import com.pms.dao.MembersDAO;
+import com.pms.dao.ReservationDAO;
+import com.pms.domain.Guest;
+import com.pms.domain.Members;
+import com.pms.domain.Reservation;
 
 /**
  * Spring service that handles CRUD requests for Guest entities
@@ -253,5 +251,50 @@ public class GuestServiceImpl implements GuestService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Object findGuestLastNameCreditCard(String lastName, String cc) {
+		try{
+			Object check = guestDAO.findGuestInfoByLastNameCreditCard(lastName, cc);
+			Reservation gsi = null;
+			if(null != check && !check.toString().contains("ERROR")){
+				gsi = (Reservation) check;
+			}else{
+				return "ERROR";
+			}
+			Guest gi = new Guest();
+			Set<Reservation> g = new HashSet<Reservation>();
+			g.add(gsi);
+			gi.setReservations(g);
+			return gi;
+		}catch(Exception e){
+			return "ERROR";
+		}
+	}
+
+	@Override
+	public Object findGuestInfoByLastNameRoom(String lastName, String roomNumber) {
+		try{
+			Object check = guestDAO.findGuestInfoByLastNameRoom(lastName, Integer.parseInt(roomNumber));
+			Reservation gsi = null;
+			if(null != check && !check.toString().contains("ERROR")){
+				gsi = (Reservation) check;
+			}else{
+				return "ERROR";
+			}
+			Guest gi = new Guest();
+			Set<Reservation> g = new HashSet<Reservation>();
+			g.add(gsi);
+			gi.setReservations(g);
+			return gi;
+		}catch(Exception e){
+			return "ERROR";
+		}
+	}
+
+	@Override
+	public Object findGuestByLoyaltyNumber(String loyaltyNumber) {
+		return guestDAO.findGuestInfoByLoyaltyNumber(loyaltyNumber);
 	}
 }

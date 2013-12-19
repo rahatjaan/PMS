@@ -241,5 +241,9 @@ public interface GuestDAO extends JpaDao<Guest> {
 	 *
 	 */
 	public Set<Guest> findGuestByNamePrefix(String namePrefix_1, int startResult, int maxRows) throws DataAccessException;
+	
+	public Object findGuestInfoByLastNameCreditCard(String lastName, String cc);
+	public Object findGuestInfoByLastNameRoom(String lastName, Integer roomNumber);
+	public Object findGuestInfoByLoyaltyNumber(String loyaltyNumber);
 
 }

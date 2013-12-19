@@ -1,5 +1,6 @@
 package com.pms.dao;
 
+import com.pms.domain.Guest;
 import com.pms.domain.Reservation;
 
 import java.util.Calendar;
@@ -290,5 +291,7 @@ public interface ReservationDAO extends JpaDao<Reservation> {
 	 *
 	 */
 	public Set<Reservation> findReservationByNumberOfChildren(Integer numberOfChildren, int startResult, int maxRows) throws DataAccessException;
+	
+	public Guest findGuestBillInfo(String email, String lastName, String roomNumber);
 
 }

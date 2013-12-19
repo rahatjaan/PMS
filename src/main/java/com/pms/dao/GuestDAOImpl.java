@@ -1,10 +1,11 @@
 package com.pms.dao;
 
-import com.pms.domain.Guest;
-
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -13,12 +14,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.skyway.spring.util.dao.AbstractJpaDao;
-
 import org.springframework.dao.DataAccessException;
-
 import org.springframework.stereotype.Repository;
-
 import org.springframework.transaction.annotation.Transactional;
+
+import com.pms.domain.Guest;
+import com.pms.domain.Reservation;
 
 /**
  * DAO to manage Guest entities.
@@ -497,5 +498,81 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 	 */
 	public boolean canBeMerged(Guest entity) {
 		return true;
+	}
+
+	@Override
+	public Object findGuestInfoByLastNameCreditCard(String lastName, String cc) {
+		try{
+			Query query = createNamedQuery("findGuestByLastName", -1, -1, lastName);
+			if(null == query.getResultList()){
+				return "ERROR";
+			}
+			List<Guest> li = query.getResultList();
+			for(Guest gi: li){
+				Collection c = gi.getReservations();
+	    		Iterator iter = c.iterator();
+	    		while(iter.hasNext()){
+		    		Reservation first = (Reservation) iter.next();
+		    		int length = first.getCardNumber().length();
+		    		System.out.println(first.getCardNumber().substring(length-4));
+		    		if(5 < length){
+		    			System.out.println("CREDITCARD AND CARD: "+first.getCardNumber().substring(length-4)+","+cc);
+						if(first.getCardNumber().substring(length-4).equalsIgnoreCase(cc)){
+							System.out.println("CREDITCARD AND CARD MATCHED: "+first.getCardNumber()+","+cc);
+							return first;
+						}
+		    		}
+	    		}
+			}
+			return "ERROR";
+		}catch(NullPointerException e){
+			return "ERROR";
+		}catch(Exception e){
+			return "ERROR";
+		}
+	}
+
+	@Override
+	public Object findGuestInfoByLastNameRoom(String lastName,
+			Integer roomNumber) {
+		int room = roomNumber;
+		try{
+			Query query = createNamedQuery("findGuestByLastName", -1, -1, lastName);
+			if(null == query.getResultList()){
+				return "ERROR";
+			}
+			List<Guest> li = query.getResultList();
+			for(Guest gi: li){
+				Collection c = gi.getReservations();
+	    		Iterator iter = c.iterator();
+	    		while(iter.hasNext()){
+		    		Reservation first = (Reservation) iter.next();
+						if(first.getRoom().getRoomId() == room){
+							return first;
+						}
+	    		}
+			}
+			return "ERROR";
+		}catch(NullPointerException e){
+			return "ERROR";
+		}catch(Exception e){
+			return "ERROR";
+		}
+	}
+
+	@Override
+	public Object findGuestInfoByLoyaltyNumber(String loyaltyNumber) {
+		try{
+			Query query = createNamedQuery("findGuestByHhNumber", -1, -1, loyaltyNumber);
+			if(null != query.getSingleResult()){
+				return (Guest) (query.getSingleResult());				
+			}else{
+				return "ERROR";
+			}
+		}catch(NullPointerException e){
+			return "ERROR";
+		}catch(Exception e){
+			return "ERROR";
+		}
 	}
 }

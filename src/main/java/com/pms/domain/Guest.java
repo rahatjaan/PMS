@@ -37,6 +37,8 @@ import javax.persistence.*;
 		@NamedQuery(name = "findGuestByEmail", query = "select myGuest from Guest myGuest where myGuest.email = ?1"),
 		@NamedQuery(name = "findGuestByEmailContaining", query = "select myGuest from Guest myGuest where myGuest.email like ?1"),
 		@NamedQuery(name = "findGuestByFirstName", query = "select myGuest from Guest myGuest where myGuest.firstName = ?1"),
+		@NamedQuery(name = "findGuestBillInfo", query = "select myGuest from Reservation myReservation, Transactions myTransactions, Guest myGuest where myGuest.email = ?1 and myGuest.lastName = ?2 and myReservation.room.roomId = ?3"),
+		@NamedQuery(name = "findGuestInfoByHhNumber", query = "select myGuest from Guest myGuest where myGuest.loyaltyNumber = ?1"),
 		@NamedQuery(name = "findGuestByFirstNameContaining", query = "select myGuest from Guest myGuest where myGuest.firstName like ?1"),
 		@NamedQuery(name = "findGuestByGuestId", query = "select myGuest from Guest myGuest where myGuest.guestId = ?1"),
 		@NamedQuery(name = "findGuestByLastName", query = "select myGuest from Guest myGuest where myGuest.lastName = ?1"),
@@ -113,6 +115,11 @@ public class Guest implements Serializable {
 	String country;
 	/**
 	 */
+	@Column(name = "loyalty_number", length = 200)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String loyaltyNumber;
+	
 
 	@Column(name = "mobile_number", length = 200)
 	@Basic(fetch = FetchType.EAGER)
@@ -124,8 +131,17 @@ public class Guest implements Serializable {
 	@XmlElement
 	byte[] userPic;
 	
+	transient String error;
 	
 	
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
+	}
+
 	public byte[] getUserPic() {
 		return userPic;
 	}
@@ -156,6 +172,16 @@ public class Guest implements Serializable {
 	 */
 	public Integer getGuestId() {
 		return this.guestId;
+	}
+	
+	
+
+	public String getLoyaltyNumber() {
+		return loyaltyNumber;
+	}
+
+	public void setLoyaltyNumber(String loyaltyNumber) {
+		this.loyaltyNumber = loyaltyNumber;
 	}
 
 	/**

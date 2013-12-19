@@ -305,4 +305,17 @@ public class ReservationServiceImpl implements ReservationService {
 		}
 		reservationDAO.flush();
 	}
+
+	@Override
+	public Guest findGuestBillInfo(String email, String lastName,
+			String roomNumber) {
+		return reservationDAO.findGuestBillInfo(email,lastName,roomNumber);
+	}
+
+	@Override
+	public Reservation findReservationByConfirmationNumber(String confirmationNumber) {
+		// TODO Auto-generated method stub
+		return reservationDAO.findReservationByReservationId(Integer.parseInt(confirmationNumber));
+		//return null;
+	}
 }

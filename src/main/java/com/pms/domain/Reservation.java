@@ -100,6 +100,11 @@ public class Reservation implements Serializable {
 	String cardNumber;
 	/**
 	 */
+	
+	@Column(name = "special_requests", length = 1000)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String specialRequests;
 
 	@Column(name = "cvv_number", length = 10)
 	@Basic(fetch = FetchType.EAGER)
@@ -171,7 +176,7 @@ public class Reservation implements Serializable {
 	@XmlElement(name = "", namespace = "")
 	java.util.Set<com.pms.domain.Transactions> transactionses;
 
-	private String error;
+	private transient String error;
 	
 	
 	public String getError() {
@@ -192,6 +197,16 @@ public class Reservation implements Serializable {
 	 */
 	public Integer getReservationId() {
 		return this.reservationId;
+	}
+	
+	
+
+	public String getSpecialRequests() {
+		return specialRequests;
+	}
+
+	public void setSpecialRequests(String specialRequests) {
+		this.specialRequests = specialRequests;
 	}
 
 	/**

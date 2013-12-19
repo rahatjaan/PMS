@@ -1,10 +1,9 @@
 package com.pms.dao;
 
-import com.pms.domain.Reservation;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -13,12 +12,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.skyway.spring.util.dao.AbstractJpaDao;
-
 import org.springframework.dao.DataAccessException;
-
 import org.springframework.stereotype.Repository;
-
 import org.springframework.transaction.annotation.Transactional;
+
+import com.pms.domain.Guest;
+import com.pms.domain.Reservation;
 
 /**
  * DAO to manage Reservation entities.
@@ -586,5 +585,38 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 	 */
 	public boolean canBeMerged(Reservation entity) {
 		return true;
+	}
+
+	@Override
+	public Guest findGuestBillInfo(String email, String lastName,
+			String roomNumber) {
+		Query query = null;
+		System.out.println("NAME: "+lastName+"ROOM: "+roomNumber+"EMAIL: "+email);
+		try{
+			query = createNamedQuery("findGuestBillInfo", -1, -1, email, lastName, Integer.parseInt(roomNumber));
+			List<Guest> ob = query.getResultList();
+			int i = 0;
+			System.out.println("LIST SIZE BILL INFO IS: "+ob.size());
+			while(ob.size() > i){
+				Guest o = ob.get(i);
+				Set<Reservation> se = o.getReservations();
+				System.out.println("GUEST INFO LIST SIZE BILL INFO IS: "+se.size());
+				for (Reservation s : se) {
+					System.out.println("Lastname: "+o.getLastName()+"   Email: "+o.getEmail()+"   Room: "+s.getRoom().getRoomId());
+					System.out.println("NAME: "+lastName+"ROOM: "+roomNumber+"EMAIL: "+email);
+				    if(o.getLastName().equalsIgnoreCase(lastName) && o.getEmail().equalsIgnoreCase(email) && Integer.toString(s.getRoom().getRoomId()).equalsIgnoreCase(roomNumber)){
+				    	Set<Reservation> sss = new HashSet<Reservation>();
+				    	sss.add(s);
+				    	o.setReservations(sss);
+				    	return o;
+				    }
+				}		
+				i++;
+			}
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

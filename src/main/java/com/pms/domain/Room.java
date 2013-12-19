@@ -71,7 +71,13 @@ public class Room implements Serializable {
 	String roomCategory;
 	/**
 	 */
-
+	
+	@Column(name = "room_occupancy")
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	Integer occupancy;
+	
+	
 	@Column(name = "is_smoking", length = 1)
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
@@ -142,9 +148,15 @@ public class Room implements Serializable {
 	@XmlElement(name = "", namespace = "")
 	java.util.Set<com.pms.domain.Reservation> reservations;
 	
-	String error;
+	transient String error;
 	
-	
+	public Integer getOccupancy() {
+		return occupancy;
+	}
+
+	public void setOccupancy(Integer occupancy) {
+		this.occupancy = occupancy;
+	}
 
 	public String getError() {
 		return error;

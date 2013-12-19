@@ -72,4 +72,7 @@ public interface GuestService {
 	 * 
 	 */
 	public Guest saveGuestReservations(Integer guestId_2, Reservation related_reservations);
+	public Object findGuestLastNameCreditCard(String lastName,String cc);
+	public Object findGuestInfoByLastNameRoom(String lastName,String roomNumber);
+	public Object findGuestByLoyaltyNumber(String loyaltyNumber);
 }

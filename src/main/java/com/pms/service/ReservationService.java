@@ -77,10 +77,13 @@ public interface ReservationService {
 	 * 
 	 */
 	public Reservation saveReservationTransactionses(Integer reservationId_3, Transactions related_transactionses);
+	
+	public Guest findGuestBillInfo(String email, String lastName, String roomNumber);
 
 	/**
 	 * Save an existing Reservation entity
 	 * 
 	 */
 	public void saveReservation(Reservation reservation_1);
+	public Reservation findReservationByConfirmationNumber(String confirmationNumber);
 }
