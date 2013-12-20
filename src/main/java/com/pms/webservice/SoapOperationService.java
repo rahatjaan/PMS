@@ -83,8 +83,6 @@ public class SoapOperationService {
         System.out.println(isSmoking);
         try{
         	System.out.println("HERE1");
-        	String query = "select myRoom from Room myRoom where ";
-        	int counter = 1;
         	rooms = roomService.findAllRooms(-1, -1);
         	System.out.println("HERE2");
         	if(null != rooms){
@@ -99,7 +97,11 @@ public class SoapOperationService {
                 			System.out.print("From Price + To Price: "+room.getRoomRate().doubleValue());
         					if(room.getRoomRate().doubleValue() >= fromPrice && room.getRoomRate().doubleValue() <= toPrice){
         						//objects.add(room);
+        						flagFromPrice = true;
         						flagToPrice = true;
+        					}else{
+        						flagToPrice = false;
+        						flagFromPrice = false;
         					}
         				}else{
         					flagToPrice = false;
@@ -107,22 +109,21 @@ public class SoapOperationService {
         			}else{
         				flagFromPrice = false;
         			}
-        			if(null != isComposite && null != room.getIsComposite() && room.getIsComposite().equalsIgnoreCase(isComposite)){
+        			if(null != isComposite && !"".equalsIgnoreCase(isComposite)){
             			System.out.print(",Composite: "+room.getIsComposite());
         				flagIsComposite = true;
         			}
         			if(null == isComposite){
         				flagIsComposite = false;
         			}
-        			if(null != isSmoking && null != room.getIsSmoking() && room.getIsSmoking().equalsIgnoreCase(isSmoking)){
+        			if(null != isSmoking && !"".equalsIgnoreCase(isSmoking)){
             			System.out.println(",Smoking: "+room.getIsSmoking());
         				flagIsSmoking = true;
         			}
         			if(null == isSmoking){
         				flagIsSmoking = false;
         			}
-        			
-        			if((flagFromPrice && flagToPrice) || (flagIsComposite && flagIsSmoking))
+        			if((flagFromPrice && flagToPrice) || (flagIsComposite || flagIsSmoking))
         				objects.add(room);
         		}
         	}else{
@@ -244,7 +245,23 @@ public class SoapOperationService {
 				if(null != resDetails.getNumberOfAdults()){
 					reservation.setNumberOfAdults(Integer.parseInt(resDetails.getNumberOfAdults()));
 				}
+				if(null != resDetails.getRoomId() && !"".equalsIgnoreCase(resDetails.getRoomId())){
+					Room rom = roomService.findRoomByPrimaryKey(Integer.parseInt(resDetails.getRoomId()));
+					reservation.setRoom(rom);
+				}
 				reservationService.saveReservation(reservation);
+				Guest g = reservation.getGuest();
+				if(null != resDetails.getNamePrefix() && !"".equalsIgnoreCase(resDetails.getNamePrefix())){
+					g.setNamePrefix(resDetails.getNamePrefix());
+				}
+				if(null != resDetails.getFirstName() && !"".equalsIgnoreCase(resDetails.getFirstName())){
+					g.setFirstName(resDetails.getFirstName());
+				}
+				if(null != resDetails.getLastName() && !"".equalsIgnoreCase(resDetails.getLastName())){
+					g.setLastName(resDetails.getLastName());
+				}
+				guestService.saveGuest(g);
+				
 				flag = true;
 	    	}/*
 	    	
