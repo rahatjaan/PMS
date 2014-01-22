@@ -69,11 +69,11 @@ public class MembersRestController {
 	 * Show all Guest entities by Members
 	 * 
 	 */
-	@RequestMapping(value = "/Members/{members_memberId}/guests", method = RequestMethod.GET)
-	@ResponseBody
-	public List<Guest> getMembersGuests(@PathVariable String members_memberId) {
-		return new java.util.ArrayList<Guest>(membersDAO.findMembersByPrimaryKey(members_memberId).getGuests());
-	}
+//	@RequestMapping(value = "/Members/{members_memberId}/guests", method = RequestMethod.GET)
+//	@ResponseBody
+//	public List<Guest> getMembersGuests(@PathVariable String members_memberId) {
+//		return new java.util.ArrayList<Guest>(membersDAO.findMembersByPrimaryKey(members_memberId).getGuests());
+//	}
 
 	/**
 	 * Delete an existing Guest entity

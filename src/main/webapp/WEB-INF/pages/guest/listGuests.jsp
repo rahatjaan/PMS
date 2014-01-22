@@ -92,7 +92,7 @@
 					</td>
 					<td nowrap="nowrap" class="tabletd">
 						
-							${current.members.memberId}
+							${current.memberShipNumber}
 						&nbsp;
 					</td>
 				</tr>

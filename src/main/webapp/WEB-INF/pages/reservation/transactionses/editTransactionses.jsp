@@ -20,6 +20,7 @@
 							<fmt:message key="transactions.transactiondate.title"/>:
 						</td>
 						<td>
+<%-- 						<input id="transactions_transactionDate" name="transactionDate" type="text" value="<fmt:formatDate value="${transactions.transactionDate.time}" pattern="yyyy-MM-dd"/>" dojoType="dijit.form.DateTextBox" constraints="{datePattern:'<fmt:message key="date.format"/>'}" trim="true" promptMessage="<fmt:message key="date.format" />" invalidMessage="<fmt:message key="date.format.invalid" /> <fmt:message key="date.format" />." style="width:300px;" /> --%>
 							<input id="transactions_transactionDate" name="transactionDate" type="text" value="<fmt:formatDate value="${transactions.transactionDate.time}" pattern="MM/dd/yyyy h:mm a"/>" style="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "transactions_transactionDate",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="navigation.dateTime.title"/>"}})); </script>
 						</td>

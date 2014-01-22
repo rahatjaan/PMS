@@ -13,6 +13,7 @@
 		<h1><fmt:message key="navigation.edit"/> <fmt:message key="reservation.title"/></h1>
 		<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexReservation"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>
 		<form:form action="${pageContext.request.contextPath}/saveReservation" method="POST" modelAttribute="reservation">
+		<form:hidden path="reservationId"/>
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
 					<tr>

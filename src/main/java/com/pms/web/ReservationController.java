@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -314,7 +315,19 @@ public class ReservationController {
 	@RequestMapping("/editReservation")
 	public ModelAndView editReservation(@RequestParam Integer reservationIdKey) {
 		ModelAndView mav = new ModelAndView();
+		Map<Integer,String> guestList = new LinkedHashMap<Integer,String>();
+		Set<Guest> guests = guestDAO.findAllGuests();
+		for(Guest rT : guests){
+			guestList.put(rT.getGuestId(), rT.getFirstName()+" "+rT.getLastName());
+	    }
 
+		Map<Integer,String> roomList = new LinkedHashMap<Integer,String>();
+		Set<Room> rooms = roomDAO.findAllRooms();
+		for(Room rT : rooms){
+			roomList.put(rT.getRoomId(), rT.getRoomCategory());
+	    }
+		mav.addObject("roomList", roomList);
+		mav.addObject("guestList", guestList);
 		mav.addObject("reservation", reservationDAO.findReservationByPrimaryKey(reservationIdKey));
 		mav.setViewName("reservation/editReservation.jsp");
 
@@ -329,7 +342,26 @@ public class ReservationController {
 	public ModelAndView newReservationTransactionses(@RequestParam Integer reservation_reservationId) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("reservation_reservationId", reservation_reservationId);
+		Transactions tr = new Transactions();
+		tr.setTransactionDate(Calendar.getInstance());
+		UUID idGen= UUID.randomUUID();
+		tr.setReferenceNumber(idGen.toString().substring(0, 5));
+		Map<Integer, String> reservationlist = new LinkedHashMap<Integer, String>();
+		Set<Reservation> reservations = reservationDAO.findAllReservations();
+		for (Reservation rT : reservations) {
+			try {
+				reservationlist.put(rT.getReservationId(), rT.getGuest()
+						.getFirstName()
+						+ " "
+						+ rT.getGuest().getLastName()
+						+ ":" + rT.getRoom().getRoomId());
+			} catch (Exception ex) {
+			}
+		}
 		mav.addObject("transactions", new Transactions());
+		mav.addObject("reservationlist", reservationlist);
+		mav.addObject("newFlag", true);
+		mav.addObject("transactions", tr);
 		mav.addObject("newFlag", true);
 		mav.setViewName("reservation/transactionses/editTransactionses.jsp");
 

@@ -71,8 +71,8 @@ public class MembersServiceImpl implements MembersService {
 			guestDAO.flush();
 		}
 
-		related_guests.setMembers(members);
-		members.getGuests().add(related_guests);
+//		related_guests.setMembers(members);
+//		members.getGuests().add(related_guests);
 		related_guests = guestDAO.store(related_guests);
 		guestDAO.flush();
 
@@ -147,8 +147,8 @@ public class MembersServiceImpl implements MembersService {
 
 		Members members = membersDAO.findMembersByPrimaryKey(members_memberId, -1, -1);
 
-		related_guests.setMembers(null);
-		members.getGuests().remove(related_guests);
+//		related_guests.setMembers(null);
+//		members.getGuests().remove(related_guests);
 
 		guestDAO.remove(related_guests);
 		guestDAO.flush();

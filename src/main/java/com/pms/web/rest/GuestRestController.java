@@ -89,11 +89,11 @@ public class GuestRestController {
 	 * Get Members entity by Guest
 	 * 
 	 */
-	@RequestMapping(value = "/Guest/{guest_guestId}/members", method = RequestMethod.GET)
-	@ResponseBody
-	public Members getGuestMembers(@PathVariable Integer guest_guestId) {
-		return guestDAO.findGuestByPrimaryKey(guest_guestId).getMembers();
-	}
+//	@RequestMapping(value = "/Guest/{guest_guestId}/members", method = RequestMethod.GET)
+//	@ResponseBody
+//	public Members getGuestMembers(@PathVariable Integer guest_guestId) {
+//		return guestDAO.findGuestByPrimaryKey(guest_guestId).getMembers();
+//	}
 
 	/**
 	 * Select an existing Guest entity

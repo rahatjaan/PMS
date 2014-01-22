@@ -125,6 +125,19 @@ public class Guest implements Serializable {
 	@Basic(fetch = FetchType.EAGER)
 	@XmlElement
 	String mobileNumber;
+	
+	@Column(name = "membership_number", length = 50)
+	@Basic(fetch = FetchType.EAGER)
+	@XmlElement
+	String memberShipNumber;
+	
+	public String getMemberShipNumber() {
+		return memberShipNumber;
+	}
+
+	public void setMemberShipNumber(String memberShipNumber) {
+		this.memberShipNumber = memberShipNumber;
+	}
 
 	@Column(name = "userPic")
 	@Basic(fetch = FetchType.EAGER)
@@ -152,10 +165,10 @@ public class Guest implements Serializable {
 
 	/**
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns({ @JoinColumn(name = "membership_number", referencedColumnName = "member_id") })
-	@XmlTransient
-	Members members;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumns({ @JoinColumn(name = "membership_number", referencedColumnName = "member_id") })
+//	@XmlTransient
+//	Members members;
 	/**
 	 */
 	@OneToMany(mappedBy = "guest", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
@@ -282,16 +295,16 @@ public class Guest implements Serializable {
 
 	/**
 	 */
-	public void setMembers(Members members) {
-		this.members = members;
-	}
-
-	/**
-	 */
-	@JsonIgnore
-	public Members getMembers() {
-		return members;
-	}
+//	public void setMembers(Members members) {
+//		this.members = members;
+//	}
+//
+//	/**
+//	 */
+//	@JsonIgnore
+//	public Members getMembers() {
+//		return members;
+//	}
 
 	/**
 	 */
@@ -328,7 +341,7 @@ public class Guest implements Serializable {
 		setEmail(that.getEmail());
 		setCountry(that.getCountry());
 		setMobileNumber(that.getMobileNumber());
-		setMembers(that.getMembers());
+//		setMembers(that.getMembers());
 		setReservations(new java.util.LinkedHashSet<com.pms.domain.Reservation>(that.getReservations()));
 	}
 

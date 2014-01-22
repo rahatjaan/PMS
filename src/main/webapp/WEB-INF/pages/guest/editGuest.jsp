@@ -92,7 +92,7 @@
 							<fmt:message key="members.memberid.title"/>:
 						</td>
 						<td>
-							<form:input id="guest_members_memberId" path="members.memberId" cssStyle="width:300px;"/>
+							<form:input id="guest_members_memberId" path="memberShipNumber" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "guest_members_memberId",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="members.memberid.help"/>"}})); </script>
 						</td>
 					</tr>

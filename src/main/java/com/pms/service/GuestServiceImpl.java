@@ -133,8 +133,8 @@ public class GuestServiceImpl implements GuestService {
 		Guest guest = guestDAO.findGuestByPrimaryKey(guest_guestId, -1, -1);
 		Members related_members = membersDAO.findMembersByPrimaryKey(related_members_memberId, -1, -1);
 
-		guest.setMembers(null);
-		related_members.getGuests().remove(guest);
+//		guest.setMembers(null);
+//		related_members.getGuests().remove(guest);
 		guest = guestDAO.store(guest);
 		guestDAO.flush();
 
@@ -166,8 +166,8 @@ public class GuestServiceImpl implements GuestService {
 			membersDAO.flush();
 		}
 
-		guest.setMembers(related_members);
-		related_members.getGuests().add(guest);
+//		guest.setMembers(related_members);
+//		related_members.getGuests().add(guest);
 		guest = guestDAO.store(guest);
 		guestDAO.flush();
 

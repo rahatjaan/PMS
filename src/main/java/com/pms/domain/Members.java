@@ -53,9 +53,9 @@ public class Members implements Serializable {
 
 	/**
 	 */
-	@OneToMany(mappedBy = "members", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
-	@XmlElement(name = "", namespace = "")
-	java.util.Set<com.pms.domain.Guest> guests;
+//	@OneToMany(mappedBy = "members", cascade = { CascadeType.REMOVE }, fetch = FetchType.LAZY)
+//	@XmlElement(name = "", namespace = "")
+//	java.util.Set<com.pms.domain.Guest> guests;
 
 	/**
 	 */
@@ -83,19 +83,19 @@ public class Members implements Serializable {
 
 	/**
 	 */
-	public void setGuests(Set<Guest> guests) {
-		this.guests = guests;
-	}
-
-	/**
-	 */
-	@JsonIgnore
-	public Set<Guest> getGuests() {
-		if (guests == null) {
-			guests = new java.util.LinkedHashSet<com.pms.domain.Guest>();
-		}
-		return guests;
-	}
+//	public void setGuests(Set<Guest> guests) {
+//		this.guests = guests;
+//	}
+//
+//	/**
+//	 */
+//	@JsonIgnore
+//	public Set<Guest> getGuests() {
+//		if (guests == null) {
+//			guests = new java.util.LinkedHashSet<com.pms.domain.Guest>();
+//		}
+//		return guests;
+//	}
 
 	/**
 	 */
@@ -109,7 +109,7 @@ public class Members implements Serializable {
 	public void copy(Members that) {
 		setMemberId(that.getMemberId());
 		setMembershipType(that.getMembershipType());
-		setGuests(new java.util.LinkedHashSet<com.pms.domain.Guest>(that.getGuests()));
+//		setGuests(new java.util.LinkedHashSet<com.pms.domain.Guest>(that.getGuests()));
 	}
 
 	/**

@@ -308,7 +308,7 @@
 			<div class="clear">&nbsp;</div>
 			<div class="spacer">&nbsp;</div>
 			<h1><fmt:message key="transactions.title"/></h1>
-					
+			<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/newReservationTransactionses?reservation_reservationId=${reservation.reservationId}" ><span><img src="images/icons/back.gif">New Transaction</span></a></div>		
 			
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<thead>
