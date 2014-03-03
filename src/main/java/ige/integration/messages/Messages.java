@@ -18,4 +18,6 @@ public class Messages {
 	public static final String RESERVATION_DESCRIPTION = "Please provide any of these three: (1). Reservation Confirmation Number (2). Last Name AND Last 4 digits of Credit Card (3). Hotel Loyalty Number  !!!Remember parameter names are case-sensitive!!!";
 	public static final String FOLIO_REASON = "Please verify if the number of input parameters are right and parameters are case-sensitive.";
 	public static final String FOLIO_DESCRIPTION = "Please provide these three in the right order: (1). terminalId (2). reservationNumber (3). folioType  !!!Remember parameter names are case-sensitive!!!";
+	public static final String BILL_INFO_VALIDATION_MESSAGE = "you must provide lastName and room number.";
+	public static final String BILL_INFO_NOT_FOUND_MSG = "No reservation is found with provided last Name,email and room number.";
 }

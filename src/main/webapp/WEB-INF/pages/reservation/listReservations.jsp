@@ -62,7 +62,7 @@
 					</td>
 					<td nowrap="nowrap" class="tabletd">
 						
-							<fmt:formatDate dateStyle="short" type="both" value="${current.arrivalDate.time}"/>
+							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" type="both" value="${current.arrivalDate.time}"/>
 						&nbsp;
 					</td>
 					<td nowrap="nowrap" class="tabletd">
@@ -72,7 +72,7 @@
 					</td>
 					<td nowrap="nowrap" class="tabletd">
 						
-							<fmt:formatDate dateStyle="short" type="both" value="${current.departureDate.time}"/>
+							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" type="both" value="${current.departureDate.time}"/>
 						&nbsp;
 					</td>
 					<td nowrap="nowrap" class="tabletd">

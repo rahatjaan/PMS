@@ -21,6 +21,8 @@
 					<th class="thead"><fmt:message key="guest.nameprefix.title"/></th>
 					<th class="thead"><fmt:message key="guest.firstname.title"/></th>
 					<th class="thead"><fmt:message key="guest.lastname.title"/></th>
+					<th class="thead">Loyalty Number</th>
+					
 					<th class="thead"><fmt:message key="guest.address1.title"/></th>
 					<th class="thead"><fmt:message key="guest.address2.title"/></th>
 					<th class="thead"><fmt:message key="guest.email.title"/></th>
@@ -65,6 +67,12 @@
 							${current.lastName}
 						&nbsp;
 					</td>
+					<td nowrap="nowrap" class="tabletd">
+						
+							${current.loyaltyNumber}
+						&nbsp;
+					</td>
+					
 					<td nowrap="nowrap" class="tabletd">
 						
 							${current.address1}

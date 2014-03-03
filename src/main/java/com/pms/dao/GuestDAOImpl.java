@@ -513,6 +513,7 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 	    		Iterator iter = c.iterator();
 	    		while(iter.hasNext()){
 		    		Reservation first = (Reservation) iter.next();
+		    		try{
 		    		int length = first.getCardNumber().length();
 		    		System.out.println(first.getCardNumber().substring(length-4));
 		    		if(5 < length){
@@ -521,6 +522,9 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 							System.out.println("CREDITCARD AND CARD MATCHED: "+first.getCardNumber()+","+cc);
 							return first;
 						}
+		    		}
+		    		}catch(Exception ex){
+		    			
 		    		}
 	    		}
 			}
@@ -563,7 +567,7 @@ public class GuestDAOImpl extends AbstractJpaDao<Guest> implements GuestDAO {
 	@Override
 	public Object findGuestInfoByLoyaltyNumber(String loyaltyNumber) {
 		try{
-			Query query = createNamedQuery("findGuestByHhNumber", -1, -1, loyaltyNumber);
+			Query query = createNamedQuery("findGuestInfoByHhNumber", -1, -1, loyaltyNumber);
 			if(null != query.getSingleResult()){
 				return (Guest) (query.getSingleResult());				
 			}else{

@@ -13,6 +13,7 @@
 		<h1><fmt:message key="navigation.edit"/> <fmt:message key="transactions.title"/></h1>
 		<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexTransactions"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>
 		<form:form action="${pageContext.request.contextPath}/saveTransactions" method="POST" modelAttribute="transactions">
+			<form:hidden path="transactionId"/>
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
 					<tr>
@@ -20,7 +21,7 @@
 							<fmt:message key="transactions.transactiondate.title"/>:
 						</td>
 						<td>
-							<input id="transactions_transactionDate" name="transactionDate" type="text" value="<fmt:formatDate value="${transactions.transactionDate.time}" pattern="MM/dd/yyyy h:mm a"/>" style="width:300px;"/>
+							<input id="transactions_transactionDate" name="transactionDate" type="text" value="<fmt:formatDate value="${transactions.transactionDate.time}" pattern="yyyy-MM-dd HH:mm:ss"/>" style="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "transactions_transactionDate",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="navigation.dateTime.title"/>"}})); </script>
 						</td>
 					</tr>

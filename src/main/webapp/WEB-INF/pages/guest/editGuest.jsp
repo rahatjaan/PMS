@@ -13,6 +13,7 @@
 		<h1><fmt:message key="navigation.edit"/> <fmt:message key="guest.title"/></h1>
 		<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexGuest"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>
 		<form:form action="${pageContext.request.contextPath}/saveGuest" method="POST" modelAttribute="guest">
+			<form:hidden path="guestId"/>
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
 					<tr>
@@ -37,11 +38,22 @@
 						<td class="label" valign="top">
 							<fmt:message key="guest.lastname.title"/>:
 						</td>
+						
 						<td>
 							<form:input id="guest_lastName" path="lastName" cssStyle="width:300px;"/>
 							<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "guest_lastName",widgetType : "dijit.form.ValidationTextBox",widgetAttrs : {promptMessage: "<fmt:message key="guest.lastname.help"/>"}})); </script>
 						</td>
 					</tr>
+					<tr>
+						<td class="label" valign="top">
+							Loyalty Number
+						</td>
+						
+						<td>
+							<form:input id="guest_loyaltyNumber" path="loyaltyNumber" cssStyle="width:300px;"/>
+						</td>
+					</tr>
+					
 					<tr>
 						<td class="label" valign="top">
 							<fmt:message key="guest.address1.title"/>:

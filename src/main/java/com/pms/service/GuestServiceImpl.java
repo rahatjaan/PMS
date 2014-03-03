@@ -90,6 +90,7 @@ public class GuestServiceImpl implements GuestService {
 				existingGuest.setEmail(guest.getEmail());
 				existingGuest.setCountry(guest.getCountry());
 				existingGuest.setMobileNumber(guest.getMobileNumber());
+				existingGuest.setLoyaltyNumber(guest.getLoyaltyNumber());
 			}
 			guest = guestDAO.store(existingGuest);
 		} else {

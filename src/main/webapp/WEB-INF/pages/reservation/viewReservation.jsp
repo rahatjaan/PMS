@@ -46,7 +46,7 @@
 							<fmt:message key="reservation.arrivaldate.title"/>:
 						</td>
 						<td>
-							<fmt:formatDate dateStyle="short" type="both" value="${reservation.arrivalDate.time}"/>
+							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" type="both" value="${reservation.arrivalDate.time}"/>
 						&nbsp;
 						</td>
 					</tr>
@@ -64,7 +64,7 @@
 							<fmt:message key="reservation.departuredate.title"/>:
 						</td>
 						<td>
-							<fmt:formatDate dateStyle="short" type="both" value="${reservation.departureDate.time}"/>
+							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" type="both" value="${reservation.departureDate.time}"/>
 						&nbsp;
 						</td>
 					</tr>
@@ -118,7 +118,7 @@
 							<fmt:message key="reservation.cardexpirydate.title"/>:
 						</td>
 						<td>
-							<fmt:formatDate dateStyle="short" type="date" value="${reservation.cardExpiryDate.time}"/>
+							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" type="date" value="${reservation.cardExpiryDate.time}"/>
 						&nbsp;
 						</td>
 					</tr>
@@ -342,7 +342,7 @@
 						&nbsp;
 						</td>
 						<td>
-							<fmt:formatDate dateStyle="short" type="both" value="${current.transactionDate.time}"/>
+							<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" type="both" value="${current.transactionDate.time}"/>
 						&nbsp;
 						</td>
 						<td>

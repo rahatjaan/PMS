@@ -593,7 +593,7 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 		Query query = null;
 		System.out.println("NAME: "+lastName+"ROOM: "+roomNumber+"EMAIL: "+email);
 		try{
-			query = createNamedQuery("findGuestBillInfo", -1, -1, email, lastName, Integer.parseInt(roomNumber));
+			query = createNamedQuery("findGuestBillInfoOrderByTransactionDate", -1, -1, lastName, Integer.parseInt(roomNumber));
 			List<Guest> ob = query.getResultList();
 			int i = 0;
 			System.out.println("LIST SIZE BILL INFO IS: "+ob.size());
@@ -604,7 +604,7 @@ public class ReservationDAOImpl extends AbstractJpaDao<Reservation> implements
 				for (Reservation s : se) {
 					System.out.println("Lastname: "+o.getLastName()+"   Email: "+o.getEmail()+"   Room: "+s.getRoom().getRoomId());
 					System.out.println("NAME: "+lastName+"ROOM: "+roomNumber+"EMAIL: "+email);
-				    if(o.getLastName().equalsIgnoreCase(lastName) && o.getEmail().equalsIgnoreCase(email) && Integer.toString(s.getRoom().getRoomId()).equalsIgnoreCase(roomNumber)){
+				    if((email==null || email.isEmpty() || o.getEmail().equalsIgnoreCase(email)) ){
 				    	Set<Reservation> sss = new HashSet<Reservation>();
 				    	sss.add(s);
 				    	o.setReservations(sss);

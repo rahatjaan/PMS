@@ -38,6 +38,7 @@ import javax.persistence.*;
 		@NamedQuery(name = "findGuestByEmailContaining", query = "select myGuest from Guest myGuest where myGuest.email like ?1"),
 		@NamedQuery(name = "findGuestByFirstName", query = "select myGuest from Guest myGuest where myGuest.firstName = ?1"),
 		@NamedQuery(name = "findGuestBillInfo", query = "select myGuest from Reservation myReservation, Transactions myTransactions, Guest myGuest where myGuest.email = ?1 and myGuest.lastName = ?2 and myReservation.room.roomId = ?3"),
+		@NamedQuery(name = "findGuestBillInfoOrderByTransactionDate", query = "select myGuest from Reservation myReservation, Transactions myTransactions, Guest myGuest where myGuest.lastName = ?1 and myReservation.room.roomId = ?2 order by myTransactions.transactionDate"),
 		@NamedQuery(name = "findGuestInfoByHhNumber", query = "select myGuest from Guest myGuest where myGuest.loyaltyNumber = ?1"),
 		@NamedQuery(name = "findGuestByFirstNameContaining", query = "select myGuest from Guest myGuest where myGuest.firstName like ?1"),
 		@NamedQuery(name = "findGuestByGuestId", query = "select myGuest from Guest myGuest where myGuest.guestId = ?1"),

@@ -6,11 +6,7 @@ import ige.integration.messages.Messages;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +34,6 @@ import com.pms.service.RoomService;
 @WebService()
 @SOAPBinding(style = SOAPBinding.Style.RPC, use = SOAPBinding.Use.LITERAL)
 public class SoapOperationService {
-    private static final String HELLO = "Hello";
     
     @Autowired
 	private RoomService roomService;
@@ -48,11 +43,6 @@ public class SoapOperationService {
     
     @Autowired
     private ReservationService reservationService;
-
-    @WebMethod(operationName = "sayHello")
-    public String sayHelloToTheUser(@WebParam(name = "name") String userName) {
-        return HELLO + " " + userName;
-    }
     
     @WebMethod(operationName = "listRooms")
     public Room[] listRooms(@WebParam(name = "roomList") ListRooms roomList) {
@@ -202,7 +192,7 @@ public class SoapOperationService {
 				System.out.println("AFTER CAL INSTANCE");
 				try {
 					System.out.println("1");
-					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					System.out.println("2");
 					System.out.println(departureDate);
 					cal1.setTime(simpleDateFormat.parse(departureDate));
@@ -346,29 +336,39 @@ public class SoapOperationService {
     	Guest info = null;
     	Object obj = null;
     	try{
-    		obj = reservationService.findGuestBillInfo(email, userName, roomNumber);
-    		System.out.println("FIRST NAME IS: "+((Guest) obj).getFirstName());
-    		info = (Guest) obj;
-    		Collection c = info.getReservations();
-    		Iterator iter = c.iterator();
-    		Reservation first = (Reservation) iter.next();
-    		Transactions [] gstArr = first.getTransactionses().toArray(new Transactions[0]);//(GuestTransactions[]) first.getGuestTransactionses().toArray();
-    		for(int i=0;i<(gstArr.length-1);i++){
-    			for(int j=i;j<gstArr.length;j++){
-    				if(gstArr[i].getTransactionDate().after(gstArr[j].getTransactionDate())){
-    					Calendar temp = gstArr[i].getTransactionDate();
-    					gstArr[i].setTransactionDate(gstArr[j].getTransactionDate());
-    					gstArr[j].setTransactionDate(temp);
-    				}
-    			}
+    		if(userName==null || userName.isEmpty() || roomNumber==null || roomNumber.isEmpty()){
+    			info = new Guest();
+    			info.setError(returnFaultObject(Messages.FAULT_CODE_CREDENTIALS, Messages.BILL_INFO_VALIDATION_MESSAGE, Messages.BILL_INFO_VALIDATION_MESSAGE, Messages.GETBILLINFO_DESCRIPTION, "getBillInfo"));
+    			return info;
     		}
-    		Set<Transactions> mySet = new HashSet<Transactions>(Arrays.asList(gstArr));
-    		first.setTransactionses(mySet);
-    		Set<Reservation> gsti = new HashSet<Reservation>();
-    		first.setSignature(null);
-    		gsti.add(first);
-    		info.setUserPic(null);
-    		info.setReservations(gsti);
+    		obj = reservationService.findGuestBillInfo(email, userName, roomNumber);
+    		if(obj==null){
+    			info = new Guest();
+    			info.setError(returnFaultObject(Messages.FAULT_CODE_CREDENTIALS, Messages.BILL_INFO_NOT_FOUND_MSG, Messages.BILL_INFO_NOT_FOUND_MSG, Messages.GETBILLINFO_DESCRIPTION, "getBillInfo"));
+    			return info;
+    		}
+//    		System.out.println("FIRST NAME IS: "+((Guest) obj).getFirstName());
+    		info = (Guest) obj;
+//    		Collection c = info.getReservations();
+//    		Iterator iter = c.iterator();
+//    		Reservation first = (Reservation) iter.next();
+//    		Transactions [] gstArr = first.getTransactionses().toArray(new Transactions[0]);//(GuestTransactions[]) first.getGuestTransactionses().toArray();
+//    		for(int i=0;i<(gstArr.length-1);i++){
+//    			for(int j=i;j<gstArr.length;j++){
+//    				if(gstArr[i].getTransactionDate().after(gstArr[j].getTransactionDate())){
+//    					Calendar temp = gstArr[i].getTransactionDate();
+//    					gstArr[i].setTransactionDate(gstArr[j].getTransactionDate());
+//    					gstArr[j].setTransactionDate(temp);
+//    				}
+//    			}
+//    		}
+//    		Set<Transactions> mySet = new HashSet<Transactions>(Arrays.asList(gstArr));
+//    		first.setTransactionses(mySet);
+//    		Set<Reservation> gsti = new HashSet<Reservation>();
+//    		first.setSignature(null);
+//    		gsti.add(first);
+//    		info.setUserPic(null);
+//    		info.setReservations(gsti);
     		obj = info;
     		/*Collections.sort(gst, new Comparator<Calendar>() {
     		    public int compare(Calendar o1, Calendar o2) {
@@ -403,7 +403,7 @@ public class SoapOperationService {
 	    	System.out.println("ROOM NUMBER IS: "+roomNumber);
 	    	String loyaltyNumber = resDetails.getLoyaltyCardNumber();
 	    	Object g = null;
-	    	List<Reservation> listRes = new ArrayList<Reservation>();
+//	    	List<Reservation> listRes = new ArrayList<Reservation>();
 	    	if(null != confirmationNumber && !"".equalsIgnoreCase(confirmationNumber.trim())){
 	    		ListReservations gi = new ListReservations();
 	    		g = reservationService.findReservationByConfirmationNumber(confirmationNumber);
@@ -428,7 +428,7 @@ public class SoapOperationService {
 	    		rees.setConfirmationNumber(Integer.toString(ru.getReservationId()));
 	    		rees.setNumberOfAdults(ru.getNumberOfAdults());
 	    		rees.setNumberOfChildren(ru.getNumberOfChildren());
-	    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				
 				String aDate="";
 				String dDate = "";
@@ -498,7 +498,8 @@ public class SoapOperationService {
 	    		List<ListReservations> lis= new ArrayList<ListReservations>(0);
 	    		for(Reservation ru:res){
 	    			ListReservations gi = new ListReservations();
-	    			if(ru.getCardNumber().trim().equalsIgnoreCase(creditCard.trim())){
+//	    			if(ru.getCardNumber().trim().equalsIgnoreCase(creditCard.trim()))
+	    			{
 	    				gi.setNamePrefix(ru.getGuest().getNamePrefix());
 	    				gi.setFirstName(ru.getGuest().getFirstName());
 	    	    		gi.setLastName(ru.getGuest().getLastName());
@@ -511,7 +512,7 @@ public class SoapOperationService {
 	    	    		rees.setConfirmationNumber(Integer.toString(ru.getReservationId()));
 	    	    		rees.setNumberOfAdults(ru.getNumberOfAdults());
 	    	    		rees.setNumberOfChildren(ru.getNumberOfChildren());
-	    	    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	    	    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    				
 	    				String aDate="";
 	    				String dDate = "";
@@ -581,7 +582,8 @@ public class SoapOperationService {
 	    		List<ListReservations> lis= new ArrayList<ListReservations>(0);
 	    		for(Reservation ru:res){
 	    			ListReservations gi = new ListReservations();
-	    			if(ru.getCardNumber().trim().equalsIgnoreCase(creditCard.trim())){
+//	    			if(ru.getCardNumber().trim().equalsIgnoreCase(creditCard.trim()))
+	    			{
 	    				gi.setNamePrefix(ru.getGuest().getNamePrefix());
 	    				gi.setFirstName(ru.getGuest().getFirstName());
 	    	    		gi.setLastName(ru.getGuest().getLastName());
@@ -594,7 +596,7 @@ public class SoapOperationService {
 	    	    		rees.setConfirmationNumber(Integer.toString(ru.getReservationId()));
 	    	    		rees.setNumberOfAdults(ru.getNumberOfAdults());
 	    	    		rees.setNumberOfChildren(ru.getNumberOfChildren());
-	    	    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	    	    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    				
 	    				String aDate="";
 	    				String dDate = "";
@@ -663,7 +665,8 @@ public class SoapOperationService {
 	    		List<ListReservations> lis= new ArrayList<ListReservations>(0);
 	    		for(Reservation ru:res){
 	    			ListReservations gi = new ListReservations();
-	    			if(ru.getCardNumber().trim().equalsIgnoreCase(creditCard.trim())){
+//	    			if(ru.getCardNumber().trim().equalsIgnoreCase(creditCard.trim()))
+	    			{
 	    				gi.setNamePrefix(ru.getGuest().getNamePrefix());
 	    				gi.setFirstName(ru.getGuest().getFirstName());
 	    	    		gi.setLastName(ru.getGuest().getLastName());
@@ -676,7 +679,7 @@ public class SoapOperationService {
 	    	    		rees.setConfirmationNumber(Integer.toString(ru.getReservationId()));
 	    	    		rees.setNumberOfAdults(ru.getNumberOfAdults());
 	    	    		rees.setNumberOfChildren(ru.getNumberOfChildren());
-	    	    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	    	    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    				
 	    				String aDate="";
 	    				String dDate = "";

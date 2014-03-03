@@ -13,6 +13,7 @@
 		<h1><fmt:message key="navigation.edit"/> <fmt:message key="roomtype.title"/></h1>
 		<div class="navitem"><a class="button" href="${pageContext.request.contextPath}/indexRoomtype"><span><img src="images/icons/back.gif" /><fmt:message key="navigation.back"/></span></a></div>
 		<form:form action="${pageContext.request.contextPath}/saveRoomtype" method="POST" modelAttribute="roomtype">
+			<form:hidden path="roomTypeId"/>
 			<table cellpadding="0" cellspacing="0" id="viewTable">
 				<tbody>
 					<tr>
