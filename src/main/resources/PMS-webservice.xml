@@ -28,7 +28,15 @@
         </wss:service>
     </wss:binding>
 
+	<wss:binding url="/ws/pos/placeOrder">
+        <wss:service>
+            <ws:service bean="#placeOrderWS">
+            </ws:service>
+        </wss:service>
+    </wss:binding>
+
     <bean id="soapOperationService" class="com.pms.webservice.SoapOperationService"/>
+    <bean id="placeOrderWS" class="com.pms.webservice.POSPlaceOrderWS"/>
 	
 	
 	
